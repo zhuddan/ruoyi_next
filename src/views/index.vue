@@ -8,6 +8,9 @@ function goTarget(url) {
 
 <template>
   <div class="app-container home">
+    <h1 class="text-3xl font-bold underline">
+      Hello world!
+    </h1>
     <el-row :gutter="20">
       <el-col :sm="24" :lg="24">
         <blockquote class="text-warning" style="font-size: 14px">

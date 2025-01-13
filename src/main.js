@@ -38,6 +38,7 @@ import router from './router'
 import store from './store'
 import 'element-plus/dist/index.css'
 import 'element-plus/theme-chalk/dark/css-vars.css'
+import './style.css'
 import '@/assets/styles/index.scss' // global css
 // svg图标
 import 'virtual:svg-icons-register'
