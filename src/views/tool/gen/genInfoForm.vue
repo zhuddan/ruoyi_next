@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-mutating-props -->
 <script setup>
 import { listMenu } from '@/api/system/menu'
 
@@ -24,7 +25,7 @@ const rules = ref({
   functionName: [{ required: true, message: '请输入生成功能名', trigger: 'blur' }],
 })
 
-function subSelectChange(value) {
+function subSelectChange() {
   props.info.subTableFkName = ''
 }
 
@@ -67,6 +68,7 @@ watch(() => props.info.tplWebType, (val) => {
 })
 </script>
 
+<!-- eslint-disable vue/no-mutating-props -->
 <template>
   <el-form ref="genInfoForm" :model="info" :rules="rules" label-width="150px">
     <el-row>
@@ -75,6 +77,7 @@ watch(() => props.info.tplWebType, (val) => {
           <template #label>
             生成模板
           </template>
+          <!-- eslint-disable-next-line vue/no-mutating-props -->
           <el-select v-model="info.tplCategory" @change="tplSelectChange">
             <el-option label="单表（增删改查）" value="crud" />
             <el-option label="树表（增删改查）" value="tree" />
