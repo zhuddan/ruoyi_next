@@ -1,5 +1,5 @@
 <script setup>
-import * as ElementPlusIconsVue from '@element-plus/icons-vue'
+// import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import { watch } from 'vue'
 
 const emit = defineEmits(['select'])
@@ -8,10 +8,10 @@ const originList = []
 const key = ref('')
 const active = ref('')
 const value = defineModel()
-for (const [key] of Object.entries(ElementPlusIconsVue)) {
-  iconList.value.push(key)
-  originList.push(key)
-}
+// for (const [key] of Object.entries(ElementPlusIconsVue)) {
+//   iconList.value.push(key)
+//   originList.push(key)
+// }
 
 function onOpen() { }
 function onClose() { }

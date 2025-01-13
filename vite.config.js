@@ -28,14 +28,14 @@ export default defineConfig(({ mode, command }) => {
       ],
       dts: './src/auto-import.d.ts',
     }),
-    Components({
-      dirs: ['src/components'],
-      dts: 'src/components.d.ts',
-    }),
     createSvgIconsPlugin({
       iconDirs: [path.resolve(process.cwd(), 'src/assets/icons/svg')],
       symbolId: 'icon-[dir]-[name]',
       svgoOptions: isBuild,
+    }),
+    Components({
+      dirs: ['src/components'],
+      dts: 'src/components.d.ts',
     }),
   ]
   if (isBuild) {

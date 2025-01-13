@@ -1,3 +1,5 @@
+/* eslint-disable perfectionist/sort-imports */
+import { createApp } from 'vue'
 import {
   addDateRange,
   handleTree,
@@ -6,19 +8,18 @@ import {
   selectDictLabel,
   selectDictLabels,
 } from '@/utils/ruoyi'
+import ElementPlus from 'element-plus'
 
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 
-import ElementPlus from 'element-plus'
 import locale from 'element-plus/es/locale/lang/zh-cn'
 import Cookies from 'js-cookie'
-import { createApp } from 'vue'
 
 import App from './App.vue'
 
 import directive from './directive'
 // 注册指令
-import plugins from './plugins'
+// import plugins from './plugins'
 
 import router from './router'
 import store from './store'
@@ -44,7 +45,6 @@ app.config.globalProperties.selectDictLabels = selectDictLabels
 
 app.use(router)
 app.use(store)
-app.use(plugins)
 app.use(directive)
 
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
