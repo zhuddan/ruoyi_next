@@ -18,8 +18,6 @@ import Cookies from 'js-cookie'
 import App from './App.vue'
 
 import directive from './directive'
-// 注册指令
-// import plugins from './plugins'
 
 import router from './router'
 import store from './store'
@@ -32,16 +30,6 @@ import 'virtual:svg-icons-register'
 import './permission'
 
 const app = createApp(App)
-
-// 全局方法挂载
-app.config.globalProperties.parseTime = parseTime
-app.config.globalProperties.resetForm = resetForm
-app.config.globalProperties.handleTree = handleTree
-app.config.globalProperties.addDateRange = addDateRange
-app.config.globalProperties.selectDictLabel = selectDictLabel
-app.config.globalProperties.selectDictLabels = selectDictLabels
-
-// 全局组件挂载
 
 app.use(router)
 app.use(store)
