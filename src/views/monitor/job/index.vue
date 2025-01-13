@@ -4,7 +4,7 @@ import Crontab from '@/components/Crontab'
 
 const router = useRouter()
 const { proxy } = getCurrentInstance()
-const { sys_job_group, sys_job_status } = proxy.useDict('sys_job_group', 'sys_job_status')
+const { sys_job_group, sys_job_status } = useDict('sys_job_group', 'sys_job_status')
 
 const jobList = ref([])
 const open = ref(false)

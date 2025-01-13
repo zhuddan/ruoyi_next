@@ -7,7 +7,7 @@ import useDictStore from '@/store/modules/dict'
 export function useDict(...args) {
   const res = ref({})
   return (() => {
-    args.forEach((dictType, index) => {
+    args.forEach((dictType) => {
       res.value[dictType] = []
       const dicts = useDictStore().getDict(dictType)
       if (dicts) {

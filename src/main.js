@@ -1,4 +1,3 @@
-import { useDict } from '@/utils/dict'
 import { download } from '@/utils/request'
 import {
   addDateRange,
@@ -35,7 +34,6 @@ import './permission'
 const app = createApp(App)
 
 // 全局方法挂载
-app.config.globalProperties.useDict = useDict
 app.config.globalProperties.download = download
 app.config.globalProperties.parseTime = parseTime
 app.config.globalProperties.resetForm = resetForm

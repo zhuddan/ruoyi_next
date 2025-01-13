@@ -22,6 +22,10 @@ export default defineConfig(({ mode, command }) => {
         'vue-router',
         'pinia',
       ],
+      dirs: [
+        './src/composables',
+        './src/tools',
+      ],
       dts: './src/auto-import.d.ts',
     }),
     Components({
