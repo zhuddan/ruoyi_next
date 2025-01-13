@@ -14,7 +14,7 @@
     "build:prod": "vite build",
     "build:stage": "vite build --mode staging",
     "preview": "vite preview",
-    "lint": "eslint . --fix"
+    "lint": "eslint . --fix --quiet"
   },
   "dependencies": {
     "@element-plus/icons-vue": "2.3.1",
