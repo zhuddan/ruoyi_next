@@ -1,7 +1,7 @@
 import { getRouters } from '@/api/menu'
-import ParentView from '@/components/ParentView'
-import InnerLink from '@/layout/components/InnerLink'
-import Layout from '@/layout/index'
+import ParentView from '@/components/ParentView/index.vue'
+import InnerLink from '@/layout/components/InnerLink/index.vue'
+import Layout from '@/layout/index.vue'
 import auth from '@/plugins/auth'
 import router, { constantRoutes, dynamicRoutes } from '@/router'
 

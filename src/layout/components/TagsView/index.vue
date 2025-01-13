@@ -3,7 +3,7 @@ import usePermissionStore from '@/store/modules/permission'
 import useSettingsStore from '@/store/modules/settings'
 import useTagsViewStore from '@/store/modules/tagsView'
 import { getNormalPath } from '@/utils/ruoyi'
-import ScrollPane from './ScrollPane'
+import ScrollPane from './ScrollPane.vue'
 
 const visible = ref(false)
 const top = ref(0)

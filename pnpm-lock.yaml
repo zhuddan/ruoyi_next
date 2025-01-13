@@ -9,7 +9,7 @@ importers:
   .:
     dependencies:
       '@element-plus/icons-vue':
-        specifier: 2.3.1
+        specifier: ^2.3.1
         version: 2.3.1(vue@3.5.13(typescript@5.7.3))
       '@vueup/vue-quill':
         specifier: 1.2.0
@@ -27,8 +27,8 @@ importers:
         specifier: 5.5.1
         version: 5.5.1
       element-plus:
-        specifier: 2.7.6
-        version: 2.7.6(vue@3.5.13(typescript@5.7.3))
+        specifier: ^2.9.3
+        version: 2.9.3(vue@3.5.13(typescript@5.7.3))
       file-saver:
         specifier: 2.0.5
         version: 2.0.5
@@ -93,6 +93,9 @@ importers:
       unplugin-auto-import:
         specifier: 0.17.6
         version: 0.17.6(@vueuse/core@10.11.0(vue@3.5.13(typescript@5.7.3)))(rollup@4.30.1)
+      unplugin-vue-components:
+        specifier: ^28.0.0
+        version: 28.0.0(@babel/parser@7.26.5)(rollup@4.30.1)(vue@3.5.13(typescript@5.7.3))
       unplugin-vue-setup-extend-plus:
         specifier: 1.0.1
         version: 1.0.1
@@ -1210,8 +1213,8 @@ packages:
   electron-to-chromium@1.5.80:
     resolution: {integrity: sha512-LTrKpW0AqIuHwmlVNV+cjFYTnXtM9K37OGhpe0ZI10ScPSxqVSryZHIY3WnCS5NSYbBODRTZyhRMS2h5FAEqAw==}
 
-  element-plus@2.7.6:
-    resolution: {integrity: sha512-36sw1K23hYjgeooR10U6CiCaCp2wvOqwoFurADZVlekeQ9v5U1FhJCFGEXO6i/kZBBMwsE1c9fxjLs9LENw2Rg==}
+  element-plus@2.9.3:
+    resolution: {integrity: sha512-6tSLp5XytDS4TMZ0P3aGZnr7MXTagfNycepNfIDitd9IgwM9y01+Ssu6mglNi8RiXYhek6LBWNOd/cvpIO12+w==}
     peerDependencies:
       vue: ^3.2.0
 
@@ -3122,12 +3125,29 @@ packages:
       '@vueuse/core':
         optional: true
 
+  unplugin-vue-components@28.0.0:
+    resolution: {integrity: sha512-vYe0wSyqTVhyNFIad1iiGyQGhG++tDOMgohqenMDOAooMJP9vvzCdXTqCVx20A0rCQXFNjgoRbSeDAioLPH36Q==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      '@babel/parser': ^7.15.8
+      '@nuxt/kit': ^3.2.2
+      vue: 2 || 3
+    peerDependenciesMeta:
+      '@babel/parser':
+        optional: true
+      '@nuxt/kit':
+        optional: true
+
   unplugin-vue-setup-extend-plus@1.0.1:
     resolution: {integrity: sha512-mW2IzkyJITyspAV/LEdnEyE1CJip9jB5fCeaVv7Q6X0oJyDrOxXoB+jyet0q5pRJNjErbjQx950/8NPTvbqLTQ==}
 
   unplugin@1.16.1:
     resolution: {integrity: sha512-4/u/j4FrCKdi17jaxuJA0jClGxB1AvU2hw/IuayPc4ay1XGaJs/rbb4v5WKwAjNifjmXK9PIFyuPiaK8azyR9w==}
     engines: {node: '>=14.0.0'}
+
+  unplugin@2.1.2:
+    resolution: {integrity: sha512-Q3LU0e4zxKfRko1wMV2HmP8lB9KWislY7hxXpxd+lGx0PRInE4vhMBVEZwpdVYHvtqzhSrzuIfErsob6bQfCzw==}
+    engines: {node: '>=18.12.0'}
 
   unset-value@1.0.0:
     resolution: {integrity: sha512-PcA2tsuGSF9cnySLHTLSh2qrQiJ70mn+r+Glzxv2TWZblxsxCC52BDlZoPCsz7STd9pN7EZetkWZBAvk4cgZdQ==}
@@ -4400,7 +4420,7 @@ snapshots:
 
   electron-to-chromium@1.5.80: {}
 
-  element-plus@2.7.6(vue@3.5.13(typescript@5.7.3)):
+  element-plus@2.9.3(vue@3.5.13(typescript@5.7.3)):
     dependencies:
       '@ctrl/tinycolor': 3.6.1
       '@element-plus/icons-vue': 2.3.1(vue@3.5.13(typescript@5.7.3))
@@ -6802,6 +6822,25 @@ snapshots:
     transitivePeerDependencies:
       - rollup
 
+  unplugin-vue-components@28.0.0(@babel/parser@7.26.5)(rollup@4.30.1)(vue@3.5.13(typescript@5.7.3)):
+    dependencies:
+      '@antfu/utils': 0.7.10
+      '@rollup/pluginutils': 5.1.4(rollup@4.30.1)
+      chokidar: 3.6.0
+      debug: 4.4.0
+      fast-glob: 3.3.3
+      local-pkg: 0.5.1
+      magic-string: 0.30.17
+      minimatch: 9.0.5
+      mlly: 1.7.4
+      unplugin: 2.1.2
+      vue: 3.5.13(typescript@5.7.3)
+    optionalDependencies:
+      '@babel/parser': 7.26.5
+    transitivePeerDependencies:
+      - rollup
+      - supports-color
+
   unplugin-vue-setup-extend-plus@1.0.1:
     dependencies:
       '@vue/compiler-sfc': 3.5.13
@@ -6809,6 +6848,11 @@ snapshots:
       unplugin: 1.16.1
 
   unplugin@1.16.1:
+    dependencies:
+      acorn: 8.14.0
+      webpack-virtual-modules: 0.6.2
+
+  unplugin@2.1.2:
     dependencies:
       acorn: 8.14.0
       webpack-virtual-modules: 0.6.2

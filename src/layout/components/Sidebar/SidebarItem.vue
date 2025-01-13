@@ -1,7 +1,7 @@
 <script setup>
 import { getNormalPath } from '@/utils/ruoyi'
 import { isExternal } from '@/utils/validate'
-import AppLink from './Link'
+import AppLink from './Link.vue'
 
 const props = defineProps({
   // route object

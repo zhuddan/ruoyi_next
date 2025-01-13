@@ -1,6 +1,6 @@
 <script setup>
 import useTagsViewStore from '@/store/modules/tagsView'
-import iframeToggle from './IframeToggle/index'
+import iframeToggle from './IframeToggle/index.vue'
 
 const route = useRoute()
 const tagsViewStore = useTagsViewStore()

@@ -9,7 +9,7 @@ import { saveAs } from 'file-saver'
 
 let downloadLoadingInstance
 // 是否显示重新登录
-export const isRelogin = { show: false }
+export const isReLogin = { show: false }
 
 axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8'
 // 创建axios实例
@@ -84,15 +84,15 @@ service.interceptors.response.use((res) => {
     return res.data
   }
   if (code === 401) {
-    if (!isRelogin.show) {
-      isRelogin.show = true
+    if (!isReLogin.show) {
+      isReLogin.show = true
       ElMessageBox.confirm('登录状态已过期，您可以继续留在该页面，或者重新登录', '系统提示', { confirmButtonText: '重新登录', cancelButtonText: '取消', type: 'warning' }).then(() => {
-        isRelogin.show = false
+        isReLogin.show = false
         useUserStore().logOut().then(() => {
           location.href = '/index'
         })
       }).catch(() => {
-        isRelogin.show = false
+        isReLogin.show = false
       })
     }
     return Promise.reject(
