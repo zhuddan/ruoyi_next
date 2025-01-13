@@ -3,9 +3,10 @@ import useSettingsStore from '@/store/modules/settings'
 import { handleThemeStyle } from '@/utils/theme'
 
 onMounted(() => {
+  const { theme } = useSettingsStore()
   nextTick(() => {
     // 初始化主题样式
-    handleThemeStyle(useSettingsStore().theme)
+    handleThemeStyle(theme)
   })
 })
 </script>

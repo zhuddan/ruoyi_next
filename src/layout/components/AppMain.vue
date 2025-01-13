@@ -9,13 +9,11 @@ onMounted(() => {
   addIframe()
 })
 
-watch((route) => {
-  addIframe()
-})
+const tagsView = useTagsViewStore()
 
 function addIframe() {
   if (route.meta.link) {
-    useTagsViewStore().addIframeView(route)
+    tagsView.addIframeView(route)
   }
 }
 </script>
