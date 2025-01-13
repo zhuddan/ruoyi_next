@@ -10,5 +10,6 @@ export default antfu({
   rules: {
     'vue/no-unused-refs': 'warn',
     'eqeqeq': 'warn',
+    'vue/eqeqeq': 'warn',
   },
 })

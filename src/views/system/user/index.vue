@@ -168,6 +168,7 @@ function handleStatusChange(row) {
 };
 
 /** 更多操作 */
+// eslint-disable-next-line unused-imports/no-unused-vars, no-unused-vars
 function handleCommand(command, row) {
   switch (command) {
     case 'handleResetPwd':
@@ -201,7 +202,7 @@ function handleResetPwd(row) {
       }
     },
   }).then(({ value }) => {
-    resetUserPwd(row.userId, value).then((response) => {
+    resetUserPwd(row.userId, value).then(() => {
       proxy.$modal.msgSuccess(`修改成功，新密码是：${value}`)
     })
   }).catch(() => {})
@@ -227,12 +228,12 @@ function importTemplate() {
 };
 
 /** 文件上传中处理 */
-function handleFileUploadProgress(event, file, fileList) {
+function handleFileUploadProgress() {
   upload.isUploading = true
 }
 
 /** 文件上传成功处理 */
-function handleFileSuccess(response, file, fileList) {
+function handleFileSuccess(response, file) {
   upload.open = false
   upload.isUploading = false
   proxy.$refs.uploadRef.handleRemove(file)
@@ -303,14 +304,14 @@ function submitForm() {
   proxy.$refs.userRef.validate((valid) => {
     if (valid) {
       if (form.value.userId != undefined) {
-        updateUser(form.value).then((response) => {
+        updateUser(form.value).then(() => {
           proxy.$modal.msgSuccess('修改成功')
           open.value = false
           getList()
         })
       }
       else {
-        addUser(form.value).then((response) => {
+        addUser(form.value).then(() => {
           proxy.$modal.msgSuccess('新增成功')
           open.value = false
           getList()
