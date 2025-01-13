@@ -28,7 +28,7 @@ const useSettingsStore = defineStore(
       // 修改布局设置
       changeSetting(data) {
         const { key, value } = data
-        if (this.hasOwnProperty(key)) {
+        if (Object.prototype.hasOwnProperty.call(this, key)) {
           this[key] = value
         }
       },
