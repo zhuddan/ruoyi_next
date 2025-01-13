@@ -2,7 +2,7 @@
 import { addType, delType, getType, listType, refreshCache, updateType } from '@/api/system/dict/type'
 import useDictStore from '@/store/modules/dict'
 import { download } from '@/utils/request'
-import { addDateRange, resetForm } from '@/utils/ruoyi'
+import { addDateRange } from '@/utils/ruoyi'
 
 defineOptions({
   name: 'Dict',

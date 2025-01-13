@@ -1,6 +1,5 @@
 <script setup>
 import { addNotice, delNotice, getNotice, listNotice, updateNotice } from '@/api/system/notice'
-import { resetForm } from '@/utils/ruoyi'
 
 defineOptions({
   name: 'Notice',

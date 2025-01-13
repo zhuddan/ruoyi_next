@@ -1,7 +1,6 @@
 <script setup>
 import { addPost, delPost, getPost, listPost, updatePost } from '@/api/system/post'
 import { download } from '@/utils/request'
-import { resetForm } from '@/utils/ruoyi'
 
 defineOptions({
   name: 'Post',

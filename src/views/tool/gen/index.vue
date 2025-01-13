@@ -2,7 +2,7 @@
 import { delTable, genCode, listTable, previewTable, synchDb } from '@/api/tool/gen'
 import router from '@/router'
 import { download } from '@/utils/request'
-import { addDateRange, resetForm } from '@/utils/ruoyi'
+import { addDateRange } from '@/utils/ruoyi'
 import createTable from './createTable.vue'
 import importTable from './importTable.vue'
 

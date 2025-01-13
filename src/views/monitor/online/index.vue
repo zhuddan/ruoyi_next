@@ -1,6 +1,5 @@
 <script setup>
 import { forceLogout, list as initData } from '@/api/monitor/online'
-import { resetForm } from '@/utils/ruoyi'
 
 defineOptions({
   name: 'Online',

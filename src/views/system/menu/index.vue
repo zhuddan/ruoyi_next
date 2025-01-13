@@ -2,7 +2,7 @@
 import { addMenu, delMenu, getMenu, listMenu, updateMenu } from '@/api/system/menu'
 import IconSelect from '@/components/IconSelect/index.vue'
 import SvgIcon from '@/components/SvgIcon'
-import { handleTree, resetForm } from '@/utils/ruoyi'
+import { handleTree } from '@/utils/ruoyi'
 
 defineOptions({
   // eslint-disable-next-line vue/no-reserved-component-names

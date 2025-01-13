@@ -1,6 +1,5 @@
 <script setup>
 import { importTable, listDbTable } from '@/api/tool/gen'
-import { resetForm } from '@/utils/ruoyi'
 
 const emit = defineEmits(['ok'])
 const total = ref(0)

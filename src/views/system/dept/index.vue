@@ -1,6 +1,6 @@
 <script setup>
 import { addDept, delDept, getDept, listDept, listDeptExcludeChild, updateDept } from '@/api/system/dept'
-import { handleTree, resetForm } from '@/utils/ruoyi'
+import { handleTree } from '@/utils/ruoyi'
 
 defineOptions({
   name: 'Dept',

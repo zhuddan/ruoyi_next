@@ -1,7 +1,7 @@
 <script setup>
 import { cleanLogininfor, delLogininfor, list, unlockLogininfor } from '@/api/monitor/logininfor'
 import { download } from '@/utils/request'
-import { addDateRange, resetForm } from '@/utils/ruoyi'
+import { addDateRange } from '@/utils/ruoyi'
 
 defineOptions({
   name: 'Logininfor',

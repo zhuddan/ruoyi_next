@@ -3,7 +3,7 @@ import { addUser, changeUserStatus, delUser, deptTreeSelect, getUser, listUser, 
 import useAppStore from '@/store/modules/app'
 import { getToken } from '@/utils/auth'
 import { download } from '@/utils/request'
-import { addDateRange, resetForm } from '@/utils/ruoyi'
+import { addDateRange } from '@/utils/ruoyi'
 import { Pane, Splitpanes } from 'splitpanes'
 import 'splitpanes/dist/splitpanes.css'
 

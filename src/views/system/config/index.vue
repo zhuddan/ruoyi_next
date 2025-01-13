@@ -1,7 +1,7 @@
 <script setup>
 import { addConfig, delConfig, getConfig, listConfig, refreshCache, updateConfig } from '@/api/system/config'
 import { download } from '@/utils/request'
-import { addDateRange, resetForm } from '@/utils/ruoyi'
+import { addDateRange } from '@/utils/ruoyi'
 
 defineOptions({
   name: 'Config',

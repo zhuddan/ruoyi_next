@@ -2,7 +2,6 @@
 import { treeselect as menuTreeselect, roleMenuTreeselect } from '@/api/system/menu'
 import { addRole, changeRoleStatus, dataScope, delRole, deptTreeSelect, getRole, listRole, updateRole } from '@/api/system/role'
 import { download } from '@/utils/request'
-import { resetForm } from '@/utils/ruoyi'
 
 defineOptions({
   name: 'Role',

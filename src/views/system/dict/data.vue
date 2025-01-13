@@ -4,7 +4,6 @@ import { optionselect as getDictOptionselect, getType } from '@/api/system/dict/
 import $tab from '@/plugins/tab'
 import useDictStore from '@/store/modules/dict'
 import { download } from '@/utils/request'
-import { resetForm } from '@/utils/ruoyi'
 
 defineOptions({
   // eslint-disable-next-line vue/no-reserved-component-names
