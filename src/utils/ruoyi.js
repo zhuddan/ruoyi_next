@@ -18,7 +18,7 @@ export function parseTime(time, pattern) {
       time = Number.parseInt(time)
     }
     else if (typeof time === 'string') {
-      time = time.replace(new RegExp(/-/g), '/').replace('T', ' ').replace(new RegExp(/\.\d{3}/g), '')
+      time = time.replace(/-/g, '/').replace('T', ' ').replace(/\.\d{3}/g, '')
     }
     if ((typeof time === 'number') && (time.toString().length === 10)) {
       time = time * 1000
@@ -37,7 +37,9 @@ export function parseTime(time, pattern) {
   const time_str = format.replace(/\{([ymdhisa])+\}/g, (result, key) => {
     let value = formatObj[key]
     // Note: getDay() returns 0 on Sunday
-    if (key === 'a') { return ['日', '一', '二', '三', '四', '五', '六'][value] }
+    if (key === 'a') {
+      return ['日', '一', '二', '三', '四', '五', '六'][value]
+    }
     if (result.length > 0 && value < 10) {
       value = `0${value}`
     }
@@ -75,10 +77,9 @@ export function selectDictLabel(datas, value) {
     return ''
   }
   const actions = []
-  Object.keys(datas).some((key) => {
+  Object.keys(datas).forEach((key) => {
     if (datas[key].value == (`${value}`)) {
       actions.push(datas[key].label)
-      return true
     }
   })
   if (actions.length === 0) {
@@ -98,9 +99,9 @@ export function selectDictLabels(datas, value, separator) {
   const actions = []
   const currentSeparator = undefined === separator ? ',' : separator
   const temp = value.split(currentSeparator)
-  Object.keys(value.split(currentSeparator)).some((val) => {
+  Object.keys(value.split(currentSeparator)).forEach((val) => {
     let match = false
-    Object.keys(datas).some((key) => {
+    Object.keys(datas).forEach((key) => {
       if (datas[key].value == (`${temp[val]}`)) {
         actions.push(datas[key].label + currentSeparator)
         match = true
@@ -115,7 +116,10 @@ export function selectDictLabels(datas, value, separator) {
 
 // 字符串格式化(%s )
 export function sprintf(str) {
-  const args = arguments; let flag = true; let i = 1
+  // eslint-disable-next-line prefer-rest-params
+  const args = arguments
+  let flag = true
+  let i = 1
   str = str.replace(/%s/g, () => {
     const arg = args[i++]
     if (typeof arg === 'undefined') {
