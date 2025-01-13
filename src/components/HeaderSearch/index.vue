@@ -70,7 +70,9 @@ function generateRoutes(routes, basePath = '', prefixTitle = []) {
 
   for (const r of routes) {
     // skip hidden router
-    if (r.hidden) { continue }
+    if (r.hidden) {
+      continue
+    }
     const p = r.path.length > 0 && r.path[0] === '/' ? r.path : `/${r.path}`
     const data = {
       path: !isHttp(r.path) ? getNormalPath(basePath + p) : r.path,

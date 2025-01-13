@@ -28,6 +28,7 @@ const values = computed(() => {
 })
 
 const unmatch = computed(() => {
+  // eslint-disable-next-line vue/no-side-effects-in-computed-properties
   unmatchArray.value = []
   // 没有value不显示
   if (props.value === null || typeof props.value === 'undefined' || props.value === '' || !Array.isArray(props.options) || props.options.length === 0)
@@ -75,7 +76,7 @@ function handleArray(array) {
       </template>
     </template>
     <template v-if="unmatch && showValue">
-      {{ unmatchArray | handleArray }}
+      {{ handleArray(unmatchArray) }}
     </template>
   </div>
 </template>

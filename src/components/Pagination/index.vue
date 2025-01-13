@@ -43,7 +43,7 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits()
+const emit = defineEmits(['update:page'])
 const currentPage = computed({
   get() {
     return props.page

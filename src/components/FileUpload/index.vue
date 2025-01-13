@@ -25,7 +25,7 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits()
+const emit = defineEmits(['update:modelValue'])
 const { proxy } = getCurrentInstance()
 const number = ref(0)
 const uploadList = ref([])
@@ -93,7 +93,7 @@ function handleExceed() {
 }
 
 // 上传失败
-function handleUploadError(err) {
+function handleUploadError() {
   proxy.$modal.msgError('上传文件失败')
 }
 

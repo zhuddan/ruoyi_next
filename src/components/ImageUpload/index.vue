@@ -26,7 +26,7 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits()
+const emit = defineEmits(['update:modelValue'])
 const { proxy } = getCurrentInstance()
 const number = ref(0)
 const uploadList = ref([])

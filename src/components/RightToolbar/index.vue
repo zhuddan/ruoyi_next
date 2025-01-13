@@ -57,6 +57,7 @@ function refresh() {
 function dataChange(data) {
   for (const item in props.columns) {
     const key = props.columns[item].key
+    // eslint-disable-next-line vue/no-mutating-props
     props.columns[item].visible = !data.includes(key)
   }
 }

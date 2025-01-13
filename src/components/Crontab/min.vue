@@ -1,8 +1,9 @@
+<!-- eslint-disable vue/no-side-effects-in-computed-properties -->
 <script setup>
 const props = defineProps({
   cron: {
     type: Object,
-    default: {
+    default: () => ({
       second: '*',
       min: '*',
       hour: '*',
@@ -10,7 +11,7 @@ const props = defineProps({
       month: '*',
       week: '?',
       year: '',
-    },
+    }),
   },
   check: {
     type: Function,

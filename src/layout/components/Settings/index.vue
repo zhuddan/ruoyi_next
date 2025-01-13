@@ -50,7 +50,9 @@ function saveSetting() {
 function resetSetting() {
   proxy.$modal.loading('正在清除设置缓存并刷新，请稍候...')
   localStorage.removeItem('layout-setting')
-  setTimeout('window.location.reload()', 1000)
+  setTimeout(() => {
+    window.location.reload()
+  }, 1000)
 }
 
 function openSetting() {

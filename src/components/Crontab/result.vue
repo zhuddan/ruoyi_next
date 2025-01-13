@@ -1,3 +1,4 @@
+<!-- eslint-disable no-labels -->
 <script setup>
 const props = defineProps({
   ex: {
@@ -305,6 +306,7 @@ function expressionChange() {
                   }
                   continue goHour
                 }
+                // eslint-disable-next-line no-labels
                 continue goMin
               }
             } // goSecond

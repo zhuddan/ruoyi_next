@@ -156,12 +156,12 @@ export function param2Obj(url) {
 
 /**
  * @param {string} val
- * @returns {string}
+ * @returns {string} html2Text
  */
 export function html2Text(val) {
   const div = document.createElement('div')
   div.innerHTML = val
-  return div.textContent || div.innerText
+  return div.textContent || div.textContent
 }
 
 /**
@@ -404,5 +404,6 @@ export function camelCase(str) {
 }
 
 export function isNumberStr(str) {
+  // eslint-disable-next-line regexp/no-unused-capturing-group
   return /^[+-]?(0|([1-9]\d*))(\.\d+)?$/.test(str)
 }

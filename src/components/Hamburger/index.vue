@@ -6,7 +6,7 @@ defineProps({
   },
 })
 
-const emit = defineEmits()
+const emit = defineEmits(['toggleClick'])
 function toggleClick() {
   emit('toggleClick')
 }
