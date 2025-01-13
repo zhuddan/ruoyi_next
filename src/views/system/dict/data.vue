@@ -9,7 +9,10 @@ defineOptions({
   // eslint-disable-next-line vue/no-reserved-component-names
   name: 'Data',
 })
-
+/**
+ * @type {TemplateRef<import("element-plus").FormInstance>}
+ */
+const dataRef = useTemplateRef('dataRef')
 const { sys_normal_disable } = useDict('sys_normal_disable')
 
 const dataList = ref([])
@@ -143,10 +146,7 @@ function handleUpdate(row) {
     title.value = '修改字典数据'
   })
 }
-/**
- * @type {TemplateRef<import("element-plus").FormInstance>}
- */
-const dataRef = useTemplateRef('dataRef')
+
 /** 提交按钮 */
 function submitForm() {
   dataRef.value.validate((valid) => {

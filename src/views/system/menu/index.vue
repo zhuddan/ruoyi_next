@@ -8,7 +8,10 @@ defineOptions({
   // eslint-disable-next-line vue/no-reserved-component-names
   name: 'Menu',
 })
-
+/**
+ * @type {TemplateRef<import("element-plus").FormInstance>}
+ */
+const menuRef = useTemplateRef('menuRef')
 const { sys_show_hide, sys_normal_disable } = useDict('sys_show_hide', 'sys_normal_disable')
 
 const menuList = ref([])
@@ -132,10 +135,7 @@ async function handleUpdate(row) {
     title.value = '修改菜单'
   })
 }
-/**
- * @type {TemplateRef<import("element-plus").FormInstance>}
- */
-const menuRef = useTemplateRef('menuRef')
+
 /** 提交按钮 */
 function submitForm() {
   menuRef.value.validate((valid) => {

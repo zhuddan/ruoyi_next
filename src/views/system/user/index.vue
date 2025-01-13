@@ -10,7 +10,10 @@ import 'splitpanes/dist/splitpanes.css'
 defineOptions({
   name: 'User',
 })
-
+/**
+ * @type {TemplateRef<import("element-plus").FormInstance>}
+ */
+const userRef = useTemplateRef('userRef')
 const router = useRouter()
 const appStore = useAppStore()
 const { sys_normal_disable, sys_user_sex } = useDict('sys_normal_disable', 'sys_user_sex')
@@ -312,10 +315,6 @@ function handleUpdate(row) {
   })
 };
 
-/**
- * @type {TemplateRef<import("element-plus").FormInstance>}
- */
-const userRef = useTemplateRef('userRef')
 /** 提交按钮 */
 function submitForm() {
   userRef.value.validate((valid) => {

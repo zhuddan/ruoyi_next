@@ -7,7 +7,10 @@ import { addDateRange } from '@/utils/ruoyi'
 defineOptions({
   name: 'Dict',
 })
-
+/**
+ * @type {TemplateRef<import("element-plus").FormInstance>}
+ */
+const dictRef = useTemplateRef('dictRef')
 const { sys_normal_disable } = useDict('sys_normal_disable')
 
 const typeList = ref([])
@@ -104,10 +107,6 @@ function handleUpdate(row) {
   })
 }
 
-/**
- * @type {TemplateRef<import("element-plus").FormInstance>}
- */
-const dictRef = useTemplateRef('dictRef')
 /** 提交按钮 */
 function submitForm() {
   dictRef.value.validate((valid) => {

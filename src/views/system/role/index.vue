@@ -7,6 +7,11 @@ defineOptions({
   name: 'Role',
 })
 
+/**
+ * @type {TemplateRef<import("element-plus").FormInstance>}
+ */
+const roleRef = useTemplateRef('roleRef')
+
 const router = useRouter()
 const { sys_normal_disable } = useDict('sys_normal_disable')
 
@@ -270,10 +275,6 @@ function getMenuAllCheckedKeys() {
   return checkedKeys
 }
 
-/**
- * @type {TemplateRef<import("element-plus").FormInstance>}
- */
-const roleRef = useTemplateRef('roleRef')
 /** 提交按钮 */
 function submitForm() {
   roleRef.value.validate((valid) => {

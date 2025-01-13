@@ -6,8 +6,15 @@ defineOptions({
   name: 'Dept',
 })
 
+/**
+ * @type {TemplateRef<import("element-plus").FormInstance>}
+ */
+const deptRef = useTemplateRef('deptRef')
+/**
+ * @type {TemplateRef<import("element-plus").FormInstance>}
+ */
+const queryRef = useTemplateRef('queryRef')
 const { sys_normal_disable } = useDict('sys_normal_disable')
-
 const deptList = ref([])
 const open = ref(false)
 const loading = ref(true)
@@ -109,14 +116,7 @@ function handleUpdate(row) {
     title.value = '修改部门'
   })
 }
-/**
- * @type {TemplateRef<import("element-plus").FormInstance>}
- */
-const deptRef = useTemplateRef('deptRef')
-/**
- * @type {TemplateRef<import("element-plus").FormInstance>}
- */
-const queryRef = useTemplateRef('queryRef')
+
 /** 提交按钮 */
 function submitForm() {
   deptRef.value.validate((valid) => {

@@ -5,6 +5,10 @@ import { download } from '@/utils/request'
 defineOptions({
   name: 'Post',
 })
+/**
+ * @type {TemplateRef<import("element-plus").FormInstance>}
+ */
+const postRef = useTemplateRef('postRef')
 
 const { sys_normal_disable } = useDict('sys_normal_disable')
 
@@ -102,10 +106,6 @@ function handleUpdate(row) {
   })
 }
 
-/**
- * @type {TemplateRef<import("element-plus").FormInstance>}
- */
-const postRef = useTemplateRef('postRef')
 /** 提交按钮 */
 function submitForm() {
   postRef.value.validate((valid) => {

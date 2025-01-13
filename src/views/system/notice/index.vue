@@ -4,7 +4,10 @@ import { addNotice, delNotice, getNotice, listNotice, updateNotice } from '@/api
 defineOptions({
   name: 'Notice',
 })
-
+/**
+ * @type {TemplateRef<import("element-plus").FormInstance>}
+ */
+const noticeRef = useTemplateRef('noticeRef')
 const { sys_notice_status, sys_notice_type } = useDict('sys_notice_status', 'sys_notice_type')
 
 const noticeList = ref([])
@@ -98,10 +101,7 @@ function handleUpdate(row) {
     title.value = '修改公告'
   })
 }
-/**
- * @type {TemplateRef<import("element-plus").FormInstance>}
- */
-const noticeRef = useTemplateRef('noticeRef')
+
 /** 提交按钮 */
 function submitForm() {
   noticeRef.value.validate((valid) => {

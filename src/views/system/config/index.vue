@@ -7,6 +7,16 @@ defineOptions({
   name: 'Config',
 })
 
+/**
+ * @type {TemplateRef<import("element-plus").FormInstance>}
+ */
+const configRef = useTemplateRef('configRef')
+
+/**
+ * @type {TemplateRef<import("element-plus").FormInstance>}
+ */
+const queryRef = useTemplateRef('queryRef')
+
 const { sys_yes_no } = useDict('sys_yes_no')
 
 const configList = ref([])
@@ -104,16 +114,6 @@ function handleUpdate(row) {
     title.value = '修改参数'
   })
 }
-
-/**
- * @type {TemplateRef<import("element-plus").FormInstance>}
- */
-const configRef = useTemplateRef('configRef')
-
-/**
- * @type {TemplateRef<import("element-plus").FormInstance>}
- */
-const queryRef = useTemplateRef('queryRef')
 
 /** 提交按钮 */
 function submitForm() {

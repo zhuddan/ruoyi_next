@@ -13,6 +13,11 @@ const router = useRouter()
  * @type {TemplateRef<import("element-plus").FormInstance>}
  */
 const queryRef = useTemplateRef('queryRef')
+
+/**
+ * @type {TemplateRef<import("element-plus").FormInstance>}
+ */
+const jobRef = useTemplateRef('jobRef')
 const { sys_job_group, sys_job_status } = useDict('sys_job_group', 'sys_job_status')
 const jobList = ref([])
 const open = ref(false)
@@ -181,10 +186,6 @@ function handleUpdate(row) {
   })
 }
 
-/**
- * @type {Ref<import("element-plus").FormInstance>}
- */
-const jobRef = ref(null)
 /** 提交按钮 */
 function submitForm() {
   jobRef.value.validate((valid) => {
