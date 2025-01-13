@@ -37,7 +37,7 @@ watch(key, (val) => {
       v-model="value" width="980px" :close-on-click-modal="false" :modal-append-to-body="false" @open="onOpen"
       @close="onClose"
     >
-      <template #header="{ close, titleId, titleClass }">
+      <template #header>
         选择图标
         <el-input
           v-model="key" size="small" :style="{ width: '260px' }" placeholder="请输入图标名称" prefix-icon="Search"
