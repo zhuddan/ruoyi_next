@@ -95,7 +95,9 @@ service.interceptors.response.use((res) => {
         isRelogin.show = false
       })
     }
-    return Promise.reject('无效的会话，或者会话已过期，请重新登录。')
+    return Promise.reject(
+      new Error('无效的会话，或者会话已过期，请重新登录。'),
+    )
   }
   else if (code === 500) {
     ElMessage({ message: msg, type: 'error' })
@@ -107,7 +109,10 @@ service.interceptors.response.use((res) => {
   }
   else if (code !== 200) {
     ElNotification.error({ title: msg })
-    return Promise.reject('error')
+    // return Promise.reject('error')
+    return Promise.reject(
+      new Error('error'),
+    )
   }
   else {
     return Promise.resolve(res.data)
