@@ -2,7 +2,7 @@
 import { addConfig, delConfig, getConfig, listConfig, refreshCache, updateConfig } from '@/api/system/config'
 
 const { proxy } = getCurrentInstance()
-const { sys_yes_no } = proxy.useDict('sys_yes_no')
+const { sys_yes_no } = useDict('sys_yes_no')
 
 const configList = ref([])
 const open = ref(false)

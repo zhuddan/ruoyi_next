@@ -3,7 +3,7 @@ import { addType, delType, getType, listType, refreshCache, updateType } from '@
 import useDictStore from '@/store/modules/dict'
 
 const { proxy } = getCurrentInstance()
-const { sys_normal_disable } = proxy.useDict('sys_normal_disable')
+const { sys_normal_disable } = useDict('sys_normal_disable')
 
 const typeList = ref([])
 const open = ref(false)

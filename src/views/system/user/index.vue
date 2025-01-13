@@ -8,7 +8,7 @@ import 'splitpanes/dist/splitpanes.css'
 const router = useRouter()
 const appStore = useAppStore()
 const { proxy } = getCurrentInstance()
-const { sys_normal_disable, sys_user_sex } = proxy.useDict('sys_normal_disable', 'sys_user_sex')
+const { sys_normal_disable, sys_user_sex } = useDict('sys_normal_disable', 'sys_user_sex')
 
 const userList = ref([])
 const open = ref(false)

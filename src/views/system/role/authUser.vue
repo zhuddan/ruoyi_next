@@ -4,7 +4,7 @@ import selectUser from './selectUser'
 
 const route = useRoute()
 const { proxy } = getCurrentInstance()
-const { sys_normal_disable } = proxy.useDict('sys_normal_disable')
+const { sys_normal_disable } = useDict('sys_normal_disable')
 
 const userList = ref([])
 const loading = ref(true)
