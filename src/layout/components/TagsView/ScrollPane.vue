@@ -8,7 +8,7 @@ const tagAndTagSpacing = ref(4)
  */
 const scrollContainer = ref(null)
 
-const scrollWrapper = computed(() => scrollContainer.value.scrollContainer.$refs.wrapRef)
+const scrollWrapper = computed(() => scrollContainer.value.$refs.wrapRef)
 
 onMounted(() => {
   scrollWrapper.value.addEventListener('scroll', emitScroll, true)
