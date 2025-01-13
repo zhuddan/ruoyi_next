@@ -46,7 +46,7 @@ onActivated(() => {
     uniqueId.value = time
     queryParams.value.pageNum = Number(route.query.pageNum)
     dateRange.value = []
-    resetForm('queryForm')
+    queryForm.value?.resetFields()
     getList()
   }
 })
@@ -115,7 +115,7 @@ function openCreateTable() {
 /** 重置按钮操作 */
 function resetQuery() {
   dateRange.value = []
-  resetForm('queryRef')
+  queryRef.value?.resetFields()
   handleQuery()
 }
 

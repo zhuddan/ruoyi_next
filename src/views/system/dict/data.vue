@@ -97,7 +97,7 @@ function reset() {
     status: '0',
     remark: undefined,
   }
-  resetForm('dataRef')
+  dataRef.value?.resetFields()
 }
 
 /** 搜索按钮操作 */
@@ -114,7 +114,7 @@ function handleClose() {
 
 /** 重置按钮操作 */
 function resetQuery() {
-  resetForm('queryRef')
+  queryRef.value?.resetFields()
   queryParams.value.dictType = defaultDictType.value
   handleQuery()
 }

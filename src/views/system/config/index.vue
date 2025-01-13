@@ -64,7 +64,7 @@ function reset() {
     configType: 'Y',
     remark: undefined,
   }
-  resetForm('configRef')
+  configRef.value?.resetFields()
 }
 
 /** 搜索按钮操作 */
@@ -76,7 +76,7 @@ function handleQuery() {
 /** 重置按钮操作 */
 function resetQuery() {
   dateRange.value = []
-  resetForm('queryRef')
+  queryRef.value?.resetFields()
   handleQuery()
 }
 

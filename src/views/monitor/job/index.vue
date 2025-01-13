@@ -78,7 +78,7 @@ function reset() {
     concurrent: 1,
     status: '0',
   }
-  resetForm('jobRef')
+  jobRef.value?.resetFields()
 }
 
 /** 搜索按钮操作 */
@@ -89,7 +89,7 @@ function handleQuery() {
 
 /** 重置按钮操作 */
 function resetQuery() {
-  resetForm('queryRef')
+  queryRef.value?.resetFields()
   handleQuery()
 }
 

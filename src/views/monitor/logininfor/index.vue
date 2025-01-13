@@ -54,7 +54,7 @@ const logininforRef = useTemplateRef('logininforRef')
 /** 重置按钮操作 */
 function resetQuery() {
   dateRange.value = []
-  resetForm('queryRef')
+  queryRef.value?.resetFields()
   queryParams.value.pageNum = 1
   logininforRef.value.sort(defaultSort.value.prop, defaultSort.value.order)
 }

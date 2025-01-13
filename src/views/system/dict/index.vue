@@ -63,7 +63,7 @@ function reset() {
     status: '0',
     remark: undefined,
   }
-  resetForm('dictRef')
+  dictRef.value?.resetFields()
 }
 
 /** 搜索按钮操作 */
@@ -75,7 +75,7 @@ function handleQuery() {
 /** 重置按钮操作 */
 function resetQuery() {
   dateRange.value = []
-  resetForm('queryRef')
+  queryRef.value?.resetFields()
   handleQuery()
 }
 

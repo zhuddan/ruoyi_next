@@ -77,7 +77,7 @@ function handleQuery() {
 /** 重置按钮操作 */
 function resetQuery() {
   dateRange.value = []
-  resetForm('queryRef')
+  queryRef.value?.resetFields()
   handleQuery()
 }
 
@@ -175,7 +175,7 @@ function reset() {
     deptCheckStrictly: true,
     remark: undefined,
   }
-  resetForm('roleRef')
+  roleRef.value?.resetFields()
 }
 
 /** 添加角色 */

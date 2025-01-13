@@ -61,7 +61,7 @@ function reset() {
     email: undefined,
     status: '0',
   }
-  resetForm('deptRef')
+  deptRef.value?.resetFields()
 }
 
 /** 搜索按钮操作 */
@@ -71,7 +71,7 @@ function handleQuery() {
 
 /** 重置按钮操作 */
 function resetQuery() {
-  resetForm('queryRef')
+  queryRef.value?.resetFields()
   handleQuery()
 }
 

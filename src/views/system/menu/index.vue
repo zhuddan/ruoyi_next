@@ -75,7 +75,7 @@ function reset() {
     visible: '0',
     status: '0',
   }
-  resetForm('menuRef')
+  menuRef.value?.resetFields()
 }
 
 /** 展示下拉图标 */
@@ -95,7 +95,7 @@ function handleQuery() {
 
 /** 重置按钮操作 */
 function resetQuery() {
-  resetForm('queryRef')
+  queryRef.value?.resetFields()
   handleQuery()
 }
 
