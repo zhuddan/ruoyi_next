@@ -6,6 +6,7 @@ import Components from 'unplugin-vue-components/vite'
 import { defineConfig, loadEnv } from 'vite'
 import compression from 'vite-plugin-compression'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
+import './seed-eslint-globals.mjs'
 // https://vitejs.dev/config/
 export default defineConfig(({ mode, command }) => {
   // const env =

@@ -8,6 +8,6 @@ fs.readFileSync('./src/auto-import.d.ts').toString().match(
 }).forEach((e) => {
   obj[e] = true
 })
-
 fs.writeFileSync('./global-vars.js', `export default ${JSON.stringify(obj, null, 2)}`)
-// fs.writeFileSync('./global-vars.json', `${JSON.stringify(obj, null, 2)}`)
+
+export {}
