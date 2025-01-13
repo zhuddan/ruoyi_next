@@ -156,9 +156,9 @@ function listToString(list, separator) {
 <template>
   <div class="upload-file">
     <el-upload
+      ref="fileUpload"
       multiple
       :action="uploadFileUrl"
-      ref="fileUpload"
       :before-upload="handleBeforeUpload"
       :file-list="fileList"
       :limit="limit"
