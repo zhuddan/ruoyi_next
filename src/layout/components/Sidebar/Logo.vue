@@ -32,9 +32,15 @@ const getLogoTextColor = computed(() => {
 </script>
 
 <template>
-  <div class="sidebar-logo-container" :class="{ collapse }">
+  <div
+    class="sidebar-logo-container" :class="{
+      'sidebar-logo-container_collapse': collapse,
+    }"
+  >
     <transition name="sidebarLogoFade">
-      <router-link v-if="collapse" key="collapse" class="sidebar-logo-link" to="/">
+      <router-link
+        v-if="collapse" key="collapse" class="sidebar-logo-link " to="/"
+      >
         <img v-if="logo" :src="logo" class="sidebar-logo">
         <h1 v-else class="sidebar-title">
           {{ title }}
@@ -99,7 +105,7 @@ const getLogoTextColor = computed(() => {
     }
   }
 
-  &.collapse {
+  &.sidebar-logo-container_collapse {
     .sidebar-logo {
       margin-right: 0px;
     }
