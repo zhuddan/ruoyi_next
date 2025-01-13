@@ -2,7 +2,7 @@
 import useTagsViewStore from '@/store/modules/tagsView'
 import iframeToggle from './IframeToggle/index.vue'
 
-const route = useRoute()
+const $route = useRoute()
 const tagsViewStore = useTagsViewStore()
 
 onMounted(() => {
@@ -12,8 +12,8 @@ onMounted(() => {
 const tagsView = useTagsViewStore()
 
 function addIframe() {
-  if (route.meta.link) {
-    tagsView.addIframeView(route)
+  if ($route.meta.link) {
+    tagsView.addIframeView($route)
   }
 }
 </script>
