@@ -1,6 +1,7 @@
 <script setup name="Data">
 import { addData, delData, getData, listData, updateData } from '@/api/system/dict/data'
 import { optionselect as getDictOptionselect, getType } from '@/api/system/dict/type'
+import $tab from '@/plugins/tab'
 import useDictStore from '@/store/modules/dict'
 import { download } from '@/utils/request'
 
@@ -103,7 +104,7 @@ function handleQuery() {
 /** 返回按钮操作 */
 function handleClose() {
   const obj = { path: '/system/dict' }
-  proxy.$tab.closeOpenPage(obj)
+  $tab.closeOpenPage(obj)
 }
 
 /** 重置按钮操作 */

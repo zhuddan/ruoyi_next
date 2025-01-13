@@ -1,5 +1,6 @@
 <script setup name="AuthUser">
 import { allocatedUserList, authUserCancel, authUserCancelAll } from '@/api/system/role'
+import $tab from '@/plugins/tab'
 import selectUser from './selectUser'
 
 const route = useRoute()
@@ -34,7 +35,7 @@ function getList() {
 /** 返回按钮 */
 function handleClose() {
   const obj = { path: '/system/role' }
-  proxy.$tab.closeOpenPage(obj)
+  $tab.closeOpenPage(obj)
 }
 
 /** 搜索按钮操作 */

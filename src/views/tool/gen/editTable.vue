@@ -1,6 +1,7 @@
 <script setup name="GenEdit">
 import { optionselect as getDictOptionselect } from '@/api/system/dict/type'
 import { getGenTable, updateGenTable } from '@/api/tool/gen'
+import $tab from '@/plugins/tab'
 import basicInfoForm from './basicInfoForm'
 import genInfoForm from './genInfoForm'
 
@@ -52,7 +53,7 @@ function getFormPromise(form) {
 
 function close() {
   const obj = { path: '/tool/gen', query: { t: Date.now(), pageNum: route.query.pageNum } }
-  proxy.$tab.closeOpenPage(obj)
+  $tab.closeOpenPage(obj)
 }
 
 (() => {

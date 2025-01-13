@@ -1,6 +1,7 @@
 <!-- eslint-disable vue/no-mutating-props -->
 <script setup>
 import { updateUserProfile } from '@/api/system/user'
+import $tab from '@/plugins/tab'
 
 const props = defineProps({
   user: {
@@ -32,7 +33,7 @@ function submit() {
 
 /** 关闭按钮 */
 function close() {
-  proxy.$tab.closePage()
+  $tab.closePage()
 };
 
 // 回显当前登录用户信息

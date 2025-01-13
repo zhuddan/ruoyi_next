@@ -1,5 +1,6 @@
 <script setup name="AuthRole">
 import { getAuthRole, updateAuthRole } from '@/api/system/user'
+import $tab from '@/plugins/tab'
 
 const route = useRoute()
 const { proxy } = getCurrentInstance()
@@ -34,7 +35,7 @@ function getRowKey(row) {
 /** 关闭按钮 */
 function close() {
   const obj = { path: '/system/user' }
-  proxy.$tab.closeOpenPage(obj)
+  $tab.closeOpenPage(obj)
 };
 
 /** 提交按钮 */

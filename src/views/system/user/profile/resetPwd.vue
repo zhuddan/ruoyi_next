@@ -1,5 +1,6 @@
 <script setup>
 import { updateUserPwd } from '@/api/system/user'
+import $tab from '@/plugins/tab'
 
 const { proxy } = getCurrentInstance()
 
@@ -37,7 +38,7 @@ function submit() {
 
 /** 关闭按钮 */
 function close() {
-  proxy.$tab.closePage()
+  $tab.closePage()
 };
 </script>
 

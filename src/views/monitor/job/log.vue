@@ -1,6 +1,7 @@
 <script setup name="JobLog">
 import { getJob } from '@/api/monitor/job'
 import { cleanJobLog, delJobLog, listJobLog } from '@/api/monitor/jobLog'
+import $tab from '@/plugins/tab'
 import { download } from '@/utils/request'
 
 const { proxy } = getCurrentInstance()
@@ -42,7 +43,7 @@ function getList() {
 // 返回按钮
 function handleClose() {
   const obj = { path: '/monitor/job' }
-  proxy.$tab.closeOpenPage(obj)
+  $tab.closeOpenPage(obj)
 }
 
 /** 搜索按钮操作 */
