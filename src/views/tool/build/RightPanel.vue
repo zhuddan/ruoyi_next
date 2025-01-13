@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-mutating-props -->
 <script setup>
 import { inputComponents, selectComponents } from '@/utils/generator/config'
 import { isNumberStr } from '@/utils/index'
@@ -109,7 +110,7 @@ const data = reactive({
     },
   ],
   layoutTreeProps: {
-    label(data, node) {
+    label(data) {
       return data.componentName || `${data.label}: ${data.vModel}`
     },
   },
@@ -159,7 +160,7 @@ function addTreeItem() {
   currentNode.value = props.activeData.options
 }
 
-function renderContent(h, { node, data, store }) {
+function renderContent(h, { node, data }) {
   return h('div', {
     class: 'custom-tree-node',
   }, [
@@ -296,10 +297,12 @@ function tagChange(tagIcon) {
   let target = inputComponents.find(item => item.tagIcon === tagIcon)
   if (!target)
     target = selectComponents.find(item => item.tagIcon === tagIcon)
+  // eslint-disable-next-line vue/custom-event-name-casing
   emit('tag-change', target)
 }
 </script>
 
+<!-- eslint-disable vue/no-mutating-props -->
 <template>
   <div class="right-board">
     <el-tabs v-model="currentTab" stretch class="center-tabs">
@@ -844,14 +847,13 @@ function tagChange(tagIcon) {
       .el-scrollbar__view {
         padding: 30px 20px;
       }
-
     }
   }
 }
 
 .reg-item {
- adding: 12px 6px;
-  backg round: var(--el-border-color-extra-light);
+  padding: 12px 6px;
+  background: var(--el-border-color-extra-light);
   position: relative;
   border-radius: 4px;
 
@@ -865,8 +867,8 @@ function tagChange(tagIcon) {
     width: 16px;
     height: 16px;
     line-height: 16px;
-    background: rgba(0, 0, 0, .2);
-    border-radius: 50%00;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
     color: #fff;
     z-index: 1;
     cursor: pointer;
@@ -884,16 +886,16 @@ function tagChange(tagIcon) {
     color: #f56c6c;
   }
 
-  & .el-input+.el-input {
-    margin-lef + + : 4px;
+  & .el-input + .el-input {
+    margin-left: 4px;
   }
 }
 
-.select-itm+.select-item {
-  margin-to + + : 4px;
+.select-item + .select-item {
+  margin-top: 4px;
 }
 
-.select-item.srtable-chosen {
+.select-item.sortable-chosen {
   border: 1px dashed #409eff;
 }
 
