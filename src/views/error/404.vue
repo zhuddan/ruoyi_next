@@ -1,3 +1,9 @@
+<script setup>
+const message = computed(() => {
+  return '找不到网页！'
+})
+</script>
+
 <template>
   <div class="wscn-http404-container">
     <div class="wscn-http404">
@@ -25,15 +31,9 @@
   </div>
 </template>
 
-<script setup>
-let message = computed(() => {
-  return '找不到网页！'
-})
-</script>
-
 <style lang="scss" scoped>
-.wscn-http404-container{
-  transform: translate(-50%,-50%);
+.wscn-http404-container {
+  transform: translate(-50%, -50%);
   position: absolute;
   top: 40%;
   left: 50%;

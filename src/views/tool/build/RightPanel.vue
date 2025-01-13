@@ -1,3 +1,305 @@
+<script setup>
+import { inputComponents, selectComponents } from '@/utils/generator/config'
+import { isNumberStr } from '@/utils/index'
+import draggable from 'vuedraggable/dist/vuedraggable.common'
+import IconsDialog from './IconsDialog'
+import TreeNodeDialog from './TreeNodeDialog'
+
+const props = defineProps({
+  showField: Boolean,
+  activeData: Object,
+  formConf: Object,
+})
+const emit = defineEmits(['tag-change'])
+const { proxy } = getCurrentInstance()
+const dateTimeFormat = {
+  date: 'YYYY-MM-DD',
+  week: 'YYYY 第 ww 周',
+  month: 'YYYY-MM',
+  year: 'YYYY',
+  datetime: 'YYYY-MM-DD HH:mm:ss',
+  daterange: 'YYYY-MM-DD',
+  monthrange: 'YYYY-MM',
+  datetimerange: 'YYYY-MM-DD HH:mm:ss',
+}
+const data = reactive({
+  currentTab: 'field',
+  currentNode: null,
+  dialogVisible: false,
+  iconsVisible: false,
+  currentIconModel: null,
+  dateTypeOptions: [
+    {
+      label: '日(date)',
+      value: 'date',
+    },
+    {
+      label: '周(week)',
+      value: 'week',
+    },
+    {
+      label: '月(month)',
+      value: 'month',
+    },
+    {
+      label: '年(year)',
+      value: 'year',
+    },
+    {
+      label: '日期时间(datetime)',
+      value: 'datetime',
+    },
+  ],
+  dateRangeTypeOptions: [
+    {
+      label: '日期范围(daterange)',
+      value: 'daterange',
+    },
+    {
+      label: '月范围(monthrange)',
+      value: 'monthrange',
+    },
+    {
+      label: '日期时间范围(datetimerange)',
+      value: 'datetimerange',
+    },
+  ],
+  colorFormatOptions: [
+    {
+      label: 'hex',
+      value: 'hex',
+    },
+    {
+      label: 'rgb',
+      value: 'rgb',
+    },
+    {
+      label: 'rgba',
+      value: 'rgba',
+    },
+    {
+      label: 'hsv',
+      value: 'hsv',
+    },
+    {
+      label: 'hsl',
+      value: 'hsl',
+    },
+  ],
+  justifyOptions: [
+    {
+      label: 'start',
+      value: 'start',
+    },
+    {
+      label: 'end',
+      value: 'end',
+    },
+    {
+      label: 'center',
+      value: 'center',
+    },
+    {
+      label: 'space-around',
+      value: 'space-around',
+    },
+    {
+      label: 'space-between',
+      value: 'space-between',
+    },
+  ],
+  layoutTreeProps: {
+    label(data, node) {
+      return data.componentName || `${data.label}: ${data.vModel}`
+    },
+  },
+})
+
+const { currentTab, currentNode, dialogVisible, iconsVisible, currentIconModel, dateTypeOptions, dateRangeTypeOptions, colorFormatOptions, justifyOptions, layoutTreeProps } = toRefs(data)
+
+const documentLink = computed(() => props.activeData.document || 'https://element-plus.org/zh-CN/guide/installation')
+
+const dateOptions = computed(() => {
+  if (props.activeData.type !== undefined && props.activeData.tag === 'el-date-picker') {
+    if (props.activeData['start-placeholder'] === undefined) {
+      return dateTypeOptions.value
+    }
+    return dateRangeTypeOptions.value
+  }
+  return []
+})
+
+const tagList = ref([
+  {
+    label: '输入型组件',
+    options: inputComponents,
+  },
+  {
+    label: '选择型组件',
+    options: selectComponents,
+  },
+])
+
+function addReg() {
+  props.activeData.regList.push({
+    pattern: '',
+    message: '',
+  })
+}
+function addSelectItem() {
+  props.activeData.options.push({
+    label: '',
+    value: '',
+  })
+}
+
+function addTreeItem() {
+  ++proxy.idGlobal
+  dialogVisible.value = true
+  currentNode.value = props.activeData.options
+}
+
+function renderContent(h, { node, data, store }) {
+  return h('div', {
+    class: 'custom-tree-node',
+  }, [
+    h('span', node.label),
+    h('span', {
+      class: 'node-operation',
+    }, [
+      h(resolveComponent('el-link'), {
+        type: 'primary',
+        icon: 'Plus',
+        underline: false,
+        onClick: () => {
+          append(data)
+        },
+      }),
+      h(resolveComponent('el-link'), {
+        type: 'danger',
+        icon: 'Delete',
+        underline: false,
+        style: 'margin-left: 5px;',
+        onClick: () => {
+          remove(node, data)
+        },
+      }),
+    ]),
+  ])
+}
+function append(data) {
+  if (!data.children) {
+    data.children = []
+  }
+  dialogVisible.value = true
+  currentNode.value = data.children
+}
+function remove(node, data) {
+  const { parent } = node
+  const children = parent.data.children || parent.data
+  const index = children.findIndex(d => d.id === data.id)
+  children.splice(index, 1)
+}
+function addNode(data) {
+  currentNode.value.push(data)
+}
+
+function setOptionValue(item, val) {
+  item.value = isNumberStr(val) ? +val : val
+}
+function setDefaultValue(val) {
+  if (Array.isArray(val)) {
+    return val.join(',')
+  }
+  if (['string', 'number'].includes(val)) {
+    return val
+  }
+  if (typeof val === 'boolean') {
+    return `${val}`
+  }
+  return val
+}
+
+function onDefaultValueInput(str) {
+  if (Array.isArray(props.activeData.defaultValue)) {
+    // 数组
+    props.activeData.defaultValue = str.split(',').map(val => (isNumberStr(val) ? +val : val))
+  }
+  else if (['true', 'false'].includes(str)) {
+    // 布尔
+    props.activeData.defaultValue = JSON.parse(str)
+  }
+  else {
+    // 字符串和数字
+    props.activeData.defaultValue = isNumberStr(str) ? +str : str
+  }
+}
+
+function onSwitchValueInput(val, name) {
+  if (['true', 'false'].includes(val)) {
+    props.activeData[name] = JSON.parse(val)
+  }
+  else {
+    props.activeData[name] = isNumberStr(val) ? +val : val
+  }
+}
+
+function setTimeValue(val, type) {
+  const valueFormat = type === 'week' ? dateTimeFormat.date : val
+  props.activeData.defaultValue = null
+  props.activeData['value-format'] = valueFormat
+  props.activeData.format = val
+}
+
+function spanChange(val) {
+  props.formConf.span = val
+}
+
+function multipleChange(val) {
+  props.activeData.defaultValue = val ? [] : ''
+}
+
+function dateTypeChange(val) {
+  setTimeValue(dateTimeFormat[val], val)
+}
+
+function rangeChange(val) {
+  props.activeData.defaultValue = val ? [props.activeData.min, props.activeData.max] : props.activeData.min
+}
+
+function rateTextChange(val) {
+  if (val)
+    props.activeData['show-score'] = false
+}
+
+function rateScoreChange(val) {
+  if (val)
+    props.activeData['show-text'] = false
+}
+
+function colorFormatChange(val) {
+  props.activeData.defaultValue = null
+  props.activeData['show-alpha'] = val.includes('a')
+  props.activeData.renderKey = +new Date() // 更新renderKey,重新渲染该组件
+}
+
+function openIconsDialog(model) {
+  iconsVisible.value = true
+  currentIconModel.value = model
+}
+
+function setIcon(val) {
+  props.activeData[currentIconModel.value] = val
+}
+
+function tagChange(tagIcon) {
+  let target = inputComponents.find(item => item.tagIcon === tagIcon)
+  if (!target)
+    target = selectComponents.find(item => item.tagIcon === tagIcon)
+  emit('tag-change', target)
+}
+</script>
+
 <template>
   <div class="right-board">
     <el-tabs v-model="currentTab" stretch class="center-tabs">
@@ -12,8 +314,10 @@
       </a>
       <el-scrollbar class="right-scrollbar">
         <!-- 组件属性 -->
-        <el-form v-show="currentTab === 'field' && showField" size="default" label-width="90px" label-position="top"
-          style="">
+        <el-form
+          v-show="currentTab === 'field' && showField" size="default" label-width="90px" label-position="top"
+          style=""
+        >
           <el-form-item v-if="activeData.changeTag" label="组件类型">
             <el-select v-model="activeData.tagIcon" placeholder="请选择组件类型" :style="{ width: '100%' }" @change="tagChange">
               <el-option-group v-for="group in tagList" :key="group.label" :label="group.label">
@@ -68,16 +372,22 @@
             <el-input v-model="activeData.style.width" placeholder="请输入组件宽度" clearable />
           </el-form-item>
           <el-form-item v-if="activeData.vModel !== undefined" label="默认值">
-            <el-input :value="setDefaultValue(activeData.defaultValue)" placeholder="请输入默认值"
-              @input="onDefaultValueInput" />
+            <el-input
+              :value="setDefaultValue(activeData.defaultValue)" placeholder="请输入默认值"
+              @input="onDefaultValueInput"
+            />
           </el-form-item>
           <el-form-item v-if="activeData.tag === 'el-checkbox-group'" label="至少应选">
-            <el-input-number :value="activeData.min" :min="0" placeholder="至少应选"
-              @input="$set(activeData, 'min', $event ? $event : undefined)" />
+            <el-input-number
+              :value="activeData.min" :min="0" placeholder="至少应选"
+              @input="$set(activeData, 'min', $event ? $event : undefined)"
+            />
           </el-form-item>
           <el-form-item v-if="activeData.tag === 'el-checkbox-group'" label="最多可选">
-            <el-input-number :value="activeData.max" :min="0" placeholder="最多可选"
-              @input="$set(activeData, 'max', $event ? $event : undefined)" />
+            <el-input-number
+              :value="activeData.max" :min="0" placeholder="最多可选"
+              @input="$set(activeData, 'max', $event ? $event : undefined)"
+            />
           </el-form-item>
           <el-form-item v-if="activeData.prepend !== undefined" label="前缀">
             <el-input v-model="activeData.prepend" placeholder="请输入前缀" />
@@ -136,7 +446,7 @@
           </el-form-item>
           <el-form-item v-if="activeData.maxlength !== undefined" label="最多输入">
             <el-input v-model="activeData.maxlength" placeholder="请输入字符长度">
-              <template slot="append">
+              <template #append>
                 个字符
               </template>
             </el-input>
@@ -148,16 +458,22 @@
             <el-input v-model="activeData['inactive-text']" placeholder="请输入关闭提示" />
           </el-form-item>
           <el-form-item v-if="activeData['active-value'] !== undefined" label="开启值">
-            <el-input :value="setDefaultValue(activeData['active-value'])" placeholder="请输入开启值"
-              @input="onSwitchValueInput($event, 'active-value')" />
+            <el-input
+              :value="setDefaultValue(activeData['active-value'])" placeholder="请输入开启值"
+              @input="onSwitchValueInput($event, 'active-value')"
+            />
           </el-form-item>
           <el-form-item v-if="activeData['inactive-value'] !== undefined" label="关闭值">
-            <el-input :value="setDefaultValue(activeData['inactive-value'])" placeholder="请输入关闭值"
-              @input="onSwitchValueInput($event, 'inactive-value')" />
+            <el-input
+              :value="setDefaultValue(activeData['inactive-value'])" placeholder="请输入关闭值"
+              @input="onSwitchValueInput($event, 'inactive-value')"
+            />
           </el-form-item>
           <el-form-item v-if="activeData.type !== undefined && 'el-date-picker' === activeData.tag" label="时间类型">
-            <el-select v-model="activeData.type" placeholder="请选择时间类型" :style="{ width: '100%' }"
-              @change="dateTypeChange">
+            <el-select
+              v-model="activeData.type" placeholder="请选择时间类型" :style="{ width: '100%' }"
+              @change="dateTypeChange"
+            >
               <el-option v-for="(item, index) in dateOptions" :key="index" :label="item.label" :value="item.value" />
             </el-select>
           </el-form-item>
@@ -177,11 +493,13 @@
           </el-form-item>
           <el-form-item v-if="activeData.fileSize !== undefined" label="文件大小">
             <el-input v-model.number="activeData.fileSize" placeholder="请输入文件大小">
-              <el-select slot="append" v-model="activeData.sizeUnit" :style="{ width: '66px' }">
-                <el-option label="KB" value="KB" />
-                <el-option label="MB" value="MB" />
-                <el-option label="GB" value="GB" />
-              </el-select>
+              <template #append>
+                <el-select v-model="activeData.sizeUnit" :style="{ width: '66px' }">
+                  <el-option label="KB" value="KB" />
+                  <el-option label="MB" value="MB" />
+                  <el-option label="GB" value="GB" />
+                </el-select>
+              </template>
             </el-input>
           </el-form-item>
           <el-form-item v-if="activeData.action !== undefined" label="上传地址">
@@ -200,8 +518,10 @@
               </el-radio-button>
             </el-radio-group>
           </el-form-item>
-          <el-form-item v-if="activeData.buttonText !== undefined" v-show="'picture-card' !== activeData['list-type']"
-            label="按钮文字">
+          <el-form-item
+            v-if="activeData.buttonText !== undefined" v-show="'picture-card' !== activeData['list-type']"
+            label="按钮文字"
+          >
             <el-input v-model="activeData.buttonText" placeholder="请输入按钮文字" />
           </el-form-item>
           <el-form-item v-if="activeData['range-separator'] !== undefined" label="分隔符">
@@ -215,16 +535,20 @@
           </el-form-item>
           <template v-if="['el-checkbox-group', 'el-radio-group', 'el-select'].indexOf(activeData.tag) > -1">
             <el-divider>选项</el-divider>
-            <draggable :list="activeData.options" :animation="340" group="selectItem" handle=".option-drag"
-              item-key="label">
+            <draggable
+              :list="activeData.options" :animation="340" group="selectItem" handle=".option-drag"
+              item-key="label"
+            >
               <template #item="{ element, index }">
                 <div :key="index" class="select-item">
                   <div class="select-line-icon option-drag">
                     <i class="el-icon-s-operation" />
                   </div>
                   <el-input v-model="element.label" placeholder="选项名" size="small" />
-                  <el-input placeholder="选项值" size="small" :value="element.value"
-                    @input="setOptionValue(element, $event)" />
+                  <el-input
+                    placeholder="选项值" size="small" :value="element.value"
+                    @input="setOptionValue(element, $event)"
+                  />
                   <div class="close-btn select-line-icon" @click="activeData.options.splice(index, 1)">
                     <el-icon>
                       <Remove />
@@ -234,8 +558,10 @@
               </template>
             </draggable>
             <div>
-              <el-button icon="CirclePlus" style="margin-left: 8px; margin-top: 10px;" text bg type="primary"
-                @click="addSelectItem">
+              <el-button
+                icon="CirclePlus" style="margin-left: 8px; margin-top: 10px;" text bg type="primary"
+                @click="addSelectItem"
+              >
                 添加选项
               </el-button>
             </div>
@@ -267,11 +593,15 @@
               </el-form-item>
             </template>
 
-            <el-tree v-if="activeData.dataType === 'static'" draggable :data="activeData.options" node-key="id"
-              :expand-on-click-node="false" :render-content="renderContent" />
+            <el-tree
+              v-if="activeData.dataType === 'static'" draggable :data="activeData.options" node-key="id"
+              :expand-on-click-node="false" :render-content="renderContent"
+            />
             <div v-if="activeData.dataType === 'static'">
-              <el-button icon="CirclePlus" style="margin-left: 0; margin-top: 10px;" type="primary" text bg
-                @click="addTreeItem">
+              <el-button
+                icon="CirclePlus" style="margin-left: 0; margin-top: 10px;" type="primary" text bg
+                @click="addTreeItem"
+              >
                 添加父级
               </el-button>
             </div>
@@ -314,16 +644,22 @@
             <el-switch v-model="activeData.border" />
           </el-form-item>
           <el-form-item v-if="activeData.tag === 'el-color-picker'" label="颜色格式">
-            <el-select v-model="activeData['color-format']" placeholder="请选择颜色格式" :style="{ width: '100%' }"
-              @change="colorFormatChange">
-              <el-option v-for="(item, index) in colorFormatOptions" :key="index" :label="item.label"
-                :value="item.value" />
+            <el-select
+              v-model="activeData['color-format']" placeholder="请选择颜色格式" :style="{ width: '100%' }"
+              @change="colorFormatChange"
+            >
+              <el-option
+                v-for="(item, index) in colorFormatOptions" :key="index" :label="item.label"
+                :value="item.value"
+              />
             </el-select>
           </el-form-item>
-          <el-form-item v-if="activeData.size !== undefined &&
-            (activeData.optionType === 'button' ||
-              activeData.border ||
-              activeData.tag === 'el-color-picker')" label="选项尺寸">
+          <el-form-item
+            v-if="activeData.size !== undefined
+              && (activeData.optionType === 'button'
+                || activeData.border
+                || activeData.tag === 'el-color-picker')" label="选项尺寸"
+          >
             <el-radio-group v-model="activeData.size">
               <el-radio-button label="large">
                 较大
@@ -407,8 +743,10 @@
               </el-form-item>
             </div>
             <div>
-              <el-button icon="CirclePlus" style="margin-left: 0; margin-top: 10px;" type="primary" text bg
-                @click="addReg">
+              <el-button
+                icon="CirclePlus" style="margin-left: 0; margin-top: 10px;" type="primary" text bg
+                @click="addReg"
+              >
                 添加规则
               </el-button>
             </div>
@@ -469,310 +807,10 @@
         </el-form>
       </el-scrollbar>
     </div>
-    <icons-dialog v-model="iconsVisible" :current="activeData[currentIconModel]" @select="setIcon" />
-    <treeNode-dialog v-model="dialogVisible" @commit="addNode" />
-
+    <IconsDialog v-model="iconsVisible" :current="activeData[currentIconModel]" @select="setIcon" />
+    <TreeNodeDialog v-model="dialogVisible" @commit="addNode" />
   </div>
 </template>
-
-<script setup>
-import draggable from "vuedraggable/dist/vuedraggable.common"
-import { isNumberStr } from '@/utils/index'
-import IconsDialog from './IconsDialog'
-import TreeNodeDialog from './TreeNodeDialog'
-import { inputComponents, selectComponents } from '@/utils/generator/config'
-
-const { proxy } = getCurrentInstance()
-const dateTimeFormat = {
-  date: 'YYYY-MM-DD',
-  week: 'YYYY 第 ww 周',
-  month: 'YYYY-MM',
-  year: 'YYYY',
-  datetime: 'YYYY-MM-DD HH:mm:ss',
-  daterange: 'YYYY-MM-DD',
-  monthrange: 'YYYY-MM',
-  datetimerange: 'YYYY-MM-DD HH:mm:ss'
-}
-const props = defineProps({
-  showField: Boolean,
-  activeData: Object,
-  formConf: Object
-})
-
-const data = reactive({
-  currentTab: 'field',
-  currentNode: null,
-  dialogVisible: false,
-  iconsVisible: false,
-  currentIconModel: null,
-  dateTypeOptions: [
-    {
-      label: '日(date)',
-      value: 'date'
-    },
-    {
-      label: '周(week)',
-      value: 'week'
-    },
-    {
-      label: '月(month)',
-      value: 'month'
-    },
-    {
-      label: '年(year)',
-      value: 'year'
-    },
-    {
-      label: '日期时间(datetime)',
-      value: 'datetime'
-    }
-  ],
-  dateRangeTypeOptions: [
-    {
-      label: '日期范围(daterange)',
-      value: 'daterange'
-    },
-    {
-      label: '月范围(monthrange)',
-      value: 'monthrange'
-    },
-    {
-      label: '日期时间范围(datetimerange)',
-      value: 'datetimerange'
-    }
-  ],
-  colorFormatOptions: [
-    {
-      label: 'hex',
-      value: 'hex'
-    },
-    {
-      label: 'rgb',
-      value: 'rgb'
-    },
-    {
-      label: 'rgba',
-      value: 'rgba'
-    },
-    {
-      label: 'hsv',
-      value: 'hsv'
-    },
-    {
-      label: 'hsl',
-      value: 'hsl'
-    }
-  ],
-  justifyOptions: [
-    {
-      label: 'start',
-      value: 'start'
-    },
-    {
-      label: 'end',
-      value: 'end'
-    },
-    {
-      label: 'center',
-      value: 'center'
-    },
-    {
-      label: 'space-around',
-      value: 'space-around'
-    },
-    {
-      label: 'space-between',
-      value: 'space-between'
-    }
-  ],
-  layoutTreeProps: {
-    label(data, node) {
-      return data.componentName || `${data.label}: ${data.vModel}`
-    }
-  }
-})
-
-const { currentTab, currentNode, dialogVisible, iconsVisible, currentIconModel, dateTypeOptions, dateRangeTypeOptions, colorFormatOptions, justifyOptions, layoutTreeProps } = toRefs(data)
-
-const documentLink = computed(() => props.activeData.document || 'https://element-plus.org/zh-CN/guide/installation')
-
-const dateOptions = computed(() => {
-  if (props.activeData.type !== undefined && props.activeData.tag === 'el-date-picker') {
-    if (props.activeData['start-placeholder'] === undefined) {
-      return dateTypeOptions.value
-    }
-    return dateRangeTypeOptions.value
-  }
-  return []
-})
-
-const tagList = ref([
-  {
-    label: '输入型组件',
-    options: inputComponents
-  },
-  {
-    label: '选择型组件',
-    options: selectComponents
-  }
-])
-
-const emit = defineEmits(['tag-change'])
-
-function addReg() {
-  props.activeData.regList.push({
-    pattern: '',
-    message: ''
-  })
-}
-function addSelectItem() {
-  props.activeData.options.push({
-    label: '',
-    value: ''
-  })
-}
-
-function addTreeItem() {
-  ++proxy.idGlobal
-  dialogVisible.value = true
-  currentNode.value = props.activeData.options
-}
-
-function renderContent(h, { node, data, store }) {
-  return h('div', {
-    class: "custom-tree-node"
-  }, [
-    h('span', node.label),
-    h('span', {
-      class: "node-operation"
-    }, [
-      h(resolveComponent('el-link'), {
-        type: "primary",
-        icon: "Plus",
-        underline: false,
-        onClick: () => {
-          append(data)
-
-        }
-      }),
-      h(resolveComponent('el-link'), {
-        type: "danger",
-        icon: "Delete",
-        underline: false,
-        style: "margin-left: 5px;",
-        onClick: () => {
-          remove(node, data)
-        }
-      })
-    ])
-  ])
-}
-function append(data) {
-  if (!data.children) {
-    data.children = []
-  }
-  dialogVisible.value = true
-  currentNode.value = data.children
-}
-function remove(node, data) {
-  const { parent } = node
-  const children = parent.data.children || parent.data
-  const index = children.findIndex(d => d.id === data.id)
-  children.splice(index, 1)
-}
-function addNode(data) {
-  currentNode.value.push(data)
-}
-
-function setOptionValue(item, val) {
-  item.value = isNumberStr(val) ? +val : val
-}
-function setDefaultValue(val) {
-  if (Array.isArray(val)) {
-    return val.join(',')
-  }
-  if (['string', 'number'].indexOf(val) > -1) {
-    return val
-  }
-  if (typeof val === 'boolean') {
-    return `${val}`
-  }
-  return val
-}
-
-function onDefaultValueInput(str) {
-  if (Array.isArray(props.activeData.defaultValue)) {
-    // 数组
-    props.activeData.defaultValue = str.split(',').map(val => (isNumberStr(val) ? +val : val))
-  } else if (['true', 'false'].indexOf(str) > -1) {
-    // 布尔
-    props.activeData.defaultValue = JSON.parse(str)
-  } else {
-    // 字符串和数字
-    props.activeData.defaultValue = isNumberStr(str) ? +str : str
-  }
-}
-
-function onSwitchValueInput(val, name) {
-  if (['true', 'false'].indexOf(val) > -1) {
-    props.activeData[name] = JSON.parse(val)
-  } else {
-    props.activeData[name] = isNumberStr(val) ? +val : val
-  }
-}
-
-function setTimeValue(val, type) {
-  const valueFormat = type === 'week' ? dateTimeFormat.date : val
-  props.activeData.defaultValue = null
-  props.activeData['value-format'] = valueFormat
-  props.activeData.format = val
-}
-
-function spanChange(val) {
-  props.formConf.span = val
-}
-
-function multipleChange(val) {
-  props.activeData.defaultValue = val ? [] : ''
-}
-
-function dateTypeChange(val) {
-  setTimeValue(dateTimeFormat[val], val)
-}
-
-function rangeChange(val) {
-  props.activeData.defaultValue = val ? [props.activeData.min, props.activeData.max] : props.activeData.min
-}
-
-function rateTextChange(val) {
-  if (val) props.activeData['show-score'] = false
-}
-
-function rateScoreChange(val) {
-  if (val) props.activeData['show-text'] = false
-}
-
-function colorFormatChange(val) {
-  props.activeData.defaultValue = null
-  props.activeData['show-alpha'] = val.indexOf('a') > -1
-  props.activeData.renderKey = +new Date() // 更新renderKey,重新渲染该组件
-}
-
-function openIconsDialog(model) {
-  iconsVisible.value = true
-  currentIconModel.value = model
-}
-
-function setIcon(val) {
-  props.activeData[currentIconModel.value] = val
-}
-
-function tagChange(tagIcon) {
-  let target = inputComponents.find(item => item.tagIcon === tagIcon)
-  if (!target) target = selectComponents.find(item => item.tagIcon === tagIcon)
-  emit('tag-change', target)
-}
-</script>
 
 <style lang="scss" scoped>
 .right-board {
@@ -812,8 +850,8 @@ function tagChange(tagIcon) {
 }
 
 .reg-item {
-  padding: 12px 6px;
-  background: var(--el-border-color-extra-light);
+ adding: 12px 6px;
+  backg round: var(--el-border-color-extra-light);
   position: relative;
   border-radius: 4px;
 
@@ -828,7 +866,7 @@ function tagChange(tagIcon) {
     height: 16px;
     line-height: 16px;
     background: rgba(0, 0, 0, .2);
-    border-radius: 50%;
+    border-radius: 50%00;
     color: #fff;
     z-index: 1;
     cursor: pointer;
@@ -847,15 +885,15 @@ function tagChange(tagIcon) {
   }
 
   & .el-input+.el-input {
-    margin-left: 4px;
+    margin-lef + + : 4px;
   }
 }
 
-.select-item+.select-item {
-  margin-top: 4px;
+.select-itm+.select-item {
+  margin-to + + : 4px;
 }
 
-.select-item.sortable-chosen {
+.select-item.srtable-chosen {
   border: 1px dashed #409eff;
 }
 

@@ -1,5 +1,5 @@
+import path from 'node:path'
 import { defineConfig, loadEnv } from 'vite'
-import path from 'path'
 import createVitePlugins from './vite/plugins'
 
 // https://vitejs.dev/config/
@@ -18,10 +18,10 @@ export default defineConfig(({ mode, command }) => {
         // 设置路径
         '~': path.resolve(__dirname, './'),
         // 设置别名
-        '@': path.resolve(__dirname, './src')
+        '@': path.resolve(__dirname, './src'),
       },
       // https://cn.vitejs.dev/config/#resolve-extensions
-      extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.vue']
+      extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.vue'],
     },
     // vite 相关配置
     server: {
@@ -33,11 +33,11 @@ export default defineConfig(({ mode, command }) => {
         '/dev-api': {
           target: 'http://localhost:8080',
           changeOrigin: true,
-          rewrite: (p) => p.replace(/^\/dev-api/, '')
-        }
-      }
+          rewrite: p => p.replace(/^\/dev-api/, ''),
+        },
+      },
     },
-    //fix:error:stdin>:7356:1: warning: "@charset" must be the first rule in the file
+    // fix:error:stdin>:7356:1: warning: "@charset" must be the first rule in the file
     css: {
       postcss: {
         plugins: [
@@ -46,13 +46,13 @@ export default defineConfig(({ mode, command }) => {
             AtRule: {
               charset: (atRule) => {
                 if (atRule.name === 'charset') {
-                  atRule.remove();
+                  atRule.remove()
                 }
-              }
-            }
-          }
-        ]
-      }
-    }
+              },
+            },
+          },
+        ],
+      },
+    },
   }
 })
