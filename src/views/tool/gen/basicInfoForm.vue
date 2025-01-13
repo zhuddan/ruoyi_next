@@ -15,6 +15,7 @@ const rules = ref({
 })
 </script>
 
+<!-- eslint-disable vue/no-mutating-props -->
 <template>
   <el-form ref="basicInfoForm" :model="info" :rules="rules" label-width="150px">
     <el-row>
