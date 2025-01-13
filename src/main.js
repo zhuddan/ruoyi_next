@@ -1,13 +1,6 @@
 /* eslint-disable perfectionist/sort-imports */
 import { createApp } from 'vue'
-import {
-  addDateRange,
-  handleTree,
-  parseTime,
-  resetForm,
-  selectDictLabel,
-  selectDictLabels,
-} from '@/utils/ruoyi'
+
 import ElementPlus from 'element-plus'
 
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
