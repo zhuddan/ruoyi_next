@@ -11,5 +11,7 @@ export default antfu({
     'vue/no-unused-refs': 'warn',
     'eqeqeq': 'warn',
     'vue/eqeqeq': 'warn',
+    'no-unused-vars': 'warn',
+    'unused-imports/no-unused-vars': 'warn',
   },
 })
