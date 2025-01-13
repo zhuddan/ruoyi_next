@@ -1,6 +1,5 @@
 <script setup>
 import { addJob, changeJobStatus, delJob, getJob, listJob, runJob, updateJob } from '@/api/monitor/job'
-import Crontab from '@/components/Crontab'
 import { download } from '@/utils/request'
 import { selectDictLabel } from '@/utils/ruoyi'
 

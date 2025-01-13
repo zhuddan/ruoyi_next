@@ -139,7 +139,7 @@ getList()
                   </td>
                   <td class="el-table__cell is-leaf">
                     <div v-if="cache.info" class="cell">
-                      {{ cache.info.used_memory_human }}
+                      {{ cache.info?.used_memory_human }}
                     </div>
                   </td>
                   <td class="el-table__cell is-leaf">

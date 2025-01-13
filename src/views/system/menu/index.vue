@@ -1,7 +1,5 @@
 <script setup>
 import { addMenu, delMenu, getMenu, listMenu, updateMenu } from '@/api/system/menu'
-import IconSelect from '@/components/IconSelect/index.vue'
-import SvgIcon from '@/components/SvgIcon'
 import { handleTree } from '@/utils/ruoyi'
 
 defineOptions({

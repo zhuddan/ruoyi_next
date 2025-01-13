@@ -3,8 +3,8 @@
 import { inputComponents, selectComponents } from '@/utils/generator/config'
 import { isNumberStr } from '@/utils/index'
 import draggable from 'vuedraggable/dist/vuedraggable.common'
-import IconsDialog from './IconsDialog'
-import TreeNodeDialog from './TreeNodeDialog'
+import IconsDialog from './IconsDialog.vue'
+import TreeNodeDialog from './TreeNodeDialog.vue'
 
 const props = defineProps({
   showField: Boolean,

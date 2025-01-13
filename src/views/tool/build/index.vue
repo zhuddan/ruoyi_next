@@ -12,9 +12,9 @@ import { ElNotification } from 'element-plus'
 import beautifier from 'js-beautify'
 import { onMounted, watch } from 'vue'
 import draggable from 'vuedraggable/dist/vuedraggable.common'
-import CodeTypeDialog from './CodeTypeDialog'
-import DraggableItem from './DraggableItem'
-import RightPanel from './RightPanel'
+import CodeTypeDialog from './CodeTypeDialog.vue'
+import DraggableItem from './DraggableItem.vue'
+import RightPanel from './RightPanel.vue'
 
 const drawingList = ref(drawingDefalut)
 const dialogVisible = ref(false)
