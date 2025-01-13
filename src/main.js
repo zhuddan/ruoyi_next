@@ -6,6 +6,7 @@ import ElementPlus from 'element-plus'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 
 import locale from 'element-plus/es/locale/lang/zh-cn'
+
 import Cookies from 'js-cookie'
 
 import App from './App.vue'
