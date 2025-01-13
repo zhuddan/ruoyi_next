@@ -5,7 +5,6 @@ import { resetForm } from '@/utils/ruoyi'
 import selectUser from './selectUser'
 
 const route = useRoute()
-const { proxy } = getCurrentInstance()
 const { sys_normal_disable } = useDict('sys_normal_disable')
 
 const userList = ref([])
@@ -57,9 +56,17 @@ function handleSelectionChange(selection) {
   multiple.value = !selection.length
 }
 
+/**
+ * @type {Ref<typeof selectUser>}
+ */
+
+/**
+ * @type {TemplateRef<typeof import('./selectUser.vue').default>}
+ */
+const selectRef = useTemplateRef('selectRef')
 /** 打开授权用户表弹窗 */
 function openSelectUser() {
-  proxy.$refs.selectRef.show()
+  selectRef.show()
 }
 
 /** 取消授权按钮操作 */

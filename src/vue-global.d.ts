@@ -9,4 +9,11 @@ declare module 'vue' {
     selectDictLabels: typeof import('@/utils/ruoyi')['selectDictLabels']
   }
 }
+declare global {
+  // @ts-ignore
+  export type { ShallowRef } from 'vue'
+  export type TemplateRef<T> = Readonly<ShallowRef<T | null>>
+  import('vue')
+}
+
 export {}
