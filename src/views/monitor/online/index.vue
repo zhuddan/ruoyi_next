@@ -1,6 +1,10 @@
-<script setup name="Online">
+<script setup>
 import { forceLogout, list as initData } from '@/api/monitor/online'
 import { resetForm } from '@/utils/ruoyi'
+
+defineOptions({
+  name: 'Online',
+})
 
 /**
  * @type {TemplateRef<import("element-plus").FormInstance>}

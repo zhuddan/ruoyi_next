@@ -1,7 +1,11 @@
-<script setup name="Logininfor">
+<script setup>
 import { cleanLogininfor, delLogininfor, list, unlockLogininfor } from '@/api/monitor/logininfor'
 import { download } from '@/utils/request'
 import { addDateRange, resetForm } from '@/utils/ruoyi'
+
+defineOptions({
+  name: 'Logininfor',
+})
 
 const { sys_common_status } = useDict('sys_common_status')
 

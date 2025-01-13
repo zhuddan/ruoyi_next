@@ -1,4 +1,7 @@
-<script setup name="Index">
+<script setup>
+defineOptions({
+  name: 'Index',
+})
 const version = ref('3.8.9')
 
 function goTarget(url) {

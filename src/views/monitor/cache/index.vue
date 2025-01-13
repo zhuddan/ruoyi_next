@@ -1,6 +1,10 @@
-<script setup name="Cache">
+<script setup>
 import { getCache } from '@/api/monitor/cache'
 import * as echarts from 'echarts'
+
+defineOptions({
+  name: 'Cache',
+})
 
 const cache = ref([])
 const commandstats = ref(null)

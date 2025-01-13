@@ -1,8 +1,12 @@
-<script setup name="Profile">
+<script setup>
 import { getUserProfile } from '@/api/system/user'
 import resetPwd from './resetPwd'
 import userAvatar from './userAvatar'
 import userInfo from './userInfo'
+
+defineOptions({
+  name: 'Profile',
+})
 
 const activeTab = ref('userinfo')
 const state = reactive({

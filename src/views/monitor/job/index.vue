@@ -1,8 +1,12 @@
-<script setup name="Job">
+<script setup>
 import { addJob, changeJobStatus, delJob, getJob, listJob, runJob, updateJob } from '@/api/monitor/job'
 import Crontab from '@/components/Crontab'
 import { download } from '@/utils/request'
 import { resetForm, selectDictLabel } from '@/utils/ruoyi'
+
+defineOptions({
+  name: 'Job',
+})
 
 const router = useRouter()
 /**

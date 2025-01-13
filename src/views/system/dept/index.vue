@@ -1,6 +1,10 @@
-<script setup name="Dept">
+<script setup>
 import { addDept, delDept, getDept, listDept, listDeptExcludeChild, updateDept } from '@/api/system/dept'
 import { handleTree, resetForm } from '@/utils/ruoyi'
+
+defineOptions({
+  name: 'Dept',
+})
 
 const { sys_normal_disable } = useDict('sys_normal_disable')
 

@@ -1,10 +1,14 @@
-<script setup name="Gen">
+<script setup>
 import { delTable, genCode, listTable, previewTable, synchDb } from '@/api/tool/gen'
 import router from '@/router'
 import { download } from '@/utils/request'
 import { resetForm } from '@/utils/ruoyi'
 import createTable from './createTable'
 import importTable from './importTable'
+
+defineOptions({
+  name: 'Gen',
+})
 
 const route = useRoute()
 const { proxy } = getCurrentInstance()

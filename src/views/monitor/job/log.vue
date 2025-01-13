@@ -1,9 +1,13 @@
-<script setup name="JobLog">
+<script setup>
 import { getJob } from '@/api/monitor/job'
 import { cleanJobLog, delJobLog, listJobLog } from '@/api/monitor/jobLog'
 import $tab from '@/plugins/tab'
 import { download } from '@/utils/request'
 import { addDateRange, resetForm } from '@/utils/ruoyi'
+
+defineOptions({
+  name: 'JobLog',
+})
 
 const { sys_common_status, sys_job_group } = useDict('sys_common_status', 'sys_job_group')
 

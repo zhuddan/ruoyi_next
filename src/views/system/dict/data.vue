@@ -1,10 +1,15 @@
-<script setup name="Data">
+<script setup>
 import { addData, delData, getData, listData, updateData } from '@/api/system/dict/data'
 import { optionselect as getDictOptionselect, getType } from '@/api/system/dict/type'
 import $tab from '@/plugins/tab'
 import useDictStore from '@/store/modules/dict'
 import { download } from '@/utils/request'
 import { resetForm } from '@/utils/ruoyi'
+
+defineOptions({
+  // eslint-disable-next-line vue/no-reserved-component-names
+  name: 'Data',
+})
 
 const { sys_normal_disable } = useDict('sys_normal_disable')
 

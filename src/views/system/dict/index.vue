@@ -1,8 +1,12 @@
-<script setup name="Dict">
+<script setup>
 import { addType, delType, getType, listType, refreshCache, updateType } from '@/api/system/dict/type'
 import useDictStore from '@/store/modules/dict'
 import { download } from '@/utils/request'
 import { addDateRange, resetForm } from '@/utils/ruoyi'
+
+defineOptions({
+  name: 'Dict',
+})
 
 const { sys_normal_disable } = useDict('sys_normal_disable')
 

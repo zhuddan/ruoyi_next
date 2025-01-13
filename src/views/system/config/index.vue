@@ -1,7 +1,11 @@
-<script setup name="Config">
+<script setup>
 import { addConfig, delConfig, getConfig, listConfig, refreshCache, updateConfig } from '@/api/system/config'
 import { download } from '@/utils/request'
 import { addDateRange, resetForm } from '@/utils/ruoyi'
+
+defineOptions({
+  name: 'Config',
+})
 
 const { sys_yes_no } = useDict('sys_yes_no')
 

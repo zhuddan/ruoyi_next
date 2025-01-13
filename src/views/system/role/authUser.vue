@@ -1,8 +1,12 @@
-<script setup name="AuthUser">
+<script setup>
 import { allocatedUserList, authUserCancel, authUserCancelAll } from '@/api/system/role'
 import $tab from '@/plugins/tab'
 import { resetForm } from '@/utils/ruoyi'
 import selectUser from './selectUser'
+
+defineOptions({
+  name: 'AuthUser',
+})
 
 const route = useRoute()
 const { sys_normal_disable } = useDict('sys_normal_disable')

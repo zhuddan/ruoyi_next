@@ -1,6 +1,10 @@
-<script setup name="SelectUser">
+<script setup>
 import { authUserSelectAll, unallocatedUserList } from '@/api/system/role'
 import { resetForm } from '@/utils/ruoyi'
+
+defineOptions({
+  name: 'SelectUser',
+})
 
 const props = defineProps({
   roleId: {

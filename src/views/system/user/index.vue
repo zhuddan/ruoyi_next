@@ -1,4 +1,4 @@
-<script setup name="User">
+<script setup>
 import { addUser, changeUserStatus, delUser, deptTreeSelect, getUser, listUser, resetUserPwd, updateUser } from '@/api/system/user'
 import useAppStore from '@/store/modules/app'
 import { getToken } from '@/utils/auth'
@@ -6,6 +6,10 @@ import { download } from '@/utils/request'
 import { resetForm } from '@/utils/ruoyi'
 import { Pane, Splitpanes } from 'splitpanes'
 import 'splitpanes/dist/splitpanes.css'
+
+defineOptions({
+  name: 'User',
+})
 
 const router = useRouter()
 const appStore = useAppStore()

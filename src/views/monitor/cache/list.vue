@@ -1,5 +1,9 @@
-<script setup name="CacheList">
+<script setup>
 import { clearCacheAll, clearCacheKey, clearCacheName, getCacheValue, listCacheKey, listCacheName } from '@/api/monitor/cache'
+
+defineOptions({
+  name: 'CacheList',
+})
 
 const cacheNames = ref([])
 const cacheKeys = ref([])

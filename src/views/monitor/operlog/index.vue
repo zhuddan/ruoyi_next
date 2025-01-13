@@ -1,7 +1,11 @@
-<script setup name="Operlog">
+<script setup>
 import { cleanOperlog, delOperlog, list } from '@/api/monitor/operlog'
 import { download } from '@/utils/request'
 import { addDateRange, resetForm, selectDictLabel } from '@/utils/ruoyi'
+
+defineOptions({
+  name: 'Operlog',
+})
 
 const { sys_oper_type, sys_common_status } = useDict('sys_oper_type', 'sys_common_status')
 

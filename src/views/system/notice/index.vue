@@ -1,6 +1,10 @@
-<script setup name="Notice">
+<script setup>
 import { addNotice, delNotice, getNotice, listNotice, updateNotice } from '@/api/system/notice'
 import { resetForm } from '@/utils/ruoyi'
+
+defineOptions({
+  name: 'Notice',
+})
 
 const { sys_notice_status, sys_notice_type } = useDict('sys_notice_status', 'sys_notice_type')
 
