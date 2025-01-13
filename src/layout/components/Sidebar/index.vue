@@ -43,7 +43,13 @@ const activeMenu = computed(() => {
 </script>
 
 <template>
-  <div :class="{ 'has-logo': showLogo }" class="sidebar-container">
+  <div
+    :class="{
+      'has-logo': showLogo,
+      'sidebar-container_collapse': isCollapse,
+    }"
+    class="sidebar-container"
+  >
     <Logo v-if="showLogo" :collapse="isCollapse" />
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu
@@ -76,30 +82,30 @@ const activeMenu = computed(() => {
     background-color: v-bind(getMenuBackground);
   }
 
-  .el-menu {
-    border: none;
-    height: 100%;
-    width: 100% !important;
+  // .el-menu {
+  //   border: none;
+  //   height: 100%;
+  //   width: 100% !important;
 
-    .el-menu-item,
-    .el-sub-menu__title {
-      &:hover {
-        background-color: var(--menu-hover, rgba(0, 0, 0, 0.06)) !important;
-      }
-    }
+  //   .el-menu-item,
+  //   .el-sub-menu__title {
+  //     &:hover {
+  //       background-color: var(--menu-hover, rgba(0, 0, 0, 0.06)) !important;
+  //     }
+  //   }
 
-    .el-menu-item {
-      color: v-bind(getMenuTextColor);
+  //   .el-menu-item {
+  //     color: v-bind(getMenuTextColor);
 
-      &.is-active {
-        color: var(--menu-active-text, #409eff);
-        background-color: var(--menu-hover, rgba(0, 0, 0, 0.06)) !important;
-      }
-    }
+  //     &.is-active {
+  //       color: var(--menu-active-text, #409eff);
+  //       background-color: var(--menu-hover, rgba(0, 0, 0, 0.06)) !important;
+  //     }
+  //   }
 
-    .el-sub-menu__title {
-      color: v-bind(getMenuTextColor);
-    }
-  }
+  //   .el-sub-menu__title {
+  //     color: v-bind(getMenuTextColor);
+  //   }
+  // }
 }
 </style>

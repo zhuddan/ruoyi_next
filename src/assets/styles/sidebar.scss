@@ -1,4 +1,4 @@
-#app {
+#appx {
   .main-container {
     min-height: 100%;
     transition: margin-left 0.28s;
@@ -78,7 +78,7 @@
     }
 
     .el-menu-item .el-menu-tooltip__trigger {
-      display: inline-block !important;
+      // display: inline-block !important;
     }
 
     // menu hover
@@ -232,6 +232,17 @@
     &::-webkit-scrollbar-thumb {
       background: #99a9bf;
       border-radius: 20px;
+    }
+  }
+}
+
+.app-wrapper {
+  --sidebar-width: 200px;
+  display: flex;
+  .sidebar-container {
+    width: var(--sidebar-width) !important;
+    &_collapse {
+      width: calc(var(--el-menu-icon-width) + var(--el-menu-base-level-padding) * 2);
     }
   }
 }
