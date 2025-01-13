@@ -1,6 +1,7 @@
 <script setup name="Gen">
 import { delTable, genCode, listTable, previewTable, synchDb } from '@/api/tool/gen'
 import router from '@/router'
+import { download } from '@/utils/request'
 import createTable from './createTable'
 import importTable from './importTable'
 
@@ -75,7 +76,7 @@ function handleGenTable(row) {
     })
   }
   else {
-    proxy.$download.zip(`/tool/gen/batchGenCode?tables=${tbNames}`, 'ruoyi.zip')
+    download.zip(`/tool/gen/batchGenCode?tables=${tbNames}`, 'ruoyi.zip')
   }
 }
 

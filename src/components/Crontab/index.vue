@@ -19,7 +19,6 @@ const props = defineProps({
   },
 })
 const emit = defineEmits(['hide', 'fill'])
-const { proxy } = getCurrentInstance()
 const tabTitles = ref(['秒', '分钟', '小时', '日', '月', '周', '年'])
 const tabActive = ref(0)
 const hideComponent = ref([])
