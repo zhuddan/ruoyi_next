@@ -40,6 +40,7 @@ watch(() => props.activeId, (val) => {
 }, { immediate: true })
 </script>
 
+<!-- eslint-disable vue/no-mutating-props -->
 <template>
   <el-col :span="element.span" :class="className" @click.stop="activeItem(element)">
     <el-form-item
