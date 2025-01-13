@@ -82,7 +82,7 @@ function tabCheck(index) {
   tabActive.value = index
 }
 // 由子组件触发，更改表达式组成的字段值
-function updateCrontabValue(name, value, from) {
+function updateCrontabValue(name, value) {
   crontabValueObj.value[name] = value
 }
 // 表单选项的子组件校验数字格式（通过-props传递）
