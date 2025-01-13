@@ -16,8 +16,8 @@ export default defineConfig(({ mode, command }) => {
     resolve: {
       // https://cn.vitejs.dev/config/#resolve-alias
       alias: {
-        // 设置路径
-        '~': path.resolve(__dirname, './'),
+        // // 设置路径
+        // '~': path.resolve(__dirname, './'),
         // 设置别名
         '@': path.resolve(__dirname, './src'),
       },
@@ -29,14 +29,14 @@ export default defineConfig(({ mode, command }) => {
       port: 80,
       host: true,
       open: true,
-      proxy: {
-        // https://cn.vitejs.dev/config/#server-proxy
-        '/dev-api': {
-          target: 'http://localhost:8080',
-          changeOrigin: true,
-          rewrite: p => p.replace(/^\/dev-api/, ''),
-        },
-      },
+      // proxy: {
+      //   // https://cn.vitejs.dev/config/#server-proxy
+      //   '/dev-api': {
+      //     target: 'http://localhost:8080',
+      //     changeOrigin: true,
+      //     rewrite: p => p.replace(/^\/dev-api/, ''),
+      //   },
+      // },
     },
     // fix:error:stdin>:7356:1: warning: "@charset" must be the first rule in the file
     css: {

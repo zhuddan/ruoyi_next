@@ -155,6 +155,8 @@ watch(searchPool, (list) => {
 <style lang='scss' scoped>
 .header-search {
   font-size: 0 !important;
+  display: inline-flex !important;
+  align-items: center;
 
   .search-icon {
     cursor: pointer;

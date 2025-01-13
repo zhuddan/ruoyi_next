@@ -48,6 +48,6 @@ export default defineComponent({
   height: 1em;
   position: relative;
   fill: currentColor;
-  vertical-align: -2px;
+  vertical-align: -2px !important;
 }
 </style>
