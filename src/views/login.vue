@@ -7,7 +7,6 @@ import Cookies from 'js-cookie'
 const userStore = useUserStore()
 const route = useRoute()
 const router = useRouter()
-const { proxy } = getCurrentInstance()
 
 const loginForm = ref({
   username: 'admin',
@@ -35,8 +34,13 @@ watch(route, (newRoute) => {
   redirect.value = newRoute.query && newRoute.query.redirect
 }, { immediate: true })
 
+/**
+ * @type {TemplateRef<import("element-plus").FormInstance>}
+ */
+const loginRef = useTemplateRef('loginRef')
+
 function handleLogin() {
-  proxy.$refs.loginRef.validate((valid) => {
+  loginRef.value.validate((valid) => {
     if (valid) {
       loading.value = true
       // 勾选了需要记住密码设置在 cookie 中设置记住用户名和密码

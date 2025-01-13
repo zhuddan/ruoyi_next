@@ -9,8 +9,6 @@ const props = defineProps({
   },
 })
 
-const { proxy } = getCurrentInstance()
-
 const form = ref({})
 const rules = ref({
   nickName: [{ required: true, message: '用户昵称不能为空', trigger: 'blur' }],
@@ -18,9 +16,13 @@ const rules = ref({
   phonenumber: [{ required: true, message: '手机号码不能为空', trigger: 'blur' }, { pattern: /^1[3-9|]\d{9}$/, message: '请输入正确的手机号码', trigger: 'blur' }],
 })
 
+/**
+ * @type {TemplateRef<import("element-plus").FormInstance>}
+ */
+const userRef = useTemplateRef('userRef')
 /** 提交按钮 */
 function submit() {
-  proxy.$refs.userRef.validate((valid) => {
+  userRef.value.validate((valid) => {
     if (valid) {
       updateUserProfile(form.value).then(() => {
         $modal.msgSuccess('修改成功')

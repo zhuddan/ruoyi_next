@@ -1,12 +1,15 @@
-<script setup name="GenEdit">
+<script setup>
 import { optionselect as getDictOptionselect } from '@/api/system/dict/type'
 import { getGenTable, updateGenTable } from '@/api/tool/gen'
 import $tab from '@/plugins/tab'
-import basicInfoForm from './basicInfoForm'
-import genInfoForm from './genInfoForm'
+import basicInfoForm from './basicInfoForm.vue'
+import genInfoForm from './genInfoForm.vue'
+
+defineOptions({
+  name: 'GenEdit',
+})
 
 const route = useRoute()
-const { proxy } = getCurrentInstance()
 
 const activeName = ref('columnInfo')
 const tableHeight = ref(`${document.documentElement.scrollHeight - 245}px`)
@@ -15,10 +18,19 @@ const columns = ref([])
 const dictOptions = ref([])
 const info = ref({})
 
+/**
+ * @type {TemplateRef<InstanceType<typeof basicInfoForm>>}
+ */
+const basicInfo = useTemplateRef('basicInfo')
+
+/**
+ * @type {TemplateRef<InstanceType<typeof genInfoForm>>}
+ */
+const genInfo = useTemplateRef('genInfo')
 /** 提交按钮 */
 function submitForm() {
-  const basicForm = proxy.$refs.basicInfo.$refs.basicInfoForm
-  const genForm = proxy.$refs.genInfo.$refs.genInfoForm
+  const basicForm = basicInfo.value.$refs.basicInfoForm
+  const genForm = genInfo.value.$refs.genInfoForm
   Promise.all([basicForm, genForm].map(getFormPromise)).then((res) => {
     const validateResult = res.every(item => !!item)
     if (validateResult) {

@@ -17,7 +17,6 @@ import DraggableItem from './DraggableItem'
 import RightPanel from './RightPanel'
 
 const drawingList = ref(drawingDefalut)
-const { proxy } = getCurrentInstance()
 const dialogVisible = ref(false)
 const showFileName = ref(false)
 const operationType = ref('')

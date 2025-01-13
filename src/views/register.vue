@@ -3,7 +3,6 @@ import { getCodeImg, register } from '@/api/login'
 import { ElMessageBox } from 'element-plus'
 
 const router = useRouter()
-const { proxy } = getCurrentInstance()
 
 const registerForm = ref({
   username: '',
@@ -43,8 +42,12 @@ const codeUrl = ref('')
 const loading = ref(false)
 const captchaEnabled = ref(true)
 
+/**
+ * @type {TemplateRef<import("element-plus").FormInstance>}
+ */
+const registerRef = useTemplateRef('registerRef')
 function handleRegister() {
-  proxy.$refs.registerRef.validate((valid) => {
+  registerRef.validate((valid) => {
     if (valid) {
       loading.value = true
       register(registerForm.value).then((res) => {

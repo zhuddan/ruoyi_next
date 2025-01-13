@@ -7,7 +7,6 @@ defineOptions({
 })
 
 const route = useRoute()
-const { proxy } = getCurrentInstance()
 
 const loading = ref(true)
 const total = ref(0)
@@ -21,9 +20,13 @@ const form = ref({
   userId: undefined,
 })
 
+/**
+ * @type {TemplateRef<import("element-plus").TableInstance>}
+ */
+const roleRef = useTemplateRef('roleRef')
 /** 单击选中行数据 */
 function clickRow(row) {
-  proxy.$refs.roleRef.toggleRowSelection(row)
+  roleRef.value.toggleRowSelection(row)
 };
 
 /** 多选框选中数据 */
@@ -63,7 +66,7 @@ function submitForm() {
       nextTick(() => {
         roles.value.forEach((row) => {
           if (row.flag) {
-            proxy.$refs.roleRef.toggleRowSelection(row)
+            roleRef.value.toggleRowSelection(row)
           }
         })
       })

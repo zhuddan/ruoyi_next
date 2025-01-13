@@ -4,7 +4,6 @@ import { createTable } from '@/api/tool/gen'
 const emit = defineEmits(['ok'])
 const visible = ref(false)
 const content = ref('')
-const { proxy } = getCurrentInstance()
 /** 显示弹框 */
 function show() {
   visible.value = true

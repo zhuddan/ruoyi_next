@@ -16,4 +16,5 @@ export default antfu({
     'prefer-spread': 'warn',
     'no-console': 'warn',
   },
+
 })

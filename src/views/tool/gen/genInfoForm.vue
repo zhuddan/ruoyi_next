@@ -1,6 +1,7 @@
 <!-- eslint-disable vue/no-mutating-props -->
 <script setup>
 import { listMenu } from '@/api/system/menu'
+import { handleTree } from '@/utils/ruoyi'
 
 const props = defineProps({
   info: {
@@ -14,7 +15,6 @@ const props = defineProps({
 })
 const subColumns = ref([])
 const menuOptions = ref([])
-const { proxy } = getCurrentInstance()
 
 // 表单校验
 const rules = ref({
@@ -49,7 +49,7 @@ function setSubTableColumns(value) {
 /** 查询菜单下拉树结构 */
 function getMenuTreeselect() {
   listMenu().then((response) => {
-    menuOptions.value = proxy.handleTree(response.data, 'menuId')
+    menuOptions.value = handleTree(response.data, 'menuId')
   })
 }
 

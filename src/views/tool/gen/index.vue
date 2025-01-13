@@ -2,16 +2,15 @@
 import { delTable, genCode, listTable, previewTable, synchDb } from '@/api/tool/gen'
 import router from '@/router'
 import { download } from '@/utils/request'
-import { resetForm } from '@/utils/ruoyi'
-import createTable from './createTable'
-import importTable from './importTable'
+import { addDateRange, resetForm } from '@/utils/ruoyi'
+import createTable from './createTable.vue'
+import importTable from './importTable.vue'
 
 defineOptions({
   name: 'Gen',
 })
 
 const route = useRoute()
-const { proxy } = getCurrentInstance()
 
 const tableList = ref([])
 const loading = ref(true)
@@ -55,7 +54,7 @@ onActivated(() => {
 /** 查询表集合 */
 function getList() {
   loading.value = true
-  listTable(proxy.addDateRange(queryParams.value, dateRange.value)).then((response) => {
+  listTable(addDateRange(queryParams.value, dateRange.value)).then((response) => {
     tableList.value = response.rows
     total.value = response.total
     loading.value = false
@@ -95,14 +94,22 @@ function handleSynchDb(row) {
   }).catch(() => {})
 }
 
+/**
+ * @type {TemplateRef<InstanceType<typeof importTable>>}
+ */
+const importRef = useTemplateRef('importRef')
+
 /** 打开导入表弹窗 */
 function openImportTable() {
-  proxy.$refs.importRef.show()
+  importRef.value.show()
 }
-
+/**
+ * @type {TemplateRef<InstanceType<typeof importTable>>}
+ */
+const createRef = useTemplateRef('createRef')
 /** 打开创建表弹窗 */
 function openCreateTable() {
-  proxy.$refs.createRef.show()
+  createRef.value.show()
 }
 
 /** 重置按钮操作 */

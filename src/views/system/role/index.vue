@@ -9,7 +9,6 @@ defineOptions({
 })
 
 const router = useRouter()
-const { proxy } = getCurrentInstance()
 const { sys_normal_disable } = useDict('sys_normal_disable')
 
 const roleList = ref([])
@@ -62,7 +61,7 @@ const { queryParams, form, rules } = toRefs(data)
 /** 查询角色列表 */
 function getList() {
   loading.value = true
-  listRole(proxy.addDateRange(queryParams.value, dateRange.value)).then((response) => {
+  listRole(addDateRange(queryParams.value, dateRange.value)).then((response) => {
     roleList.value = response.rows
     total.value = response.total
     loading.value = false
@@ -272,9 +271,13 @@ function getMenuAllCheckedKeys() {
   return checkedKeys
 }
 
+/**
+ * @type {TemplateRef<import("element-plus").FormInstance>}
+ */
+const roleRef = useTemplateRef('roleRef')
 /** 提交按钮 */
 function submitForm() {
-  proxy.$refs.roleRef.validate((valid) => {
+  roleRef.value.validate((valid) => {
     if (valid) {
       if (form.value.roleId != undefined) {
         form.value.menuIds = getMenuAllCheckedKeys()

@@ -12,7 +12,6 @@ const props = defineProps({
   formConf: Object,
 })
 const emit = defineEmits(['tag-change'])
-const { proxy } = getCurrentInstance()
 const dateTimeFormat = {
   date: 'YYYY-MM-DD',
   week: 'YYYY 第 ww 周',
@@ -155,7 +154,6 @@ function addSelectItem() {
 }
 
 function addTreeItem() {
-  ++proxy.idGlobal
   dialogVisible.value = true
   currentNode.value = props.activeData.options
 }

@@ -3,7 +3,7 @@ import { addUser, changeUserStatus, delUser, deptTreeSelect, getUser, listUser, 
 import useAppStore from '@/store/modules/app'
 import { getToken } from '@/utils/auth'
 import { download } from '@/utils/request'
-import { resetForm } from '@/utils/ruoyi'
+import { addDateRange, resetForm } from '@/utils/ruoyi'
 import { Pane, Splitpanes } from 'splitpanes'
 import 'splitpanes/dist/splitpanes.css'
 
@@ -13,7 +13,6 @@ defineOptions({
 
 const router = useRouter()
 const appStore = useAppStore()
-const { proxy } = getCurrentInstance()
 const { sys_normal_disable, sys_user_sex } = useDict('sys_normal_disable', 'sys_user_sex')
 
 const userList = ref([])
@@ -86,15 +85,19 @@ function filterNode(value, data) {
   return data.label.includes(value)
 }
 
+/**
+ * @type {TemplateRef<import("element-plus").TreeInstance>}
+ */
+const deptTreeRef = useTemplateRef('deptTreeRef')
 /** 根据名称筛选部门树 */
 watch(deptName, (val) => {
-  proxy.$refs.deptTreeRef.filter(val)
+  deptTreeRef.value.filter(val)
 })
 
 /** 查询用户列表 */
 function getList() {
   loading.value = true
-  listUser(proxy.addDateRange(queryParams.value, dateRange.value)).then((res) => {
+  listUser(addDateRange(queryParams.value, dateRange.value)).then((res) => {
     loading.value = false
     userList.value = res.rows
     total.value = res.total
@@ -139,7 +142,7 @@ function resetQuery() {
   dateRange.value = []
   resetForm('queryRef')
   queryParams.value.deptId = undefined
-  proxy.$refs.deptTreeRef.setCurrentKey(null)
+  deptTreeRef.value.setCurrentKey(null)
   handleQuery()
 };
 
@@ -196,7 +199,7 @@ function handleAuthRole(row) {
 
 /** 重置密码按钮操作 */
 function handleResetPwd(row) {
-  proxy.$prompt(`请输入"${row.userName}"的新密码`, '提示', {
+  $modal.prompt(`请输入"${row.userName}"的新密码`, '提示', {
     confirmButtonText: '确定',
     cancelButtonText: '取消',
     closeOnClickModal: false,
@@ -238,18 +241,22 @@ function handleFileUploadProgress() {
   upload.isUploading = true
 }
 
+/**
+ * @type {TemplateRef<import("element-plus").UploadInstance>}
+ */
+const uploadRef = useTemplateRef('uploadRef')
 /** 文件上传成功处理 */
 function handleFileSuccess(response, file) {
   upload.open = false
   upload.isUploading = false
-  proxy.$refs.uploadRef.handleRemove(file)
-  proxy.$alert(`<div style='overflow: auto;overflow-x: hidden;max-height: 70vh;padding: 10px 20px 0;'>${response.msg}</div>`, '导入结果', { dangerouslyUseHTMLString: true })
+  uploadRef.value.handleRemove(file)
+  $modal.alert(`<div style='overflow: auto;overflow-x: hidden;max-height: 70vh;padding: 10px 20px 0;'>${response.msg}</div>`, '导入结果', { dangerouslyUseHTMLString: true })
   getList()
 }
 
 /** 提交上传文件 */
 function submitFileForm() {
-  proxy.$refs.uploadRef.submit()
+  uploadRef.value.submit()
 };
 
 /** 重置操作表单 */
@@ -305,9 +312,13 @@ function handleUpdate(row) {
   })
 };
 
+/**
+ * @type {TemplateRef<import("element-plus").FormInstance>}
+ */
+const userRef = useTemplateRef('userRef')
 /** 提交按钮 */
 function submitForm() {
-  proxy.$refs.userRef.validate((valid) => {
+  userRef.value.validate((valid) => {
     if (valid) {
       if (form.value.userId != undefined) {
         updateUser(form.value).then(() => {

@@ -13,7 +13,6 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['ok'])
-const { proxy } = getCurrentInstance()
 const { sys_normal_disable } = useDict('sys_normal_disable')
 
 const userList = ref([])
@@ -36,9 +35,14 @@ function show() {
   visible.value = true
 }
 
+/**
+ * @type {TemplateRef<import("element-plus").TableInstance>}
+ */
+const refTable = useTemplateRef('refTable')
+
 /** 选择行 */
 function clickRow(row) {
-  proxy.$refs.refTable.toggleRowSelection(row)
+  refTable.toggleRowSelection(row)
 }
 
 // 多选框选中数据

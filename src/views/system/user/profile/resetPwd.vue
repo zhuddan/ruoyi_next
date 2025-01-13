@@ -2,8 +2,6 @@
 import { updateUserPwd } from '@/api/system/user'
 import $tab from '@/plugins/tab'
 
-const { proxy } = getCurrentInstance()
-
 const user = reactive({
   oldPassword: undefined,
   newPassword: undefined,
@@ -25,11 +23,15 @@ const rules = ref({
   confirmPassword: [{ required: true, message: '确认密码不能为空', trigger: 'blur' }, { required: true, validator: equalToPassword, trigger: 'blur' }],
 })
 
+/**
+ * @type {TemplateRef<import("element-plus").FormInstance>}
+ */
+const pwdRef = useTemplateRef('pwdRef')
 /** 提交按钮 */
 function submit() {
-  proxy.$refs.pwdRef.validate((valid) => {
+  pwdRef.value.validate((valid) => {
     if (valid) {
-      updateUserPwd(user.oldPassword, user.newPassword).then((response) => {
+      updateUserPwd(user.oldPassword, user.newPassword).then(() => {
         $modal.msgSuccess('修改成功')
       })
     }

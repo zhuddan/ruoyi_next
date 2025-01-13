@@ -280,7 +280,6 @@ function buildexport(
   methods,
 ) {
   let str = `
-    const { proxy } = getCurrentInstance()
     const ${conf.formRef} = ref()
     const data = reactive({
       ${conf.formModel}: {

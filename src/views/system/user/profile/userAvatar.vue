@@ -5,7 +5,6 @@ import { VueCropper } from 'vue-cropper'
 import 'vue-cropper/dist/index.css'
 
 const userStore = useUserStore()
-const { proxy } = getCurrentInstance()
 
 const open = ref(false)
 const visible = ref(false)
@@ -36,20 +35,24 @@ function modalOpened() {
 /** 覆盖默认上传行为 */
 function requestUpload() {}
 
+/**
+ * @type {TemplateRef<InstanceType<typeof VueCropper>>}
+ */
+const cropper = useTemplateRef('cropper')
 /** 向左旋转 */
 function rotateLeft() {
-  proxy.$refs.cropper.rotateLeft()
+  cropper.value.rotateLeft()
 }
 
 /** 向右旋转 */
 function rotateRight() {
-  proxy.$refs.cropper.rotateRight()
+  cropper.value.rotateRight()
 }
 
 /** 图片缩放 */
 function changeScale(num) {
   num = num || 1
-  proxy.$refs.cropper.changeScale(num)
+  cropper.value.changeScale(num)
 }
 
 /** 上传预处理 */
@@ -69,7 +72,7 @@ function beforeUpload(file) {
 
 /** 上传图片 */
 function uploadImg() {
-  proxy.$refs.cropper.getCropBlob((data) => {
+  cropper.value.getCropBlob((data) => {
     const formData = new FormData()
     formData.append('avatarfile', data, options.filename)
     uploadAvatar(formData).then((response) => {

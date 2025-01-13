@@ -1,6 +1,10 @@
-<script setup name="DraggableItem">
+<script setup>
 import render from '@/utils/generator/render'
 import draggable from 'vuedraggable/dist/vuedraggable.common'
+
+defineOptions({
+  name: 'DraggableItem',
+})
 
 const props = defineProps({
   element: Object,

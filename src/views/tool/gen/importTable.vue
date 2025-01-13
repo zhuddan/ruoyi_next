@@ -7,7 +7,6 @@ const total = ref(0)
 const visible = ref(false)
 const tables = ref([])
 const dbTableList = ref([])
-const { proxy } = getCurrentInstance()
 
 const queryParams = reactive({
   pageNum: 1,
@@ -22,9 +21,13 @@ function show() {
   visible.value = true
 }
 
+/**
+ * @type {TemplateRef<import("element-plus").TableInstance>}
+ */
+const table = useTemplateRef('table')
 /** 单击选择行 */
 function clickRow(row) {
-  proxy.$refs.table.toggleRowSelection(row)
+  table.value.toggleRowSelection(row)
 }
 
 /** 多选框选中数据 */
