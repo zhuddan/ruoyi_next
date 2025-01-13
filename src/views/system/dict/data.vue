@@ -147,7 +147,7 @@ function submitForm() {
       if (form.value.dictCode != undefined) {
         updateData(form.value).then((response) => {
           useDictStore().removeDict(queryParams.value.dictType)
-          proxy.$modal.msgSuccess('修改成功')
+          $modal.msgSuccess('修改成功')
           open.value = false
           getList()
         })
@@ -155,7 +155,7 @@ function submitForm() {
       else {
         addData(form.value).then((response) => {
           useDictStore().removeDict(queryParams.value.dictType)
-          proxy.$modal.msgSuccess('新增成功')
+          $modal.msgSuccess('新增成功')
           open.value = false
           getList()
         })
@@ -167,11 +167,11 @@ function submitForm() {
 /** 删除按钮操作 */
 function handleDelete(row) {
   const dictCodes = row.dictCode || ids.value
-  proxy.$modal.confirm(`是否确认删除字典编码为"${dictCodes}"的数据项？`).then(() => {
+  $modal.confirm(`是否确认删除字典编码为"${dictCodes}"的数据项？`).then(() => {
     return delData(dictCodes)
   }).then(() => {
     getList()
-    proxy.$modal.msgSuccess('删除成功')
+    $modal.msgSuccess('删除成功')
     useDictStore().removeDict(queryParams.value.dictType)
   }).catch(() => {})
 }

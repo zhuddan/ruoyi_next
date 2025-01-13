@@ -106,14 +106,14 @@ function submitForm() {
     if (valid) {
       if (form.value.dictId != undefined) {
         updateType(form.value).then((response) => {
-          proxy.$modal.msgSuccess('修改成功')
+          $modal.msgSuccess('修改成功')
           open.value = false
           getList()
         })
       }
       else {
         addType(form.value).then((response) => {
-          proxy.$modal.msgSuccess('新增成功')
+          $modal.msgSuccess('新增成功')
           open.value = false
           getList()
         })
@@ -125,11 +125,11 @@ function submitForm() {
 /** 删除按钮操作 */
 function handleDelete(row) {
   const dictIds = row.dictId || ids.value
-  proxy.$modal.confirm(`是否确认删除字典编号为"${dictIds}"的数据项？`).then(() => {
+  $modal.confirm(`是否确认删除字典编号为"${dictIds}"的数据项？`).then(() => {
     return delType(dictIds)
   }).then(() => {
     getList()
-    proxy.$modal.msgSuccess('删除成功')
+    $modal.msgSuccess('删除成功')
   }).catch(() => {})
 }
 
@@ -143,7 +143,7 @@ function handleExport() {
 /** 刷新缓存按钮操作 */
 function handleRefreshCache() {
   refreshCache().then(() => {
-    proxy.$modal.msgSuccess('刷新成功')
+    $modal.msgSuccess('刷新成功')
     useDictStore().cleanDict()
   })
 }

@@ -80,11 +80,11 @@ function resetQuery() {
 /** 删除按钮操作 */
 function handleDelete(row) {
   const roleIds = row.roleId || ids.value
-  proxy.$modal.confirm(`是否确认删除角色编号为"${roleIds}"的数据项?`).then(() => {
+  $modal.confirm(`是否确认删除角色编号为"${roleIds}"的数据项?`).then(() => {
     return delRole(roleIds)
   }).then(() => {
     getList()
-    proxy.$modal.msgSuccess('删除成功')
+    $modal.msgSuccess('删除成功')
   }).catch(() => {})
 }
 
@@ -105,10 +105,10 @@ function handleSelectionChange(selection) {
 /** 角色状态修改 */
 function handleStatusChange(row) {
   const text = row.status === '0' ? '启用' : '停用'
-  proxy.$modal.confirm(`确认要"${text}""${row.roleName}"角色吗?`).then(() => {
+  $modal.confirm(`确认要"${text}""${row.roleName}"角色吗?`).then(() => {
     return changeRoleStatus(row.roleId, row.status)
   }).then(() => {
-    proxy.$modal.msgSuccess(`${text}成功`)
+    $modal.msgSuccess(`${text}成功`)
   }).catch(() => {
     row.status = row.status === '0' ? '1' : '0'
   })
@@ -274,7 +274,7 @@ function submitForm() {
       if (form.value.roleId != undefined) {
         form.value.menuIds = getMenuAllCheckedKeys()
         updateRole(form.value).then((response) => {
-          proxy.$modal.msgSuccess('修改成功')
+          $modal.msgSuccess('修改成功')
           open.value = false
           getList()
         })
@@ -282,7 +282,7 @@ function submitForm() {
       else {
         form.value.menuIds = getMenuAllCheckedKeys()
         addRole(form.value).then((response) => {
-          proxy.$modal.msgSuccess('新增成功')
+          $modal.msgSuccess('新增成功')
           open.value = false
           getList()
         })
@@ -329,7 +329,7 @@ function submitDataScope() {
   if (form.value.roleId != undefined) {
     form.value.deptIds = getDeptAllCheckedKeys()
     dataScope(form.value).then((response) => {
-      proxy.$modal.msgSuccess('修改成功')
+      $modal.msgSuccess('修改成功')
       openDataScope.value = false
       getList()
     })

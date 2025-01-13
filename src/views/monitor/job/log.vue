@@ -73,21 +73,21 @@ function handleView(row) {
 
 /** 删除按钮操作 */
 function handleDelete(row) {
-  proxy.$modal.confirm(`是否确认删除调度日志编号为"${ids.value}"的数据项?`).then(() => {
+  $modal.confirm(`是否确认删除调度日志编号为"${ids.value}"的数据项?`).then(() => {
     return delJobLog(ids.value)
   }).then(() => {
     getList()
-    proxy.$modal.msgSuccess('删除成功')
+    $modal.msgSuccess('删除成功')
   }).catch(() => {})
 }
 
 /** 清空按钮操作 */
 function handleClean() {
-  proxy.$modal.confirm('是否确认清空所有调度日志数据项?').then(() => {
+  $modal.confirm('是否确认清空所有调度日志数据项?').then(() => {
     return cleanJobLog()
   }).then(() => {
     getList()
-    proxy.$modal.msgSuccess('清空成功')
+    $modal.msgSuccess('清空成功')
   }).catch(() => {})
 }
 

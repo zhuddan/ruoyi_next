@@ -2,7 +2,7 @@ import { ElLoading, ElMessage, ElMessageBox, ElNotification } from 'element-plus
 
 let loadingInstance
 
-const $modal = {
+export const $modal = {
   // 消息提示
   msg(content) {
     ElMessage.info(content)

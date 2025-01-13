@@ -1,4 +1,6 @@
 export default {
+  "$modal": true,
+  "$tab": true,
   "EffectScope": true,
   "acceptHMRUpdate": true,
   "auth": true,

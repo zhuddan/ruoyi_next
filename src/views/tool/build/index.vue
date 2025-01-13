@@ -45,7 +45,7 @@ function download() {
   operationType.value = 'download'
 }
 function empty() {
-  proxy.$modal.confirm('确定要清空所有组件吗？', '提示', { type: 'warning' }).then(() => {
+  $modal.confirm('确定要清空所有组件吗？', '提示', { type: 'warning' }).then(() => {
     idGlobal.value = 100
     drawingList.value = []
   },
@@ -207,7 +207,7 @@ onMounted(() => {
     },
   })
   clipboard.on('error', () => {
-    proxy.$modal.msgError('代码复制失败')
+    $modal.msgError('代码复制失败')
   })
 })
 </script>

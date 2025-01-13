@@ -67,12 +67,12 @@ function handleQuery() {
 function handleGenTable(row) {
   const tbNames = row.tableName || tableNames.value
   if (tbNames === '') {
-    proxy.$modal.msgError('请选择要生成的数据')
+    $modal.msgError('请选择要生成的数据')
     return
   }
   if (row.genType === '1') {
     genCode(row.tableName).then(() => {
-      proxy.$modal.msgSuccess(`成功生成到自定义路径：${row.genPath}`)
+      $modal.msgSuccess(`成功生成到自定义路径：${row.genPath}`)
     })
   }
   else {
@@ -83,10 +83,10 @@ function handleGenTable(row) {
 /** 同步数据库操作 */
 function handleSynchDb(row) {
   const tableName = row.tableName
-  proxy.$modal.confirm(`确认要强制同步"${tableName}"表结构吗？`).then(() => {
+  $modal.confirm(`确认要强制同步"${tableName}"表结构吗？`).then(() => {
     return synchDb(tableName)
   }).then(() => {
-    proxy.$modal.msgSuccess('同步成功')
+    $modal.msgSuccess('同步成功')
   }).catch(() => {})
 }
 
@@ -118,7 +118,7 @@ function handlePreview(row) {
 
 /** 复制代码成功 */
 function copyTextSuccess() {
-  proxy.$modal.msgSuccess('复制成功')
+  $modal.msgSuccess('复制成功')
 }
 
 // 多选框选中数据
@@ -138,11 +138,11 @@ function handleEditTable(row) {
 /** 删除按钮操作 */
 function handleDelete(row) {
   const tableIds = row.tableId || ids.value
-  proxy.$modal.confirm(`是否确认删除表编号为"${tableIds}"的数据项？`).then(() => {
+  $modal.confirm(`是否确认删除表编号为"${tableIds}"的数据项？`).then(() => {
     return delTable(tableIds)
   }).then(() => {
     getList()
-    proxy.$modal.msgSuccess('删除成功')
+    $modal.msgSuccess('删除成功')
   }).catch(() => {})
 }
 

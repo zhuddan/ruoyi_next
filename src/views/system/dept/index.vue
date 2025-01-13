@@ -112,14 +112,14 @@ function submitForm() {
     if (valid) {
       if (form.value.deptId != undefined) {
         updateDept(form.value).then((response) => {
-          proxy.$modal.msgSuccess('修改成功')
+          $modal.msgSuccess('修改成功')
           open.value = false
           getList()
         })
       }
       else {
         addDept(form.value).then((response) => {
-          proxy.$modal.msgSuccess('新增成功')
+          $modal.msgSuccess('新增成功')
           open.value = false
           getList()
         })
@@ -130,11 +130,11 @@ function submitForm() {
 
 /** 删除按钮操作 */
 function handleDelete(row) {
-  proxy.$modal.confirm(`是否确认删除名称为"${row.deptName}"的数据项?`).then(() => {
+  $modal.confirm(`是否确认删除名称为"${row.deptName}"的数据项?`).then(() => {
     return delDept(row.deptId)
   }).then(() => {
     getList()
-    proxy.$modal.msgSuccess('删除成功')
+    $modal.msgSuccess('删除成功')
   }).catch(() => {})
 }
 

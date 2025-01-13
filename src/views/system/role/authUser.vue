@@ -63,11 +63,11 @@ function openSelectUser() {
 
 /** 取消授权按钮操作 */
 function cancelAuthUser(row) {
-  proxy.$modal.confirm(`确认要取消该用户"${row.userName}"角色吗？`).then(() => {
+  $modal.confirm(`确认要取消该用户"${row.userName}"角色吗？`).then(() => {
     return authUserCancel({ userId: row.userId, roleId: queryParams.roleId })
   }).then(() => {
     getList()
-    proxy.$modal.msgSuccess('取消授权成功')
+    $modal.msgSuccess('取消授权成功')
   }).catch(() => {})
 }
 
@@ -75,11 +75,11 @@ function cancelAuthUser(row) {
 function cancelAuthUserAll(row) {
   const roleId = queryParams.roleId
   const uIds = userIds.value.join(',')
-  proxy.$modal.confirm('是否取消选中用户授权数据项?').then(() => {
+  $modal.confirm('是否取消选中用户授权数据项?').then(() => {
     return authUserCancelAll({ roleId, userIds: uIds })
   }).then(() => {
     getList()
-    proxy.$modal.msgSuccess('取消授权成功')
+    $modal.msgSuccess('取消授权成功')
   }).catch(() => {})
 }
 

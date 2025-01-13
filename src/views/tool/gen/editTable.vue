@@ -31,14 +31,14 @@ function submitForm() {
         parentMenuId: info.value.parentMenuId,
       }
       updateGenTable(genTable).then((res) => {
-        proxy.$modal.msgSuccess(res.msg)
+        $modal.msgSuccess(res.msg)
         if (res.code === 200) {
           close()
         }
       })
     }
     else {
-      proxy.$modal.msgError('表单校验未通过，请重新检查提交内容')
+      $modal.msgError('表单校验未通过，请重新检查提交内容')
     }
   })
 }

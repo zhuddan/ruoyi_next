@@ -2,6 +2,7 @@
 import { addJob, changeJobStatus, delJob, getJob, listJob, runJob, updateJob } from '@/api/monitor/job'
 import Crontab from '@/components/Crontab'
 import { download } from '@/utils/request'
+import { selectDictLabel } from '@/utils/ruoyi'
 
 const router = useRouter()
 const { proxy } = getCurrentInstance()
@@ -49,8 +50,8 @@ function getList() {
 }
 
 /** 任务组名字典翻译 */
-function jobGroupFormat(row, column) {
-  return proxy.selectDictLabel(sys_job_group.value, row.jobGroup)
+function jobGroupFormat(row) {
+  return selectDictLabel(sys_job_group.value, row.jobGroup)
 }
 
 /** 取消按钮 */
@@ -113,10 +114,10 @@ function handleCommand(command, row) {
 // 任务状态修改
 function handleStatusChange(row) {
   const text = row.status === '0' ? '启用' : '停用'
-  proxy.$modal.confirm(`确认要"${text}""${row.jobName}"任务吗?`).then(() => {
+  $modal.confirm(`确认要"${text}""${row.jobName}"任务吗?`).then(() => {
     return changeJobStatus(row.jobId, row.status)
   }).then(() => {
-    proxy.$modal.msgSuccess(`${text}成功`)
+    $modal.msgSuccess(`${text}成功`)
   }).catch(() => {
     row.status = row.status === '0' ? '1' : '0'
   })
@@ -124,10 +125,10 @@ function handleStatusChange(row) {
 
 /* 立即执行一次 */
 function handleRun(row) {
-  proxy.$modal.confirm(`确认要立即执行一次"${row.jobName}"任务吗?`).then(() => {
+  $modal.confirm(`确认要立即执行一次"${row.jobName}"任务吗?`).then(() => {
     return runJob(row.jobId, row.jobGroup)
   }).then(() => {
-    proxy.$modal.msgSuccess('执行成功')
+    $modal.msgSuccess('执行成功')
   }).catch(() => {})
 }
 
@@ -180,14 +181,14 @@ function submitForm() {
     if (valid) {
       if (form.value.jobId != undefined) {
         updateJob(form.value).then((response) => {
-          proxy.$modal.msgSuccess('修改成功')
+          $modal.msgSuccess('修改成功')
           open.value = false
           getList()
         })
       }
       else {
         addJob(form.value).then((response) => {
-          proxy.$modal.msgSuccess('新增成功')
+          $modal.msgSuccess('新增成功')
           open.value = false
           getList()
         })
@@ -199,11 +200,11 @@ function submitForm() {
 /** 删除按钮操作 */
 function handleDelete(row) {
   const jobIds = row.jobId || ids.value
-  proxy.$modal.confirm(`是否确认删除定时任务编号为"${jobIds}"的数据项?`).then(() => {
+  $modal.confirm(`是否确认删除定时任务编号为"${jobIds}"的数据项?`).then(() => {
     return delJob(jobIds)
   }).then(() => {
     getList()
-    proxy.$modal.msgSuccess('删除成功')
+    $modal.msgSuccess('删除成功')
   }).catch(() => {})
 }
 

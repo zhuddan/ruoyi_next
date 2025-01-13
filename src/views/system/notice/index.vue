@@ -102,14 +102,14 @@ function submitForm() {
     if (valid) {
       if (form.value.noticeId != undefined) {
         updateNotice(form.value).then((response) => {
-          proxy.$modal.msgSuccess('修改成功')
+          $modal.msgSuccess('修改成功')
           open.value = false
           getList()
         })
       }
       else {
         addNotice(form.value).then((response) => {
-          proxy.$modal.msgSuccess('新增成功')
+          $modal.msgSuccess('新增成功')
           open.value = false
           getList()
         })
@@ -121,11 +121,11 @@ function submitForm() {
 /** 删除按钮操作 */
 function handleDelete(row) {
   const noticeIds = row.noticeId || ids.value
-  proxy.$modal.confirm(`是否确认删除公告编号为"${noticeIds}"的数据项？`).then(() => {
+  $modal.confirm(`是否确认删除公告编号为"${noticeIds}"的数据项？`).then(() => {
     return delNotice(noticeIds)
   }).then(() => {
     getList()
-    proxy.$modal.msgSuccess('删除成功')
+    $modal.msgSuccess('删除成功')
   }).catch(() => {})
 }
 

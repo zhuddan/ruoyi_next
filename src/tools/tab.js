@@ -1,7 +1,7 @@
 import router from '@/router'
 import useTagsViewStore from '@/store/modules/tagsView'
 
-const $tab = {
+export const $tab = {
   // 刷新当前tab页签
   refreshPage(obj) {
     const { path, query, matched } = router.currentRoute.value

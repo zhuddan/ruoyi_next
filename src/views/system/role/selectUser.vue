@@ -66,11 +66,11 @@ function handleSelectUser() {
   const roleId = queryParams.roleId
   const uIds = userIds.value.join(',')
   if (uIds == '') {
-    proxy.$modal.msgError('请选择要分配的用户')
+    $modal.msgError('请选择要分配的用户')
     return
   }
   authUserSelectAll({ roleId, userIds: uIds }).then((res) => {
-    proxy.$modal.msgSuccess(res.msg)
+    $modal.msgSuccess(res.msg)
     visible.value = false
     emit('ok')
   })

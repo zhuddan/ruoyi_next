@@ -106,14 +106,14 @@ function handleBeforeUpload(file) {
   const isJPG = type.includes(file.type)
   // 检验文件格式
   if (!isJPG) {
-    proxy.$modal.msgError(`图片格式错误!`)
+    $modal.msgError(`图片格式错误!`)
     return false
   }
   // 校检文件大小
   if (props.fileSize) {
     const isLt = file.size / 1024 / 1024 < props.fileSize
     if (!isLt) {
-      proxy.$modal.msgError(`上传文件大小不能超过 ${props.fileSize} MB!`)
+      $modal.msgError(`上传文件大小不能超过 ${props.fileSize} MB!`)
       return false
     }
   }
@@ -134,13 +134,13 @@ function handleUploadSuccess(res, file) {
     quill.setSelection(length + 1)
   }
   else {
-    proxy.$modal.msgError('图片插入失败')
+    $modal.msgError('图片插入失败')
   }
 }
 
 // 上传失败处理
 function handleUploadError() {
-  proxy.$modal.msgError('图片插入失败')
+  $modal.msgError('图片插入失败')
 }
 </script>
 

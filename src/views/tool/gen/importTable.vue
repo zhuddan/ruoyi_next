@@ -55,11 +55,11 @@ function resetQuery() {
 function handleImportTable() {
   const tableNames = tables.value.join(',')
   if (tableNames === '') {
-    proxy.$modal.msgError('请选择要导入的表')
+    $modal.msgError('请选择要导入的表')
     return
   }
   importTable({ tables: tableNames }).then((res) => {
-    proxy.$modal.msgSuccess(res.msg)
+    $modal.msgSuccess(res.msg)
     if (res.code === 200) {
       visible.value = false
       emit('ok')

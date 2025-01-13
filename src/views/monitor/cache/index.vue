@@ -8,9 +8,9 @@ const usedmemory = ref(null)
 const { proxy } = getCurrentInstance()
 
 function getList() {
-  proxy.$modal.loading('正在加载缓存监控数据，请稍候！')
+  $modal.loading('正在加载缓存监控数据，请稍候！')
   getCache().then((response) => {
-    proxy.$modal.closeLoading()
+    $modal.closeLoading()
     cache.value = response.data
 
     const commandstatsIntance = echarts.init(commandstats.value, 'macarons')

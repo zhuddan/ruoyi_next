@@ -55,7 +55,7 @@ function changeScale(num) {
 /** 上传预处理 */
 function beforeUpload(file) {
   if (!file.type.includes('image/')) {
-    proxy.$modal.msgError('文件格式错误，请上传图片类型,如：JPG，PNG后缀的文件。')
+    $modal.msgError('文件格式错误，请上传图片类型,如：JPG，PNG后缀的文件。')
   }
   else {
     const reader = new FileReader()
@@ -76,7 +76,7 @@ function uploadImg() {
       open.value = false
       options.img = import.meta.env.VITE_APP_BASE_API + response.imgUrl
       userStore.avatar = options.img
-      proxy.$modal.msgSuccess('修改成功')
+      $modal.msgSuccess('修改成功')
       visible.value = false
     })
   })

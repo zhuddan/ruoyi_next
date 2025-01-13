@@ -65,36 +65,36 @@ function handleBeforeUpload(file) {
     const fileExt = fileName[fileName.length - 1]
     const isTypeOk = props.fileType.includes(fileExt)
     if (!isTypeOk) {
-      proxy.$modal.msgError(`文件格式不正确，请上传${props.fileType.join('/')}格式文件!`)
+      $modal.msgError(`文件格式不正确，请上传${props.fileType.join('/')}格式文件!`)
       return false
     }
   }
   // 校检文件名是否包含特殊字符
   if (file.name.includes(',')) {
-    proxy.$modal.msgError('文件名不正确，不能包含英文逗号!')
+    $modal.msgError('文件名不正确，不能包含英文逗号!')
     return false
   }
   // 校检文件大小
   if (props.fileSize) {
     const isLt = file.size / 1024 / 1024 < props.fileSize
     if (!isLt) {
-      proxy.$modal.msgError(`上传文件大小不能超过 ${props.fileSize} MB!`)
+      $modal.msgError(`上传文件大小不能超过 ${props.fileSize} MB!`)
       return false
     }
   }
-  proxy.$modal.loading('正在上传文件，请稍候...')
+  $modal.loading('正在上传文件，请稍候...')
   number.value++
   return true
 }
 
 // 文件个数超出
 function handleExceed() {
-  proxy.$modal.msgError(`上传文件数量不能超过 ${props.limit} 个!`)
+  $modal.msgError(`上传文件数量不能超过 ${props.limit} 个!`)
 }
 
 // 上传失败
 function handleUploadError() {
-  proxy.$modal.msgError('上传文件失败')
+  $modal.msgError('上传文件失败')
 }
 
 // 上传成功回调
@@ -105,8 +105,8 @@ function handleUploadSuccess(res, file) {
   }
   else {
     number.value--
-    proxy.$modal.closeLoading()
-    proxy.$modal.msgError(res.msg)
+    $modal.closeLoading()
+    $modal.msgError(res.msg)
     proxy.$refs.fileUpload.handleRemove(file)
     uploadedSuccessfully()
   }
@@ -125,7 +125,7 @@ function uploadedSuccessfully() {
     uploadList.value = []
     number.value = 0
     emit('update:modelValue', listToString(fileList.value))
-    proxy.$modal.closeLoading()
+    $modal.closeLoading()
   }
 }
 
