@@ -1,8 +1,8 @@
 <script setup>
 import { getUserProfile } from '@/api/system/user'
-import resetPwd from './resetPwd'
-import userAvatar from './userAvatar'
-import userInfo from './userInfo'
+import resetPwd from './resetPwd.vue'
+import userAvatar from './userAvatar.vue'
+import userInfo from './userInfo.vue'
 
 defineOptions({
   name: 'Profile',
