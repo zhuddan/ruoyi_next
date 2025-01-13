@@ -3,7 +3,6 @@ import { addPost, delPost, getPost, listPost, updatePost } from '@/api/system/po
 import { download } from '@/utils/request'
 import { resetForm } from '@/utils/ruoyi'
 
-const { proxy } = getCurrentInstance()
 const { sys_normal_disable } = useDict('sys_normal_disable')
 
 const postList = ref([])
@@ -100,9 +99,13 @@ function handleUpdate(row) {
   })
 }
 
+/**
+ * @type {TemplateRef<import("element-plus").FormInstance>}
+ */
+const postRef = useTemplateRef('postRef')
 /** 提交按钮 */
 function submitForm() {
-  proxy.$refs.postRef.validate((valid) => {
+  postRef.value.validate((valid) => {
     if (valid) {
       if (form.value.postId != undefined) {
         updatePost(form.value).then((response) => {

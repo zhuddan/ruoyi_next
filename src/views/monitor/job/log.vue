@@ -3,11 +3,14 @@ import { getJob } from '@/api/monitor/job'
 import { cleanJobLog, delJobLog, listJobLog } from '@/api/monitor/jobLog'
 import $tab from '@/plugins/tab'
 import { download } from '@/utils/request'
-import { resetForm } from '@/utils/ruoyi'
+import { addDateRange, resetForm } from '@/utils/ruoyi'
 
-const { proxy } = getCurrentInstance()
 const { sys_common_status, sys_job_group } = useDict('sys_common_status', 'sys_job_group')
 
+/**
+ * @type {TemplateRef<import("element-plus").FormInstance>}
+ */
+const queryRef = useTemplateRef('queryRef')
 const jobLogList = ref([])
 const open = ref(false)
 const loading = ref(true)
@@ -29,12 +32,12 @@ const data = reactive({
   },
 })
 
-const { queryParams, form, rules } = toRefs(data)
+const { queryParams, form } = toRefs(data)
 
 /** 查询调度日志列表 */
 function getList() {
   loading.value = true
-  listJobLog(proxy.addDateRange(queryParams.value, dateRange.value)).then((response) => {
+  listJobLog(addDateRange(queryParams.value, dateRange.value)).then((response) => {
     jobLogList.value = response.rows
     total.value = response.total
     loading.value = false

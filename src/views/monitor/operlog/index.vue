@@ -1,9 +1,8 @@
 <script setup name="Operlog">
 import { cleanOperlog, delOperlog, list } from '@/api/monitor/operlog'
 import { download } from '@/utils/request'
-import { resetForm } from '@/utils/ruoyi'
+import { addDateRange, resetForm, selectDictLabel } from '@/utils/ruoyi'
 
-const { proxy } = getCurrentInstance()
 const { sys_oper_type, sys_common_status } = useDict('sys_oper_type', 'sys_common_status')
 
 const operlogList = ref([])
@@ -36,7 +35,7 @@ const { queryParams, form } = toRefs(data)
 /** 查询登录日志 */
 function getList() {
   loading.value = true
-  list(proxy.addDateRange(queryParams.value, dateRange.value)).then((response) => {
+  list(addDateRange(queryParams.value, dateRange.value)).then((response) => {
     operlogList.value = response.rows
     total.value = response.total
     loading.value = false
@@ -45,7 +44,7 @@ function getList() {
 
 /** 操作日志类型字典翻译 */
 function typeFormat(row, column) {
-  return proxy.selectDictLabel(sys_oper_type.value, row.businessType)
+  return selectDictLabel(sys_oper_type.value, row.businessType)
 }
 
 /** 搜索按钮操作 */
@@ -53,13 +52,20 @@ function handleQuery() {
   queryParams.value.pageNum = 1
   getList()
 }
-
+/**
+ * @type {TemplateRef<import("element-plus").FormInstance>}
+ */
+const operlogRef = useTemplateRef('operlogRef')
+/**
+ * @type {TemplateRef<import("element-plus").FormInstance>}
+ */
+const queryRef = useTemplateRef('queryRef')
 /** 重置按钮操作 */
 function resetQuery() {
   dateRange.value = []
   resetForm('queryRef')
   queryParams.value.pageNum = 1
-  proxy.$refs.operlogRef.sort(defaultSort.value.prop, defaultSort.value.order)
+  operlogRef.value.sort(defaultSort.value.prop, defaultSort.value.order)
 }
 
 /** 多选框选中数据 */

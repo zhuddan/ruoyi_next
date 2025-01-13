@@ -2,8 +2,10 @@
 import { forceLogout, list as initData } from '@/api/monitor/online'
 import { resetForm } from '@/utils/ruoyi'
 
-const { proxy } = getCurrentInstance()
-
+/**
+ * @type {TemplateRef<import("element-plus").FormInstance>}
+ */
+const queryRef = useTemplateRef('queryRef')
 const onlineList = ref([])
 const loading = ref(true)
 const total = ref(0)

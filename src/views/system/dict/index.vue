@@ -2,9 +2,8 @@
 import { addType, delType, getType, listType, refreshCache, updateType } from '@/api/system/dict/type'
 import useDictStore from '@/store/modules/dict'
 import { download } from '@/utils/request'
-import { resetForm } from '@/utils/ruoyi'
+import { addDateRange, resetForm } from '@/utils/ruoyi'
 
-const { proxy } = getCurrentInstance()
 const { sys_normal_disable } = useDict('sys_normal_disable')
 
 const typeList = ref([])
@@ -38,7 +37,7 @@ const { queryParams, form, rules } = toRefs(data)
 /** 查询字典类型列表 */
 function getList() {
   loading.value = true
-  listType(proxy.addDateRange(queryParams.value, dateRange.value)).then((response) => {
+  listType(addDateRange(queryParams.value, dateRange.value)).then((response) => {
     typeList.value = response.rows
     total.value = response.total
     loading.value = false
@@ -101,9 +100,13 @@ function handleUpdate(row) {
   })
 }
 
+/**
+ * @type {TemplateRef<import("element-plus").FormInstance>}
+ */
+const dictRef = useTemplateRef('dictRef')
 /** 提交按钮 */
 function submitForm() {
-  proxy.$refs.dictRef.validate((valid) => {
+  dictRef.value.validate((valid) => {
     if (valid) {
       if (form.value.dictId != undefined) {
         updateType(form.value).then((response) => {

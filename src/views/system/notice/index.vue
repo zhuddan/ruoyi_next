@@ -2,7 +2,6 @@
 import { addNotice, delNotice, getNotice, listNotice, updateNotice } from '@/api/system/notice'
 import { resetForm } from '@/utils/ruoyi'
 
-const { proxy } = getCurrentInstance()
 const { sys_notice_status, sys_notice_type } = useDict('sys_notice_status', 'sys_notice_type')
 
 const noticeList = ref([])
@@ -96,10 +95,13 @@ function handleUpdate(row) {
     title.value = '修改公告'
   })
 }
-
+/**
+ * @type {TemplateRef<import("element-plus").FormInstance>}
+ */
+const noticeRef = useTemplateRef('noticeRef')
 /** 提交按钮 */
 function submitForm() {
-  proxy.$refs.noticeRef.validate((valid) => {
+  noticeRef.value.validate((valid) => {
     if (valid) {
       if (form.value.noticeId != undefined) {
         updateNotice(form.value).then((response) => {

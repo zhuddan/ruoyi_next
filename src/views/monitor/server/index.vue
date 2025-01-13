@@ -2,7 +2,6 @@
 import { getServer } from '@/api/monitor/server'
 
 const server = ref([])
-const { proxy } = getCurrentInstance()
 
 function getList() {
   $modal.loading('正在加载服务监控数据，请稍候！')

@@ -6,7 +6,6 @@ import useDictStore from '@/store/modules/dict'
 import { download } from '@/utils/request'
 import { resetForm } from '@/utils/ruoyi'
 
-const { proxy } = getCurrentInstance()
 const { sys_normal_disable } = useDict('sys_normal_disable')
 
 const dataList = ref([])
@@ -140,10 +139,13 @@ function handleUpdate(row) {
     title.value = '修改字典数据'
   })
 }
-
+/**
+ * @type {TemplateRef<import("element-plus").FormInstance>}
+ */
+const dataRef = useTemplateRef('dataRef')
 /** 提交按钮 */
 function submitForm() {
-  proxy.$refs.dataRef.validate((valid) => {
+  dataRef.value.validate((valid) => {
     if (valid) {
       if (form.value.dictCode != undefined) {
         updateData(form.value).then((response) => {

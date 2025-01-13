@@ -1,8 +1,7 @@
 <script setup name="Dept">
 import { addDept, delDept, getDept, listDept, listDeptExcludeChild, updateDept } from '@/api/system/dept'
-import { resetForm } from '@/utils/ruoyi'
+import { handleTree, resetForm } from '@/utils/ruoyi'
 
-const { proxy } = getCurrentInstance()
 const { sys_normal_disable } = useDict('sys_normal_disable')
 
 const deptList = ref([])
@@ -35,7 +34,7 @@ const { queryParams, form, rules } = toRefs(data)
 function getList() {
   loading.value = true
   listDept(queryParams.value).then((response) => {
-    deptList.value = proxy.handleTree(response.data, 'deptId')
+    deptList.value = handleTree(response.data, 'deptId')
     loading.value = false
   })
 }
@@ -76,7 +75,7 @@ function resetQuery() {
 function handleAdd(row) {
   reset()
   listDept().then((response) => {
-    deptOptions.value = proxy.handleTree(response.data, 'deptId')
+    deptOptions.value = handleTree(response.data, 'deptId')
   })
   if (row != undefined) {
     form.value.parentId = row.deptId
@@ -98,7 +97,7 @@ function toggleExpandAll() {
 function handleUpdate(row) {
   reset()
   listDeptExcludeChild(row.deptId).then((response) => {
-    deptOptions.value = proxy.handleTree(response.data, 'deptId')
+    deptOptions.value = handleTree(response.data, 'deptId')
   })
   getDept(row.deptId).then((response) => {
     form.value = response.data
@@ -106,10 +105,17 @@ function handleUpdate(row) {
     title.value = '修改部门'
   })
 }
-
+/**
+ * @type {TemplateRef<import("element-plus").FormInstance>}
+ */
+const deptRef = useTemplateRef('deptRef')
+/**
+ * @type {TemplateRef<import("element-plus").FormInstance>}
+ */
+const queryRef = useTemplateRef('queryRef')
 /** 提交按钮 */
 function submitForm() {
-  proxy.$refs.deptRef.validate((valid) => {
+  deptRef.value.validate((valid) => {
     if (valid) {
       if (form.value.deptId != undefined) {
         updateDept(form.value).then((response) => {

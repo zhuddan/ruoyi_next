@@ -1,9 +1,8 @@
 <script setup name="Logininfor">
 import { cleanLogininfor, delLogininfor, list, unlockLogininfor } from '@/api/monitor/logininfor'
 import { download } from '@/utils/request'
-import { resetForm } from '@/utils/ruoyi'
+import { addDateRange, resetForm } from '@/utils/ruoyi'
 
-const { proxy } = getCurrentInstance()
 const { sys_common_status } = useDict('sys_common_status')
 
 const logininforList = ref([])
@@ -31,7 +30,7 @@ const queryParams = ref({
 /** 查询登录日志列表 */
 function getList() {
   loading.value = true
-  list(proxy.addDateRange(queryParams.value, dateRange.value)).then((response) => {
+  list(addDateRange(queryParams.value, dateRange.value)).then((response) => {
     logininforList.value = response.rows
     total.value = response.total
     loading.value = false
@@ -44,12 +43,16 @@ function handleQuery() {
   getList()
 }
 
+/**
+ * @type {TemplateRef<import("element-plus").FormInstance>}
+ */
+const logininforRef = useTemplateRef('logininforRef')
 /** 重置按钮操作 */
 function resetQuery() {
   dateRange.value = []
   resetForm('queryRef')
   queryParams.value.pageNum = 1
-  proxy.$refs.logininforRef.sort(defaultSort.value.prop, defaultSort.value.order)
+  logininforRef.value.sort(defaultSort.value.prop, defaultSort.value.order)
 }
 
 /** 多选框选中数据 */

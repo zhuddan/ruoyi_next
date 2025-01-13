@@ -5,9 +5,11 @@ import { download } from '@/utils/request'
 import { resetForm, selectDictLabel } from '@/utils/ruoyi'
 
 const router = useRouter()
-const { proxy } = getCurrentInstance()
+/**
+ * @type {TemplateRef<import("element-plus").FormInstance>}
+ */
+const queryRef = useTemplateRef('queryRef')
 const { sys_job_group, sys_job_status } = useDict('sys_job_group', 'sys_job_status')
-
 const jobList = ref([])
 const open = ref(false)
 const loading = ref(true)
@@ -175,9 +177,13 @@ function handleUpdate(row) {
   })
 }
 
+/**
+ * @type {Ref<import("element-plus").FormInstance>}
+ */
+const jobRef = ref(null)
 /** 提交按钮 */
 function submitForm() {
-  proxy.$refs.jobRef.validate((valid) => {
+  jobRef.value.validate((valid) => {
     if (valid) {
       if (form.value.jobId != undefined) {
         updateJob(form.value).then((response) => {

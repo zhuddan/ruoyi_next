@@ -1,9 +1,8 @@
 <script setup name="Config">
 import { addConfig, delConfig, getConfig, listConfig, refreshCache, updateConfig } from '@/api/system/config'
 import { download } from '@/utils/request'
-import { resetForm } from '@/utils/ruoyi'
+import { addDateRange, resetForm } from '@/utils/ruoyi'
 
-const { proxy } = getCurrentInstance()
 const { sys_yes_no } = useDict('sys_yes_no')
 
 const configList = ref([])
@@ -38,7 +37,7 @@ const { queryParams, form, rules } = toRefs(data)
 /** 查询参数列表 */
 function getList() {
   loading.value = true
-  listConfig(proxy.addDateRange(queryParams.value, dateRange.value)).then((response) => {
+  listConfig(addDateRange(queryParams.value, dateRange.value)).then((response) => {
     configList.value = response.rows
     total.value = response.total
     loading.value = false
@@ -102,9 +101,19 @@ function handleUpdate(row) {
   })
 }
 
+/**
+ * @type {TemplateRef<import("element-plus").FormInstance>}
+ */
+const configRef = useTemplateRef('configRef')
+
+/**
+ * @type {TemplateRef<import("element-plus").FormInstance>}
+ */
+const queryRef = useTemplateRef('queryRef')
+
 /** 提交按钮 */
 function submitForm() {
-  proxy.$refs.configRef.validate((valid) => {
+  configRef.value.validate((valid) => {
     if (valid) {
       if (form.value.configId != undefined) {
         updateConfig(form.value).then((response) => {
