@@ -22,7 +22,7 @@ function handleSetSize(size) {
 </script>
 
 <template>
-  <div>
+  <div class="!inline-flex items-center justify-center">
     <el-dropdown trigger="click" @command="handleSetSize">
       <div class="size-icon--style">
         <svg-icon class-name="size-icon" icon-class="size" />

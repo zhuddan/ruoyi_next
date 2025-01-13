@@ -18,16 +18,16 @@ import { createApp } from 'vue'
 
 import App from './App.vue'
 
-import directive from './directive' // directive
+import directive from './directive'
 // 注册指令
-import plugins from './plugins' // plugins
+import plugins from './plugins'
 
 import router from './router'
 import store from './store'
 import 'element-plus/dist/index.css'
 import 'element-plus/theme-chalk/dark/css-vars.css'
+import './assets/styles/index.scss' // global css
 import './style.css'
-import '@/assets/styles/index.scss' // global css
 // svg图标
 import 'virtual:svg-icons-register'
 import './permission'
@@ -49,18 +49,14 @@ app.config.globalProperties.selectDictLabels = selectDictLabels
 app.use(router)
 app.use(store)
 app.use(plugins)
+app.use(directive)
 
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)
 }
-// app.component('svg-icon', SvgIcon)
 
-directive(app)
-
-// 使用element-plus 并且设置全局的大小
 app.use(ElementPlus, {
   locale,
-  // 支持 large、default、small
   size: Cookies.get('size') || 'default',
 })
 

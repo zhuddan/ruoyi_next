@@ -5,7 +5,7 @@ const { isFullscreen, enter, exit, toggle } = useFullscreen()
 </script>
 
 <template>
-  <div>
+  <div class="!inline-flex items-center justify-center">
     <svg-icon :icon-class="isFullscreen ? 'exit-fullscreen' : 'fullscreen'" @click="toggle" />
   </div>
 </template>
