@@ -1,5 +1,6 @@
 <script setup name="Dept">
 import { addDept, delDept, getDept, listDept, listDeptExcludeChild, updateDept } from '@/api/system/dept'
+import { resetForm } from '@/utils/ruoyi'
 
 const { proxy } = getCurrentInstance()
 const { sys_normal_disable } = useDict('sys_normal_disable')
@@ -57,7 +58,7 @@ function reset() {
     email: undefined,
     status: '0',
   }
-  proxy.resetForm('deptRef')
+  resetForm('deptRef')
 }
 
 /** 搜索按钮操作 */
@@ -67,7 +68,7 @@ function handleQuery() {
 
 /** 重置按钮操作 */
 function resetQuery() {
-  proxy.resetForm('queryRef')
+  resetForm('queryRef')
   handleQuery()
 }
 

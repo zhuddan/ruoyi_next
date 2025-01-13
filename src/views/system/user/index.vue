@@ -3,6 +3,7 @@ import { addUser, changeUserStatus, delUser, deptTreeSelect, getUser, listUser, 
 import useAppStore from '@/store/modules/app'
 import { getToken } from '@/utils/auth'
 import { download } from '@/utils/request'
+import { resetForm } from '@/utils/ruoyi'
 import { Pane, Splitpanes } from 'splitpanes'
 import 'splitpanes/dist/splitpanes.css'
 
@@ -132,7 +133,7 @@ function handleQuery() {
 /** 重置按钮操作 */
 function resetQuery() {
   dateRange.value = []
-  proxy.resetForm('queryRef')
+  resetForm('queryRef')
   queryParams.value.deptId = undefined
   proxy.$refs.deptTreeRef.setCurrentKey(null)
   handleQuery()
@@ -263,7 +264,7 @@ function reset() {
     postIds: [],
     roleIds: [],
   }
-  proxy.resetForm('userRef')
+  resetForm('userRef')
 };
 
 /** 取消按钮 */

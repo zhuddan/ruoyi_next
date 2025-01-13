@@ -1,5 +1,6 @@
 <script setup>
 import { importTable, listDbTable } from '@/api/tool/gen'
+import { resetForm } from '@/utils/ruoyi'
 
 const emit = defineEmits(['ok'])
 const total = ref(0)
@@ -47,7 +48,7 @@ function handleQuery() {
 
 /** 重置按钮操作 */
 function resetQuery() {
-  proxy.resetForm('queryRef')
+  resetForm('queryRef')
   handleQuery()
 }
 

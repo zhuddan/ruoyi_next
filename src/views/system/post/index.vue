@@ -1,6 +1,7 @@
 <script setup name="Post">
 import { addPost, delPost, getPost, listPost, updatePost } from '@/api/system/post'
 import { download } from '@/utils/request'
+import { resetForm } from '@/utils/ruoyi'
 
 const { proxy } = getCurrentInstance()
 const { sys_normal_disable } = useDict('sys_normal_disable')
@@ -59,7 +60,7 @@ function reset() {
     status: '0',
     remark: undefined,
   }
-  proxy.resetForm('postRef')
+  resetForm('postRef')
 }
 
 /** 搜索按钮操作 */
@@ -70,7 +71,7 @@ function handleQuery() {
 
 /** 重置按钮操作 */
 function resetQuery() {
-  proxy.resetForm('queryRef')
+  resetForm('queryRef')
   handleQuery()
 }
 

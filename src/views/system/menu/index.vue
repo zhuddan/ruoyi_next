@@ -2,6 +2,7 @@
 import { addMenu, delMenu, getMenu, listMenu, updateMenu } from '@/api/system/menu'
 import IconSelect from '@/components/IconSelect'
 import SvgIcon from '@/components/SvgIcon'
+import { resetForm } from '@/utils/ruoyi'
 
 const { proxy } = getCurrentInstance()
 const { sys_show_hide, sys_normal_disable } = useDict('sys_show_hide', 'sys_normal_disable')
@@ -70,7 +71,7 @@ function reset() {
     visible: '0',
     status: '0',
   }
-  proxy.resetForm('menuRef')
+  resetForm('menuRef')
 }
 
 /** 展示下拉图标 */
@@ -90,7 +91,7 @@ function handleQuery() {
 
 /** 重置按钮操作 */
 function resetQuery() {
-  proxy.resetForm('queryRef')
+  resetForm('queryRef')
   handleQuery()
 }
 

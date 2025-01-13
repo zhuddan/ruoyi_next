@@ -2,6 +2,7 @@
 import { delTable, genCode, listTable, previewTable, synchDb } from '@/api/tool/gen'
 import router from '@/router'
 import { download } from '@/utils/request'
+import { resetForm } from '@/utils/ruoyi'
 import createTable from './createTable'
 import importTable from './importTable'
 
@@ -42,7 +43,7 @@ onActivated(() => {
     uniqueId.value = time
     queryParams.value.pageNum = Number(route.query.pageNum)
     dateRange.value = []
-    proxy.resetForm('queryForm')
+    resetForm('queryForm')
     getList()
   }
 })
@@ -103,7 +104,7 @@ function openCreateTable() {
 /** 重置按钮操作 */
 function resetQuery() {
   dateRange.value = []
-  proxy.resetForm('queryRef')
+  resetForm('queryRef')
   handleQuery()
 }
 

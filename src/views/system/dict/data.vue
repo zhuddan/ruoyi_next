@@ -4,6 +4,7 @@ import { optionselect as getDictOptionselect, getType } from '@/api/system/dict/
 import $tab from '@/plugins/tab'
 import useDictStore from '@/store/modules/dict'
 import { download } from '@/utils/request'
+import { resetForm } from '@/utils/ruoyi'
 
 const { proxy } = getCurrentInstance()
 const { sys_normal_disable } = useDict('sys_normal_disable')
@@ -92,7 +93,7 @@ function reset() {
     status: '0',
     remark: undefined,
   }
-  proxy.resetForm('dataRef')
+  resetForm('dataRef')
 }
 
 /** 搜索按钮操作 */
@@ -109,7 +110,7 @@ function handleClose() {
 
 /** 重置按钮操作 */
 function resetQuery() {
-  proxy.resetForm('queryRef')
+  resetForm('queryRef')
   queryParams.value.dictType = defaultDictType.value
   handleQuery()
 }

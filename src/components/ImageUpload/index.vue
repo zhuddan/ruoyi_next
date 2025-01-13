@@ -27,7 +27,6 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['update:modelValue'])
-const { proxy } = getCurrentInstance()
 const number = ref(0)
 const uploadList = ref([])
 const dialogImageUrl = ref('')
@@ -106,6 +105,11 @@ function handleExceed() {
   $modal.msgError(`上传文件数量不能超过 ${props.limit} 个!`)
 }
 
+/**
+ * @type {Ref<import('element-plus').UploadInstance>}
+ */
+const imageUpload = ref()
+
 // 上传成功回调
 function handleUploadSuccess(res, file) {
   if (res.code === 200) {
@@ -116,7 +120,7 @@ function handleUploadSuccess(res, file) {
     number.value--
     $modal.closeLoading()
     $modal.msgError(res.msg)
-    proxy.$refs.imageUpload.handleRemove(file)
+    imageUpload.value.handleRemove(file)
     uploadedSuccessfully()
   }
 }

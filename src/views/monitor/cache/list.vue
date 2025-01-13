@@ -1,8 +1,6 @@
 <script setup name="CacheList">
 import { clearCacheAll, clearCacheKey, clearCacheName, getCacheValue, listCacheKey, listCacheName } from '@/api/monitor/cache'
 
-const { proxy } = getCurrentInstance()
-
 const cacheNames = ref([])
 const cacheKeys = ref([])
 const cacheForm = ref({})

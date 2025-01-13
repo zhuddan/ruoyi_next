@@ -1,5 +1,6 @@
 <script setup name="Online">
 import { forceLogout, list as initData } from '@/api/monitor/online'
+import { resetForm } from '@/utils/ruoyi'
 
 const { proxy } = getCurrentInstance()
 
@@ -32,7 +33,7 @@ function handleQuery() {
 
 /** 重置按钮操作 */
 function resetQuery() {
-  proxy.resetForm('queryRef')
+  resetForm('queryRef')
   handleQuery()
 }
 

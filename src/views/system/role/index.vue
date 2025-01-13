@@ -2,6 +2,7 @@
 import { treeselect as menuTreeselect, roleMenuTreeselect } from '@/api/system/menu'
 import { addRole, changeRoleStatus, dataScope, delRole, deptTreeSelect, getRole, listRole, updateRole } from '@/api/system/role'
 import { download } from '@/utils/request'
+import { resetForm } from '@/utils/ruoyi'
 
 const router = useRouter()
 const { proxy } = getCurrentInstance()
@@ -73,7 +74,7 @@ function handleQuery() {
 /** 重置按钮操作 */
 function resetQuery() {
   dateRange.value = []
-  proxy.resetForm('queryRef')
+  resetForm('queryRef')
   handleQuery()
 }
 
@@ -171,7 +172,7 @@ function reset() {
     deptCheckStrictly: true,
     remark: undefined,
   }
-  proxy.resetForm('roleRef')
+  resetForm('roleRef')
 }
 
 /** 添加角色 */

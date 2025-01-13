@@ -2,6 +2,7 @@
 import { addType, delType, getType, listType, refreshCache, updateType } from '@/api/system/dict/type'
 import useDictStore from '@/store/modules/dict'
 import { download } from '@/utils/request'
+import { resetForm } from '@/utils/ruoyi'
 
 const { proxy } = getCurrentInstance()
 const { sys_normal_disable } = useDict('sys_normal_disable')
@@ -59,7 +60,7 @@ function reset() {
     status: '0',
     remark: undefined,
   }
-  proxy.resetForm('dictRef')
+  resetForm('dictRef')
 }
 
 /** 搜索按钮操作 */
@@ -71,7 +72,7 @@ function handleQuery() {
 /** 重置按钮操作 */
 function resetQuery() {
   dateRange.value = []
-  proxy.resetForm('queryRef')
+  resetForm('queryRef')
   handleQuery()
 }
 

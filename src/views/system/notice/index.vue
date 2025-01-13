@@ -1,5 +1,6 @@
 <script setup name="Notice">
 import { addNotice, delNotice, getNotice, listNotice, updateNotice } from '@/api/system/notice'
+import { resetForm } from '@/utils/ruoyi'
 
 const { proxy } = getCurrentInstance()
 const { sys_notice_status, sys_notice_type } = useDict('sys_notice_status', 'sys_notice_type')
@@ -56,7 +57,7 @@ function reset() {
     noticeContent: undefined,
     status: '0',
   }
-  proxy.resetForm('noticeRef')
+  resetForm('noticeRef')
 }
 
 /** 搜索按钮操作 */
@@ -67,7 +68,7 @@ function handleQuery() {
 
 /** 重置按钮操作 */
 function resetQuery() {
-  proxy.resetForm('queryRef')
+  resetForm('queryRef')
   handleQuery()
 }
 

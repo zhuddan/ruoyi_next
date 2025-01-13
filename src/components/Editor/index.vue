@@ -35,8 +35,6 @@ const props = defineProps({
   },
 })
 
-const { proxy } = getCurrentInstance()
-
 const quillEditorRef = ref()
 const uploadUrl = ref(`${import.meta.env.VITE_APP_BASE_API}/common/upload`) // 上传的图片服务器地址
 const headers = ref({
@@ -85,13 +83,14 @@ watch(() => props.modelValue, (v) => {
 }, { immediate: true })
 
 // 如果设置了上传地址则自定义图片上传事件
+const uploadRef = ref(null)
 onMounted(() => {
   if (props.type == 'url') {
     const quill = quillEditorRef.value.getQuill()
     const toolbar = quill.getModule('toolbar')
     toolbar.addHandler('image', (value) => {
       if (value) {
-        proxy.$refs.uploadRef.click()
+        uploadRef.value.click()
       }
       else {
         quill.format('image', false)

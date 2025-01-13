@@ -13,7 +13,6 @@ const selectedTag = ref({})
 const affixTags = ref([])
 const scrollPaneRef = ref(null)
 
-const { proxy } = getCurrentInstance()
 const route = useRoute()
 const router = useRouter()
 
@@ -193,11 +192,14 @@ function toLastView(visitedViews, view) {
     }
   }
 }
-
+/**
+ * @type {Ref<HTMLDivElement>}
+ */
+const tagRef = ref(null)
 function openMenu(tag, e) {
   const menuMinWidth = 105
-  const offsetLeft = proxy.$el.getBoundingClientRect().left // container margin left
-  const offsetWidth = proxy.$el.offsetWidth // container width
+  const offsetLeft = tagRef.value.getBoundingClientRect().left // container margin left
+  const offsetWidth = tagRef.value.offsetWidth // container width
   const maxLeft = offsetWidth - menuMinWidth // left boundary
   const l = e.clientX - offsetLeft + 15 // 15: margin right
 
@@ -223,7 +225,7 @@ function handleScroll() {
 </script>
 
 <template>
-  <div id="tags-view-container" class="tags-view-container">
+  <div id="tags-view-container" ref="tagRef" class="tags-view-container">
     <ScrollPane ref="scrollPaneRef" class="tags-view-wrapper" @scroll="handleScroll">
       <router-link
         v-for="tag in visitedViews"

@@ -2,7 +2,7 @@
 import { addJob, changeJobStatus, delJob, getJob, listJob, runJob, updateJob } from '@/api/monitor/job'
 import Crontab from '@/components/Crontab'
 import { download } from '@/utils/request'
-import { selectDictLabel } from '@/utils/ruoyi'
+import { resetForm, selectDictLabel } from '@/utils/ruoyi'
 
 const router = useRouter()
 const { proxy } = getCurrentInstance()
@@ -72,7 +72,7 @@ function reset() {
     concurrent: 1,
     status: '0',
   }
-  proxy.resetForm('jobRef')
+  resetForm('jobRef')
 }
 
 /** 搜索按钮操作 */
@@ -83,7 +83,7 @@ function handleQuery() {
 
 /** 重置按钮操作 */
 function resetQuery() {
-  proxy.resetForm('queryRef')
+  resetForm('queryRef')
   handleQuery()
 }
 

@@ -1,6 +1,7 @@
 <script setup name="AuthUser">
 import { allocatedUserList, authUserCancel, authUserCancelAll } from '@/api/system/role'
 import $tab from '@/plugins/tab'
+import { resetForm } from '@/utils/ruoyi'
 import selectUser from './selectUser'
 
 const route = useRoute()
@@ -46,7 +47,7 @@ function handleQuery() {
 
 /** 重置按钮操作 */
 function resetQuery() {
-  proxy.resetForm('queryRef')
+  resetForm('queryRef')
   handleQuery()
 }
 

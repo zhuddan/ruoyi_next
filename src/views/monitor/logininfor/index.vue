@@ -1,6 +1,7 @@
 <script setup name="Logininfor">
 import { cleanLogininfor, delLogininfor, list, unlockLogininfor } from '@/api/monitor/logininfor'
 import { download } from '@/utils/request'
+import { resetForm } from '@/utils/ruoyi'
 
 const { proxy } = getCurrentInstance()
 const { sys_common_status } = useDict('sys_common_status')
@@ -46,7 +47,7 @@ function handleQuery() {
 /** 重置按钮操作 */
 function resetQuery() {
   dateRange.value = []
-  proxy.resetForm('queryRef')
+  resetForm('queryRef')
   queryParams.value.pageNum = 1
   proxy.$refs.logininforRef.sort(defaultSort.value.prop, defaultSort.value.order)
 }

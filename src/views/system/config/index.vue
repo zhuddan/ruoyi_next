@@ -1,6 +1,7 @@
 <script setup name="Config">
 import { addConfig, delConfig, getConfig, listConfig, refreshCache, updateConfig } from '@/api/system/config'
 import { download } from '@/utils/request'
+import { resetForm } from '@/utils/ruoyi'
 
 const { proxy } = getCurrentInstance()
 const { sys_yes_no } = useDict('sys_yes_no')
@@ -60,7 +61,7 @@ function reset() {
     configType: 'Y',
     remark: undefined,
   }
-  proxy.resetForm('configRef')
+  resetForm('configRef')
 }
 
 /** 搜索按钮操作 */
@@ -72,7 +73,7 @@ function handleQuery() {
 /** 重置按钮操作 */
 function resetQuery() {
   dateRange.value = []
-  proxy.resetForm('queryRef')
+  resetForm('queryRef')
   handleQuery()
 }
 

@@ -26,7 +26,6 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['update:modelValue'])
-const { proxy } = getCurrentInstance()
 const number = ref(0)
 const uploadList = ref([])
 const baseUrl = import.meta.env.VITE_APP_BASE_API
@@ -96,7 +95,10 @@ function handleExceed() {
 function handleUploadError() {
   $modal.msgError('上传文件失败')
 }
-
+/**
+ * @type {Ref<import('element-plus').UploadInstance>}
+ */
+const fileUpload = ref(null)
 // 上传成功回调
 function handleUploadSuccess(res, file) {
   if (res.code === 200) {
@@ -107,7 +109,7 @@ function handleUploadSuccess(res, file) {
     number.value--
     $modal.closeLoading()
     $modal.msgError(res.msg)
-    proxy.$refs.fileUpload.handleRemove(file)
+    fileUpload.value.handleRemove(file)
     uploadedSuccessfully()
   }
 }

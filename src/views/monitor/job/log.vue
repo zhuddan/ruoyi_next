@@ -3,6 +3,7 @@ import { getJob } from '@/api/monitor/job'
 import { cleanJobLog, delJobLog, listJobLog } from '@/api/monitor/jobLog'
 import $tab from '@/plugins/tab'
 import { download } from '@/utils/request'
+import { resetForm } from '@/utils/ruoyi'
 
 const { proxy } = getCurrentInstance()
 const { sys_common_status, sys_job_group } = useDict('sys_common_status', 'sys_job_group')
@@ -55,7 +56,7 @@ function handleQuery() {
 /** 重置按钮操作 */
 function resetQuery() {
   dateRange.value = []
-  proxy.resetForm('queryRef')
+  resetForm('queryRef')
   handleQuery()
 }
 
