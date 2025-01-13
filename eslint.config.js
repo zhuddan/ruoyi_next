@@ -7,4 +7,8 @@ export default antfu({
   languageOptions: {
     globals,
   },
+  rules: {
+    'vue/no-unused-refs': 'warn',
+    'eqeqeq': 'warn',
+  },
 })
