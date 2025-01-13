@@ -1,4 +1,3 @@
-import { download } from '@/utils/request'
 import {
   addDateRange,
   handleTree,
@@ -34,7 +33,6 @@ import './permission'
 const app = createApp(App)
 
 // 全局方法挂载
-// app.config.globalProperties.download = download
 app.config.globalProperties.parseTime = parseTime
 app.config.globalProperties.resetForm = resetForm
 app.config.globalProperties.handleTree = handleTree
