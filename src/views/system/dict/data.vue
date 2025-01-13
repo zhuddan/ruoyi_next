@@ -2,6 +2,7 @@
 import { addData, delData, getData, listData, updateData } from '@/api/system/dict/data'
 import { optionselect as getDictOptionselect, getType } from '@/api/system/dict/type'
 import useDictStore from '@/store/modules/dict'
+import { download } from '@/utils/request'
 
 const { proxy } = getCurrentInstance()
 const { sys_normal_disable } = useDict('sys_normal_disable')
@@ -176,7 +177,7 @@ function handleDelete(row) {
 
 /** 导出按钮操作 */
 function handleExport() {
-  proxy.download('system/dict/data/export', {
+  download('system/dict/data/export', {
     ...queryParams.value,
   }, `dict_data_${new Date().getTime()}.xlsx`)
 }

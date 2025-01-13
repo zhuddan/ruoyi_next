@@ -1,5 +1,6 @@
 <script setup name="Operlog">
 import { cleanOperlog, delOperlog, list } from '@/api/monitor/operlog'
+import { download } from '@/utils/request'
 
 const { proxy } = getCurrentInstance()
 const { sys_oper_type, sys_common_status } = useDict('sys_oper_type', 'sys_common_status')
@@ -102,7 +103,7 @@ function handleClean() {
 
 /** 导出按钮操作 */
 function handleExport() {
-  proxy.download('monitor/operlog/export', {
+  download('monitor/operlog/export', {
     ...queryParams.value,
   }, `config_${new Date().getTime()}.xlsx`)
 }

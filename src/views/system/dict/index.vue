@@ -1,6 +1,7 @@
 <script setup name="Dict">
 import { addType, delType, getType, listType, refreshCache, updateType } from '@/api/system/dict/type'
 import useDictStore from '@/store/modules/dict'
+import { download } from '@/utils/request'
 
 const { proxy } = getCurrentInstance()
 const { sys_normal_disable } = useDict('sys_normal_disable')
@@ -134,7 +135,7 @@ function handleDelete(row) {
 
 /** 导出按钮操作 */
 function handleExport() {
-  proxy.download('system/dict/type/export', {
+  download('system/dict/type/export', {
     ...queryParams.value,
   }, `dict_${new Date().getTime()}.xlsx`)
 }

@@ -2,6 +2,7 @@
 import { addUser, changeUserStatus, delUser, deptTreeSelect, getUser, listUser, resetUserPwd, updateUser } from '@/api/system/user'
 import useAppStore from '@/store/modules/app'
 import { getToken } from '@/utils/auth'
+import { download } from '@/utils/request'
 import { Pane, Splitpanes } from 'splitpanes'
 import 'splitpanes/dist/splitpanes.css'
 
@@ -150,7 +151,7 @@ function handleDelete(row) {
 
 /** 导出按钮操作 */
 function handleExport() {
-  proxy.download('system/user/export', {
+  download('system/user/export', {
     ...queryParams.value,
   }, `user_${new Date().getTime()}.xlsx`)
 };
@@ -223,7 +224,7 @@ function handleImport() {
 
 /** 下载模板操作 */
 function importTemplate() {
-  proxy.download('system/user/importTemplate', {
+  download('system/user/importTemplate', {
   }, `user_template_${new Date().getTime()}.xlsx`)
 };
 

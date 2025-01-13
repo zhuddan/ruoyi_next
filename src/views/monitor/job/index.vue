@@ -1,6 +1,7 @@
 <script setup name="Job">
 import { addJob, changeJobStatus, delJob, getJob, listJob, runJob, updateJob } from '@/api/monitor/job'
 import Crontab from '@/components/Crontab'
+import { download } from '@/utils/request'
 
 const router = useRouter()
 const { proxy } = getCurrentInstance()
@@ -208,7 +209,7 @@ function handleDelete(row) {
 
 /** 导出按钮操作 */
 function handleExport() {
-  proxy.download('monitor/job/export', {
+  download('monitor/job/export', {
     ...queryParams.value,
   }, `job_${new Date().getTime()}.xlsx`)
 }

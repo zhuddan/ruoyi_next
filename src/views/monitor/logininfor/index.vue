@@ -1,5 +1,6 @@
 <script setup name="Logininfor">
 import { cleanLogininfor, delLogininfor, list, unlockLogininfor } from '@/api/monitor/logininfor'
+import { download } from '@/utils/request'
 
 const { proxy } = getCurrentInstance()
 const { sys_common_status } = useDict('sys_common_status')
@@ -98,7 +99,7 @@ function handleUnlock() {
 
 /** 导出按钮操作 */
 function handleExport() {
-  proxy.download('monitor/logininfor/export', {
+  download('monitor/logininfor/export', {
     ...queryParams.value,
   }, `logininfor_${new Date().getTime()}.xlsx`)
 }

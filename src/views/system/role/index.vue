@@ -1,6 +1,7 @@
 <script setup name="Role">
 import { treeselect as menuTreeselect, roleMenuTreeselect } from '@/api/system/menu'
 import { addRole, changeRoleStatus, dataScope, delRole, deptTreeSelect, getRole, listRole, updateRole } from '@/api/system/role'
+import { download } from '@/utils/request'
 
 const router = useRouter()
 const { proxy } = getCurrentInstance()
@@ -89,7 +90,7 @@ function handleDelete(row) {
 
 /** 导出按钮操作 */
 function handleExport() {
-  proxy.download('system/role/export', {
+  download('system/role/export', {
     ...queryParams.value,
   }, `role_${new Date().getTime()}.xlsx`)
 }

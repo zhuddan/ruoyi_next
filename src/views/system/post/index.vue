@@ -1,5 +1,6 @@
 <script setup name="Post">
 import { addPost, delPost, getPost, listPost, updatePost } from '@/api/system/post'
+import { download } from '@/utils/request'
 
 const { proxy } = getCurrentInstance()
 const { sys_normal_disable } = useDict('sys_normal_disable')
@@ -133,7 +134,7 @@ function handleDelete(row) {
 
 /** 导出按钮操作 */
 function handleExport() {
-  proxy.download('system/post/export', {
+  download('system/post/export', {
     ...queryParams.value,
   }, `post_${new Date().getTime()}.xlsx`)
 }

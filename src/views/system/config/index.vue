@@ -1,5 +1,6 @@
 <script setup name="Config">
 import { addConfig, delConfig, getConfig, listConfig, refreshCache, updateConfig } from '@/api/system/config'
+import { download } from '@/utils/request'
 
 const { proxy } = getCurrentInstance()
 const { sys_yes_no } = useDict('sys_yes_no')
@@ -135,7 +136,7 @@ function handleDelete(row) {
 
 /** 导出按钮操作 */
 function handleExport() {
-  proxy.download('system/config/export', {
+  download('system/config/export', {
     ...queryParams.value,
   }, `config_${new Date().getTime()}.xlsx`)
 }

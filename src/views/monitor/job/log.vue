@@ -1,6 +1,7 @@
 <script setup name="JobLog">
 import { getJob } from '@/api/monitor/job'
 import { cleanJobLog, delJobLog, listJobLog } from '@/api/monitor/jobLog'
+import { download } from '@/utils/request'
 
 const { proxy } = getCurrentInstance()
 const { sys_common_status, sys_job_group } = useDict('sys_common_status', 'sys_job_group')
@@ -91,7 +92,7 @@ function handleClean() {
 
 /** 导出按钮操作 */
 function handleExport() {
-  proxy.download('monitor/jobLog/export', {
+  download('monitor/jobLog/export', {
     ...queryParams.value,
   }, `job_log_${new Date().getTime()}.xlsx`)
 }
