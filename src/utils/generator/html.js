@@ -8,7 +8,7 @@ export function dialogWrapper(str) {
     ${str}
     <template #footer>
       <el-button @click="close">取消</el-button>
-	  <el-button type="primary" @click="handelConfirm">确定</el-button>
+      <el-button type="primary" @click="handelConfirm">确定</el-button>
     </template>
   </el-dialog>`
 }
@@ -75,34 +75,6 @@ function colWrapper(element, str) {
     </el-col>`
   }
   return str
-}
-
-const layouts = {
-  colFormItem(element) {
-    let labelWidth = ''
-    if (element.labelWidth && element.labelWidth !== confGlobal.labelWidth) {
-      labelWidth = `label-width="${element.labelWidth}px"`
-    }
-    const required = !trigger[element.tag] && element.required ? 'required' : ''
-    const tagDom = tags[element.tag] ? tags[element.tag](element) : null
-    let str = `<el-form-item ${labelWidth} label="${element.label}" prop="${element.vModel}" ${required}>
-        ${tagDom}
-      </el-form-item>`
-    str = colWrapper(element, str)
-    return str
-  },
-  rowFormItem(element) {
-    const type = element.type === 'default' ? '' : `type="${element.type}"`
-    const justify = element.type === 'default' ? '' : `justify="${element.justify}"`
-    const align = element.type === 'default' ? '' : `align="${element.align}"`
-    const gutter = element.gutter ? `gutter="${element.gutter}"` : ''
-    const children = element.children.map(el => layouts[el.layout](el))
-    let str = `<el-row ${type} ${justify} ${align} ${gutter}>
-      ${children.join('\n')}
-    </el-row>`
-    str = colWrapper(element, str)
-    return str
-  },
 }
 
 const tags = {
@@ -297,6 +269,34 @@ const tags = {
     if (child)
       child = `\n${child}\n` // 换行
     return `<${el.tag} ${ref} ${fileList} ${action} ${autoUpload} ${multiple} ${beforeUpload} ${listType} ${accept} ${name} ${disabled}>${child}</${el.tag}>`
+  },
+}
+
+const layouts = {
+  colFormItem(element) {
+    let labelWidth = ''
+    if (element.labelWidth && element.labelWidth !== confGlobal.labelWidth) {
+      labelWidth = `label-width="${element.labelWidth}px"`
+    }
+    const required = !trigger[element.tag] && element.required ? 'required' : ''
+    const tagDom = tags[element.tag] ? tags[element.tag](element) : null
+    let str = `<el-form-item ${labelWidth} label="${element.label}" prop="${element.vModel}" ${required}>
+        ${tagDom}
+      </el-form-item>`
+    str = colWrapper(element, str)
+    return str
+  },
+  rowFormItem(element) {
+    const type = element.type === 'default' ? '' : `type="${element.type}"`
+    const justify = element.type === 'default' ? '' : `justify="${element.justify}"`
+    const align = element.type === 'default' ? '' : `align="${element.align}"`
+    const gutter = element.gutter ? `gutter="${element.gutter}"` : ''
+    const children = element.children.map(el => layouts[el.layout](el))
+    let str = `<el-row ${type} ${justify} ${align} ${gutter}>
+      ${children.join('\n')}
+    </el-row>`
+    str = colWrapper(element, str)
+    return str
   },
 }
 
