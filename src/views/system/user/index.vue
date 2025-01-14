@@ -14,6 +14,11 @@ defineOptions({
  * @type {TemplateRef<import("element-plus").FormInstance>}
  */
 const userRef = useTemplateRef('userRef')
+/**
+ * @type {TemplateRef<import("element-plus").FormInstance>}
+ */
+const queryRef = useTemplateRef('queryRef')
+
 const router = useRouter()
 const appStore = useAppStore()
 const { sys_normal_disable, sys_user_sex } = useDict('sys_normal_disable', 'sys_user_sex')
