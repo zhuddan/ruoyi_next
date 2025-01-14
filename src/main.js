@@ -26,7 +26,5 @@ app.use(store)
 app.use(directive)
 app.use(ElementIcons)
 app.use(ElementPlus)
-
 app.config.globalProperties.parseTime = parseTime
-
 app.mount('#app')
