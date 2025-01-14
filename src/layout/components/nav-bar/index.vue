@@ -4,6 +4,11 @@ import useSettingsStore from '@/store/modules/settings'
 import useUserStore from '@/store/modules/user'
 import { ElMessageBox } from 'element-plus'
 import AppBreadcrumb from './app-breadcrumb.vue'
+import Doc from './doc.vue'
+import Git from './git.vue'
+import HeaderSearch from './header-search.vue'
+import ScreenfullBtn from './screenfull-btn.vue'
+import SizeSelect from './size-select.vue'
 import ToggleBtn from './toggle-btn.vue'
 import TopNav from './top-nav.vue'
 
@@ -60,14 +65,14 @@ function toggleTheme() {
         <HeaderSearch id="header-search" />
 
         <el-tooltip content="源码地址" effect="dark" placement="bottom">
-          <RuoYiGit id="ruoyi-git" />
+          <Git id="ruoyi-git" />
         </el-tooltip>
 
         <el-tooltip content="文档地址" effect="dark" placement="bottom">
-          <RuoYiDoc id="ruoyi-doc" />
+          <Doc id="ruoyi-doc" />
         </el-tooltip>
 
-        <Screenfull id="screenfull" />
+        <ScreenfullBtn />
 
         <el-tooltip content="主题模式" effect="dark" placement="bottom">
           <div class="inline-flex items-center justify-center h-full min-w-[34px] hover:cursor-pointer" @click="toggleTheme">
@@ -77,7 +82,7 @@ function toggleTheme() {
         </el-tooltip>
 
         <el-tooltip content="布局大小" effect="dark" placement="bottom">
-          <SizeSelect id="size-select" class="inline-flex items-center justify-center h-full min-w-[34px] hover:cursor-pointer" />
+          <SizeSelect id="size-select" class="" />
         </el-tooltip>
       </template>
 
