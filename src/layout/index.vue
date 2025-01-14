@@ -1,18 +1,31 @@
 <script setup>
 import useAppStore from '@/store/modules/app'
 import useSettingsStore from '@/store/modules/settings'
+import { useCssVar } from '@vueuse/core'
 import { AppMain, Navbar, Settings, TagsView } from './components'
 import Sidebar from './components/Sidebar/index.vue'
 
 const {
-  theme,
-  tagsView,
-  fixedHeader,
+  settings,
 } = toRefs(useSettingsStore())
 const { isCollapse, isMobile } = storeToRefs(useAppStore())
-
 const breakpoints = useAppBreakpoints()
-
+const sidevarDefaultWidth = useCssVar('--sidebar-default-width')
+const sidevarCollapseWidth = useCssVar('--sidevar-collapse-width')
+/**
+ * 侧边栏真实占用的宽度
+ */
+const sidebarRealWidth = computed(() => {
+  if (isMobile.value) {
+    return '0px'
+  }
+  else if (isCollapse.value) {
+    return sidevarCollapseWidth.value
+  }
+  else {
+    return sidevarDefaultWidth.value
+  }
+})
 const smaller_lg = breakpoints.smaller('lg')
 
 watch(smaller_lg, () => {
@@ -30,19 +43,22 @@ function setLayout() {
 <template>
   <div
     class="app-wrapper flex"
-    :style="{ '--current-color': theme }"
+    :style="{ '--current-color': settings.theme }"
   >
     <Sidebar />
 
     <div
       class="main-container flex-1 max-w-full"
+      :style="{
+        width: `calc(100% - ${sidebarRealWidth})`,
+      }"
     >
       <div
-        :class="{ sticky: fixedHeader }"
+        :class="{ sticky: settings.fixedHeader }"
         class="top-0 z-10 backdrop-blur-md"
       >
         <Navbar @set-layout="setLayout" />
-        <TagsView v-if="tagsView" />
+        <TagsView v-if="settings.tagsView" />
       </div>
       <AppMain />
       <Settings ref="settingRef" />

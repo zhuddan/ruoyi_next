@@ -47,8 +47,8 @@ const activeMenu = computed(() => {
         'sidebar-container_collapse': isCollapse,
       },
       isCollapse
-        ? 'w-[calc(var(--el-menu-icon-width)_+_var(--el-menu-base-level-padding)_*_2)]'
-        : 'w-[var(--sidebar-width)]',
+        ? 'w-[var(--sidevar-collapse-width)]'
+        : 'w-[var(--sidebar-default-width)]',
     ]"
     class="sidebar-container  h-[100vh] flex-shrink-0 transition-[width] sticky top-0"
     style="border-right: 1px solid var(--el-menu-border-color);"

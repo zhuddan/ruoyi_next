@@ -1,4 +1,4 @@
-import { useLocalStorage } from '@vueuse/core'
+import { useCssVar, useLocalStorage } from '@vueuse/core'
 
 const ELEMENT_PLUS_SIZE = 'ELEMENT_PLUS_SIZE'
 const useAppStore = defineStore(
@@ -37,6 +37,7 @@ const useAppStore = defineStore(
         isCollapse.value = false
       }
     })
+
     return {
       isCollapse,
       isOpenSideBar,

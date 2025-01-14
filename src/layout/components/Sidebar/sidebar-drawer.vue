@@ -11,7 +11,7 @@ const { drawer } = storeToRefs(appStore)
     direction="ltr"
     :with-header="false"
     body-class="overflow-hidden p-0 "
-    class="!w-[var(--sidebar-width)]"
+    class="!w-[var(--sidebar-default-width)]"
   >
     <slot />
   </el-drawer>
