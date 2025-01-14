@@ -7,16 +7,11 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    Breadcrumb: typeof import('./components/Breadcrumb/index.vue')['default']
     Crontab: typeof import('./components/Crontab/index.vue')['default']
     Day: typeof import('./components/Crontab/day.vue')['default']
     DictTag: typeof import('./components/DictTag/index.vue')['default']
-    Doc: typeof import('./components/RuoYi/Doc/index.vue')['default']
     Editor: typeof import('./components/Editor/index.vue')['default']
     FileUpload: typeof import('./components/FileUpload/index.vue')['default']
-    Git: typeof import('./components/RuoYi/Git/index.vue')['default']
-    Hamburger: typeof import('./components/Hamburger/index.vue')['default']
-    HeaderSearch: typeof import('./components/HeaderSearch/index.vue')['default']
     Hour: typeof import('./components/Crontab/hour.vue')['default']
     IconSelect: typeof import('./components/IconSelect/index.vue')['default']
     IFrame: typeof import('./components/iFrame/index.vue')['default']
@@ -30,13 +25,9 @@ declare module 'vue' {
     RightToolbar: typeof import('./components/RightToolbar/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    RuoYiDoc: typeof import('./components/RuoYi/RuoYiDoc.vue')['default']
-    RuoYiGit: typeof import('./components/RuoYi/RuoYiGit.vue')['default']
     Screenfull: typeof import('./components/Screenfull/index.vue')['default']
     Second: typeof import('./components/Crontab/second.vue')['default']
-    SizeSelect: typeof import('./components/SizeSelect/index.vue')['default']
     SvgIcon: typeof import('./components/SvgIcon/index.vue')['default']
-    TopNav: typeof import('./components/TopNav/index.vue')['default']
     Week: typeof import('./components/Crontab/week.vue')['default']
     Year: typeof import('./components/Crontab/year.vue')['default']
   }
