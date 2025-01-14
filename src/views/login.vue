@@ -102,7 +102,7 @@ getCookie()
 </script>
 
 <template>
-  <div class="login">
+  <div class="login !h-[100vh]">
     <el-form ref="loginRef" :model="loginForm" :rules="loginRules" class="login-form">
       <h3 class="title">
         若依后台管理系统
