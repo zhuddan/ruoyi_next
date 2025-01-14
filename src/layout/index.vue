@@ -1,33 +1,18 @@
 <script setup>
-import useAppStore from '@/store/modules/app'
 import useAppStoreV2 from '@/store/modules/app-v2'
 import useSettingsStore from '@/store/modules/settings'
-
-import { useWindowSize } from '@vueuse/core'
 import { AppMain, Navbar, Settings, TagsView } from './components'
 import Sidebar from './components/Sidebar/index.vue'
 
 const settingsStore = useSettingsStore()
 const theme = computed(() => settingsStore.theme)
-const sidebar = computed(() => useAppStore().sidebar)
-const device = computed(() => useAppStore().device)
 const needTagsView = computed(() => settingsStore.tagsView)
 const fixedHeader = computed(() => settingsStore.fixedHeader)
 const { isCollapse, isMobile } = storeToRefs(useAppStoreV2())
 
-const classObj = computed(() => ({
-  hideSidebar: !sidebar.value.opened,
-  openSidebar: sidebar.value.opened,
-  withoutAnimation: sidebar.value.withoutAnimation,
-  mobile: device.value === 'mobile',
-}))
-
-const { width, height } = useWindowSize()
-
 const breakpoints = useAppBreakpoints()
 
 const smaller_lg = breakpoints.smaller('lg')
-const greater_lg = breakpoints.greater('lg')
 
 watch(smaller_lg, () => {
   if (smaller_lg.value && !isMobile.value && !isCollapse.value) {
@@ -49,16 +34,13 @@ function setLayout() {
 
 <template>
   <div
-    :class="classObj"
     class="app-wrapper flex"
     :style="{ '--current-color': theme }"
   >
-    <!-- <div v-if="device === 'mobile' && sidebar.opened" class="drawer-bg" @click="handleClickOutside" /> -->
-
-    <Sidebar v-if="!sidebar.hide" />
+    <Sidebar />
 
     <div
-      :class="{ hasTagsView: needTagsView, sidebarHide: sidebar.hide }" class="main-container flex-1 max-w-full"
+      class="main-container flex-1 max-w-full"
     >
       <div :class="{ 'fixed-header': fixedHeader }">
         <Navbar @set-layout="setLayout" />

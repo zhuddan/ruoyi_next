@@ -1,6 +1,5 @@
 <script setup>
 import { constantRoutes } from '@/router'
-// import useAppStore from '@/store/modules/app'
 import usePermissionStore from '@/store/modules/permission'
 import useSettingsStore from '@/store/modules/settings'
 import { isHttp } from '@/utils/validate'
@@ -12,7 +11,6 @@ const currentIndex = ref(null)
 // 隐藏侧边栏路由
 const hideList = ['/index', '/user/profile']
 
-// const appStore = useAppStore()
 const settingsStore = useSettingsStore()
 const permissionStore = usePermissionStore()
 const route = useRoute()

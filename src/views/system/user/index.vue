@@ -1,6 +1,5 @@
 <script setup>
 import { addUser, changeUserStatus, delUser, deptTreeSelect, getUser, listUser, resetUserPwd, updateUser } from '@/api/system/user'
-import useAppStore from '@/store/modules/app'
 import useAppStoreV2 from '@/store/modules/app-v2'
 import { getToken } from '@/utils/auth'
 import { download } from '@/utils/request'

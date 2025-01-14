@@ -1,5 +1,4 @@
 <script setup>
-// import useAppStore from '@/store/modules/app'
 import useAppStoreV2 from '@/store/modules/app-v2'
 
 const { size } = toRefs(useAppStoreV2())
@@ -10,11 +9,7 @@ const sizeOptions = ref([
 ])
 
 function handleSetSize(_size) {
-  // $modal.loading('正在设置布局大小，请稍候...')
   size.value = _size
-  // setTimeout(() => {
-  //   window.location.reload()
-  // }, 1000)
 }
 </script>
 
