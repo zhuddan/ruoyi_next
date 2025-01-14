@@ -29,7 +29,7 @@ const breakpoints = useAppBreakpoints()
 const smaller_lg = breakpoints.smaller('lg')
 const greater_lg = breakpoints.greater('lg')
 
-watchEffect(() => {
+watch(smaller_lg, () => {
   if (smaller_lg.value && !isMobile.value && !isCollapse.value) {
     isCollapse.value = true
   }

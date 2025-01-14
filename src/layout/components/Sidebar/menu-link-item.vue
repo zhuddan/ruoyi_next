@@ -1,12 +1,9 @@
 <!-- eslint-disable vue/no-undef-properties -->
 <script>
-import useAppStoreV2 from '@/store/modules/app-v2'
-
 import { ElTooltip, menuItemEmits, menuItemProps, useNamespace } from 'element-plus'
 import AppLink from './app-link.vue'
 import useMenu from './use-menu'
 
-const { isMobile, drawer } = storeToRefs(useAppStoreV2())
 function throwError(scope, m) {
   throw new Error(`[${scope}] ${m}`)
 }
@@ -56,10 +53,6 @@ export default defineComponent({
           route: props.route,
         })
         emit('click', item)
-        // 展开 drawer 的情况下点击菜单需要关闭
-        if (isMobile.value && drawer.value) {
-          drawer.value = false
-        }
       }
     }
 

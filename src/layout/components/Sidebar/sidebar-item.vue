@@ -1,6 +1,8 @@
 <script setup>
+import useAppStoreV2 from '@/store/modules/app-v2'
 import { getNormalPath } from '@/utils/ruoyi'
 import { isExternal } from '@/utils/validate'
+
 import LinkItem from './menu-link-item.vue'
 
 const props = defineProps({
@@ -69,6 +71,13 @@ function hasTitle(title) {
     return ''
   }
 }
+const { isMobile, drawer } = storeToRefs(useAppStoreV2())
+function handleClick() {
+  // 展开 drawer 的情况下点击菜单需要关闭
+  if (isMobile.value && drawer.value) {
+    drawer.value = false
+  }
+}
 </script>
 
 <template>
@@ -84,6 +93,7 @@ function hasTitle(title) {
         <LinkItem
           :index="resolvePath(onlyOneChild.path)"
           :to="resolvePath(onlyOneChild.path)"
+          @click="handleClick()"
         >
           <el-icon class="icon-box" size="15">
             <svg-icon :icon-class="onlyOneChild.meta.icon" />
