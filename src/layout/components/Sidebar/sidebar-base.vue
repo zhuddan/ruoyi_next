@@ -2,34 +2,34 @@
 import variables from '@/assets/styles/variables.module.scss'
 import useAppStore from '@/store/modules/app'
 import usePermissionStore from '@/store/modules/permission'
-import useSettingsStore from '@/store/modules/settings'
+import useSettingsStoreV2 from '@/store/modules/settings-v2'
 import AppLogo from './app-logo.vue'
 import SidebarItem from './sidebar-item.vue'
 
 const route = useRoute()
-const settingsStore = useSettingsStore()
+const {
+  settings,
+} = storeToRefs(useSettingsStoreV2())
+
 const permissionStore = usePermissionStore()
 
 const sidebarRouters = computed(() => permissionStore.sidebarRouters)
-const showLogo = computed(() => settingsStore.sidebarLogo)
-const sideTheme = computed(() => settingsStore.sideTheme)
-const theme = computed(() => settingsStore.theme)
 const { isCollapse } = storeToRefs(useAppStore())
 
 // 获取菜单背景色
 const getMenuBackground = computed(() => {
-  if (settingsStore.isDark) {
+  if (settings.value.isDark) {
     return 'var(--sidebar-bg)'
   }
-  return sideTheme.value === 'theme-dark' ? variables.menuBg : variables.menuLightBg
+  return settings.value.sideTheme === 'theme-dark' ? variables.menuBg : variables.menuLightBg
 })
 
 // 获取菜单文字颜色
 const getMenuTextColor = computed(() => {
-  if (settingsStore.isDark) {
+  if (settings.value.isDark) {
     return 'var(--sidebar-text)'
   }
-  return sideTheme.value === 'theme-dark' ? variables.menuText : variables.menuLightText
+  return settings.value.sideTheme === 'theme-dark' ? variables.menuText : variables.menuLightText
 })
 const activeMenu = computed(() => {
   const { meta, path } = route
@@ -53,7 +53,7 @@ const activeMenu = computed(() => {
     class="sidebar-container  h-[100vh] flex-shrink-0 transition-[width] sticky top-0"
     style="border-right: 1px solid var(--el-menu-border-color);"
   >
-    <AppLogo v-if="showLogo" :collapse="isCollapse" />
+    <AppLogo v-if="settings. sidebarLogo" :collapse="isCollapse" />
     <el-scrollbar
       wrap-class="scrollbar-wrapper"
       class="h-[calc(100vh_-_50px)]"
@@ -65,10 +65,10 @@ const activeMenu = computed(() => {
         :background-color="getMenuBackground"
         :text-color="getMenuTextColor"
         :unique-opened="true"
-        :active-text-color="theme"
+        :active-text-color="settings.theme"
         :collapse-transition="false"
         mode="vertical"
-        :class="sideTheme"
+        :class="settings.sideTheme"
       >
         <SidebarItem
           v-for="(it, index) in sidebarRouters"
@@ -79,48 +79,13 @@ const activeMenu = computed(() => {
       </el-menu>
     </el-scrollbar>
   </div>
-  <!-- <el-drawer
-    v-model="sidebar.opened"
-    direction="ltr"
-    :with-header="false"
-    body-class="overflow-hidden p-0 "
-    class="!w-[var(--sidebar-width)]"
-  >
-  </el-drawer> -->
 </template>
 
 <style lang="scss" scoped>
 .sidebar-container {
   background-color: v-bind(getMenuBackground);
-
   .scrollbar-wrapper {
     background-color: v-bind(getMenuBackground);
   }
-
-  // .el-menu {
-  //   border: none;
-  //   height: 100%;
-  //   width: 100% !important;
-
-  //   .el-menu-item,
-  //   .el-sub-menu__title {
-  //     &:hover {
-  //       background-color: var(--menu-hover, rgba(0, 0, 0, 0.06)) !important;
-  //     }
-  //   }
-
-  //   .el-menu-item {
-  //     color: v-bind(getMenuTextColor);
-
-  //     &.is-active {
-  //       color: var(--menu-active-text, #409eff);
-  //       background-color: var(--menu-hover, rgba(0, 0, 0, 0.06)) !important;
-  //     }
-  //   }
-
-  //   .el-sub-menu__title {
-  //     color: v-bind(getMenuTextColor);
-  //   }
-  // }
 }
 </style>

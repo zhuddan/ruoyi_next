@@ -1,7 +1,5 @@
 <script setup>
 import logo from '@/assets/logo/logo.png'
-import variables from '@/assets/styles/variables.module.scss'
-import useSettingsStore from '@/store/modules/settings'
 
 defineProps({
   collapse: {
@@ -11,29 +9,11 @@ defineProps({
 })
 
 const title = import.meta.env.VITE_APP_TITLE
-const settingsStore = useSettingsStore()
-const sideTheme = computed(() => settingsStore.sideTheme)
-
-// 获取Logo背景色
-const getLogoBackground = computed(() => {
-  if (settingsStore.isDark) {
-    return 'var(--sidebar-bg)'
-  }
-  return sideTheme.value === 'theme-dark' ? variables.menuBg : variables.menuLightBg
-})
-
-// 获取Logo文字颜色
-const getLogoTextColor = computed(() => {
-  if (settingsStore.isDark) {
-    return 'var(--sidebar-text)'
-  }
-  return sideTheme.value === 'theme-dark' ? '#fff' : variables.menuLightText
-})
 </script>
 
 <template>
   <div
-    class="sidebar-logo-container"
+    class="sidebar-logo-container bg-[var(--el-bg-color) text-[var(--el-text-color-regular)]"
     :class="{
       'sidebar-logo-container_collapse': collapse,
     }"

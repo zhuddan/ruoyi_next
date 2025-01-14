@@ -1,15 +1,15 @@
 <script setup>
-import useSettingsStore from '@/store/modules/settings'
+import useSettingsStoreV2 from '@/store/modules/settings-v2'
 import { handleThemeStyle } from '@/utils/theme'
 import { ElConfigProvider } from 'element-plus'
 import useAppStore from './store/modules/app'
 
-const { theme } = useSettingsStore()
+const { settings } = useSettingsStoreV2()
 const { size } = storeToRefs(useAppStore())
 onMounted(() => {
   nextTick(() => {
     // 初始化主题样式
-    handleThemeStyle(theme)
+    handleThemeStyle(settings.theme)
   })
 })
 </script>

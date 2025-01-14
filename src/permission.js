@@ -1,5 +1,4 @@
 import usePermissionStore from '@/store/modules/permission'
-import useSettingsStore from '@/store/modules/settings'
 import useUserStore from '@/store/modules/user'
 import { getToken } from '@/utils/auth'
 import { isReLogin } from '@/utils/request'
@@ -7,6 +6,7 @@ import { isHttp, isPathMatch } from '@/utils/validate'
 import { ElMessage } from 'element-plus'
 import NProgress from 'nprogress'
 import router from './router'
+import useSettingsStoreV2 from './store/modules/settings-v2'
 import 'nprogress/nprogress.css'
 
 NProgress.configure({ showSpinner: false })
@@ -18,9 +18,10 @@ function isWhiteList(path) {
 }
 
 router.beforeEach((to, from, next) => {
+  const { setTitle } = useSettingsStoreV2()
   NProgress.start()
   if (getToken()) {
-    to.meta.title && useSettingsStore().setTitle(to.meta.title)
+    to.meta.title && setTitle(to.meta.title)
     /* has token */
     if (to.path === '/login') {
       next({ path: '/' })

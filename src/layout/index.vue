@@ -1,13 +1,14 @@
 <script setup>
 import useAppStore from '@/store/modules/app'
-import useSettingsStore from '@/store/modules/settings'
+import useSettingsStoreV2 from '@/store/modules/settings-v2'
 import { AppMain, Navbar, Settings, TagsView } from './components'
 import Sidebar from './components/Sidebar/index.vue'
 
-const settingsStore = useSettingsStore()
-const theme = computed(() => settingsStore.theme)
-const needTagsView = computed(() => settingsStore.tagsView)
-const fixedHeader = computed(() => settingsStore.fixedHeader)
+const {
+  theme,
+  tagsView,
+  fixedHeader,
+} = toRefs(useSettingsStoreV2())
 const { isCollapse, isMobile } = storeToRefs(useAppStore())
 
 const breakpoints = useAppBreakpoints()
@@ -19,12 +20,6 @@ watch(smaller_lg, () => {
     isCollapse.value = true
   }
 })
-
-// watchEffect(() => {
-//   if (greater_lg.value && !isMobile.value && isCollapse.value) {
-//     isCollapse.value = false
-//   }
-// })
 
 const settingRef = ref(null)
 function setLayout() {
@@ -42,9 +37,12 @@ function setLayout() {
     <div
       class="main-container flex-1 max-w-full"
     >
-      <div :class="{ 'fixed-header': fixedHeader }">
+      <div
+        :class="{ sticky: fixedHeader }"
+        class="top-0 z-10 backdrop-blur-md"
+      >
         <Navbar @set-layout="setLayout" />
-        <TagsView v-if="needTagsView" />
+        <TagsView v-if="tagsView" />
       </div>
       <AppMain />
       <Settings ref="settingRef" />

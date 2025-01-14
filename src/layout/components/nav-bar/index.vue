@@ -1,6 +1,6 @@
 <script setup>
 import useAppStore from '@/store/modules/app'
-import useSettingsStore from '@/store/modules/settings'
+import useSettingsStoreV2 from '@/store/modules/settings-v2'
 import useUserStore from '@/store/modules/user'
 import { ElMessageBox } from 'element-plus'
 import AppBreadcrumb from './app-breadcrumb.vue'
@@ -15,7 +15,11 @@ import TopNav from './top-nav.vue'
 const emits = defineEmits(['setLayout'])
 const userStore = useUserStore()
 const { isMobile } = storeToRefs(useAppStore())
-const settingsStore = useSettingsStore()
+const {
+  settings,
+  topNav,
+  toggleTheme,
+} = useSettingsStoreV2()
 
 function handleCommand(command) {
   switch (command) {
@@ -45,18 +49,14 @@ function logout() {
 function setLayout() {
   emits('setLayout')
 }
-
-function toggleTheme() {
-  settingsStore.toggleTheme()
-}
 </script>
 
 <template>
   <div class="navbar flex bg-[var(--el-bg-color) text-[var(--el-text-color-regular)]">
     <ToggleBtn />
-    <AppBreadcrumb v-if="!settingsStore.topNav" id="breadcrumb-container" class="breadcrumb-container" />
+    <AppBreadcrumb v-if="!topNav" id="breadcrumb-container" class="breadcrumb-container" />
 
-    <TopNav v-if="settingsStore.topNav" id="topmenu-container" class="topmenu-container" />
+    <TopNav v-if="topNav" id="topmenu-container" class="topmenu-container" />
     <div class="flex-1" />
     <div
       class=" flex items-center"
@@ -76,8 +76,8 @@ function toggleTheme() {
 
         <el-tooltip content="主题模式" effect="dark" placement="bottom">
           <div class="inline-flex items-center justify-center h-full min-w-[34px] hover:cursor-pointer" @click="toggleTheme">
-            <svg-icon v-if="settingsStore.isDark" icon-class="sunny" />
-            <svg-icon v-if="!settingsStore.isDark" icon-class="moon" />
+            <svg-icon v-if="settings.isDark" icon-class="sunny" />
+            <svg-icon v-if="!settings.isDark" icon-class="moon" />
           </div>
         </el-tooltip>
 
@@ -102,7 +102,7 @@ function toggleTheme() {
               <router-link to="/user/profile">
                 <el-dropdown-item>个人中心</el-dropdown-item>
               </router-link>
-              <el-dropdown-item v-if="settingsStore.showSettings" command="setLayout">
+              <el-dropdown-item v-if="settings.showSettings" command="setLayout">
                 <span>布局设置</span>
               </el-dropdown-item>
               <el-dropdown-item divided command="logout">
