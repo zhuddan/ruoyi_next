@@ -35,11 +35,11 @@ watchEffect(() => {
   }
 })
 
-watchEffect(() => {
-  if (greater_lg.value && !isMobile.value && isCollapse.value) {
-    isCollapse.value = false
-  }
-})
+// watchEffect(() => {
+//   if (greater_lg.value && !isMobile.value && isCollapse.value) {
+//     isCollapse.value = false
+//   }
+// })
 
 const settingRef = ref(null)
 function setLayout() {
@@ -58,7 +58,7 @@ function setLayout() {
     <Sidebar v-if="!sidebar.hide" />
 
     <div
-      :class="{ hasTagsView: needTagsView, sidebarHide: sidebar.hide }" class="main-container flex-1"
+      :class="{ hasTagsView: needTagsView, sidebarHide: sidebar.hide }" class="main-container flex-1 max-w-full"
     >
       <div :class="{ 'fixed-header': fixedHeader }">
         <Navbar @set-layout="setLayout" />
