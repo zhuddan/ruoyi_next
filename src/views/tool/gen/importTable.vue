@@ -109,8 +109,8 @@ defineExpose({
     <el-row>
       <el-table ref="table" :data="dbTableList" height="260px" @row-click="clickRow" @selection-change="handleSelectionChange">
         <el-table-column type="selection" width="55" />
-        <el-table-column prop="tableName" label="表名称" :show-overflow-tooltip="true" />
-        <el-table-column prop="tableComment" label="表描述" :show-overflow-tooltip="true" />
+        <el-table-column prop="tableName" label="表名称" show-overflow-tooltip />
+        <el-table-column prop="tableComment" label="表描述" show-overflow-tooltip />
         <el-table-column prop="createTime" label="创建时间" />
         <el-table-column prop="updateTime" label="更新时间" />
       </el-table>

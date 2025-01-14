@@ -98,7 +98,7 @@ function close() {
             label="字段列名"
             prop="columnName"
             min-width="10%"
-            :show-overflow-tooltip="true"
+            show-overflow-tooltip
           />
           <el-table-column label="字段描述" min-width="10%">
             <template #default="scope">
@@ -109,7 +109,7 @@ function close() {
             label="物理类型"
             prop="columnType"
             min-width="10%"
-            :show-overflow-tooltip="true"
+            show-overflow-tooltip
           />
           <el-table-column label="Java类型" min-width="11%">
             <template #default="scope">

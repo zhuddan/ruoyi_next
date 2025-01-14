@@ -124,7 +124,7 @@ getCacheNames()
               label="缓存名称"
               align="center"
               prop="cacheName"
-              :show-overflow-tooltip="true"
+              show-overflow-tooltip
               :formatter="nameFormatter"
             />
 
@@ -132,7 +132,7 @@ getCacheNames()
               label="备注"
               align="center"
               prop="remark"
-              :show-overflow-tooltip="true"
+              show-overflow-tooltip
             />
             <el-table-column
               label="操作"
@@ -181,7 +181,7 @@ getCacheNames()
             <el-table-column
               label="缓存键名"
               align="center"
-              :show-overflow-tooltip="true"
+              show-overflow-tooltip
               :formatter="keyFormatter"
             />
             <el-table-column

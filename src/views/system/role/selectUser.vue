@@ -123,10 +123,10 @@ defineExpose({
     <el-row>
       <el-table ref="refTable" :data="userList" height="260px" @row-click="clickRow" @selection-change="handleSelectionChange">
         <el-table-column type="selection" width="55" />
-        <el-table-column label="用户名称" prop="userName" :show-overflow-tooltip="true" />
-        <el-table-column label="用户昵称" prop="nickName" :show-overflow-tooltip="true" />
-        <el-table-column label="邮箱" prop="email" :show-overflow-tooltip="true" />
-        <el-table-column label="手机" prop="phonenumber" :show-overflow-tooltip="true" />
+        <el-table-column label="用户名称" prop="userName" show-overflow-tooltip />
+        <el-table-column label="用户昵称" prop="nickName" show-overflow-tooltip />
+        <el-table-column label="邮箱" prop="email" show-overflow-tooltip />
+        <el-table-column label="手机" prop="phonenumber" show-overflow-tooltip />
         <el-table-column label="状态" align="center" prop="status">
           <template #default="scope">
             <dict-tag :options="sys_normal_disable" :value="scope.row.status" />
