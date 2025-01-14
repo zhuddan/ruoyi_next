@@ -52,14 +52,14 @@ function toggleTheme() {
 </script>
 
 <template>
-  <div class="navbar flex bg-[var(--el-bg-color)">
+  <div class="navbar flex bg-[var(--el-bg-color) text-[var(--el-text-color-regular)]">
     <ToggleBtn />
     <AppBreadcrumb v-if="!settingsStore.topNav" id="breadcrumb-container" class="breadcrumb-container" />
 
     <TopNav v-if="settingsStore.topNav" id="topmenu-container" class="topmenu-container" />
     <div class="flex-1" />
     <div
-      class=" text-[var(--el-text-color-regular)] flex items-center"
+      class=" flex items-center"
     >
       <template v-if="!isMobile">
         <HeaderSearch id="header-search" />

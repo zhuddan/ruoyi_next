@@ -225,7 +225,10 @@ function handleScroll() {
 </script>
 
 <template>
-  <div id="tags-view-container" ref="tagRef" class="tags-view-container">
+  <div
+    id="tags-view-container" ref="tagRef"
+    class="tags-view-container bg-[var(--el-bg-color) text-[var(--el-text-color-regular)]"
+  >
     <ScrollPane ref="scrollPaneRef" class="tags-view-wrapper" @scroll="handleScroll">
       <router-link
         v-for="tag in visitedViews"
@@ -271,7 +274,7 @@ function handleScroll() {
 .tags-view-container {
   height: 34px;
   width: 100%;
-  background: var(--tags-bg, #fff);
+  // background: var(--tags-bg, #fff);
   border-bottom: 1px solid var(--tags-item-border, #d8dce5);
   box-shadow:
     0 1px 3px 0 rgba(0, 0, 0, 0.12),
