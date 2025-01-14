@@ -1,5 +1,5 @@
 <script setup>
-import useTagsViewStore from '@/store/modules/tagsView'
+import useTagsViewStore from '@/store/modules/tags-view'
 
 const emits = defineEmits(['scroll'])
 const tagAndTagSpacing = ref(4)

@@ -1,5 +1,5 @@
 <script setup>
-import useTagsViewStore from '@/store/modules/tagsView'
+import useTagsViewStore from '@/store/modules/tags-view'
 import InnerLink from '../InnerLink/index.vue'
 
 const route = useRoute()

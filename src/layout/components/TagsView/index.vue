@@ -2,7 +2,7 @@
 import $tab from '@/plugins/tab'
 import usePermissionStore from '@/store/modules/permission'
 import useSettingsStore from '@/store/modules/settings'
-import useTagsViewStore from '@/store/modules/tagsView'
+import useTagsViewStore from '@/store/modules/tags-view'
 import { getNormalPath } from '@/utils/ruoyi'
 import ScrollPane from './ScrollPane.vue'
 

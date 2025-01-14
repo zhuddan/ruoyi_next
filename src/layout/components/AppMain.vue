@@ -1,5 +1,5 @@
 <script setup>
-import useTagsViewStore from '@/store/modules/tagsView'
+import useTagsViewStore from '@/store/modules/tags-view'
 import iframeToggle from './IframeToggle/index.vue'
 
 const $route = useRoute()

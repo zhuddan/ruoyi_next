@@ -1,5 +1,5 @@
 import router from '@/router'
-import useTagsViewStore from '@/store/modules/tagsView'
+import useTagsViewStore from '@/store/modules/tags-view'
 
 const $tab = {
   // 刷新当前tab页签
