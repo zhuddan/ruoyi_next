@@ -8,6 +8,7 @@ import { ElMessageBox } from 'element-plus'
 const emits = defineEmits(['setLayout'])
 const appStore = useAppStore()
 const userStore = useUserStore()
+const { isMobile } = storeToRefs(useAppStoreV2())
 const settingsStore = useSettingsStore()
 
 function toggleSideBar() {
@@ -49,46 +50,50 @@ function toggleTheme() {
 </script>
 
 <template>
-  <div class="navbar">
-    <Hamburger
-      id="hamburger-container"
-      class="hamburger-container"
-    />
-    <!-- :is-active="appStore.sidebar.opened" -->
-    <!-- @toggle-click="toggleSideBar" -->
+  <div class="navbar flex bg-[var(--el-bg-color)">
+    <Hamburger />
     <Breadcrumb v-if="!settingsStore.topNav" id="breadcrumb-container" class="breadcrumb-container" />
-    <TopNav v-if="settingsStore.topNav" id="topmenu-container" class="topmenu-container" />
 
-    <div class="right-menu">
-      <template v-if="appStore.device !== 'mobile'">
-        <HeaderSearch id="header-search" class="right-menu-item" />
+    <TopNav v-if="settingsStore.topNav" id="topmenu-container" class="topmenu-container" />
+    <div class="flex-1" />
+    <div
+      class=" text-[var(--el-text-color-regular)] flex items-center"
+    >
+      <template v-if="!isMobile">
+        <HeaderSearch id="header-search" />
 
         <el-tooltip content="源码地址" effect="dark" placement="bottom">
-          <RuoYiGit id="ruoyi-git" class="right-menu-item hover-effect" />
+          <RuoYiGit id="ruoyi-git" />
         </el-tooltip>
 
         <el-tooltip content="文档地址" effect="dark" placement="bottom">
-          <RuoYiDoc id="ruoyi-doc" class="right-menu-item hover-effect" />
+          <RuoYiDoc id="ruoyi-doc" />
         </el-tooltip>
 
-        <Screenfull id="screenfull" class="right-menu-item hover-effect" />
+        <Screenfull id="screenfull" />
 
         <el-tooltip content="主题模式" effect="dark" placement="bottom">
-          <div class="right-menu-item hover-effect theme-switch-wrapper" @click="toggleTheme">
+          <div class="inline-flex items-center justify-center h-full min-w-[34px] hover:cursor-pointer" @click="toggleTheme">
             <svg-icon v-if="settingsStore.isDark" icon-class="sunny" />
             <svg-icon v-if="!settingsStore.isDark" icon-class="moon" />
           </div>
         </el-tooltip>
 
         <el-tooltip content="布局大小" effect="dark" placement="bottom">
-          <SizeSelect id="size-select" class="right-menu-item hover-effect" />
+          <SizeSelect id="size-select" class="inline-flex items-center justify-center h-full min-w-[34px] hover:cursor-pointer" />
         </el-tooltip>
       </template>
-      <div class="avatar-container">
-        <el-dropdown class="right-menu-item hover-effect" trigger="click" @command="handleCommand">
-          <div class="avatar-wrapper">
-            <img :src="userStore.avatar" class="user-avatar">
-            <el-icon><caret-bottom /></el-icon>
+
+      <div class="mr-[20px]">
+        <!-- <el-tooltip content="" effect="dark" placement="bottom"> -->
+        <el-dropdown trigger="click" @command="handleCommand">
+          <div class="h-[50px] flex items-center">
+            <img
+              :src="userStore.avatar" class="size-[40px] rounded-sm"
+            >
+            <el-icon>
+              <caret-bottom />
+            </el-icon>
           </div>
           <template #dropdown>
             <el-dropdown-menu>
@@ -104,6 +109,7 @@ function toggleTheme() {
             </el-dropdown-menu>
           </template>
         </el-dropdown>
+        <!-- </el-tooltip> -->
       </div>
     </div>
   </div>
@@ -114,25 +120,8 @@ function toggleTheme() {
   height: 50px;
   overflow: hidden;
   position: relative;
-  background: var(--navbar-bg);
+  // background: var(--navbar-bg);
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
-
-  .hamburger-container {
-    line-height: 46px;
-    height: 100%;
-    float: left;
-    cursor: pointer;
-    transition: background 0.3s;
-    -webkit-tap-highlight-color: transparent;
-
-    &:hover {
-      background: rgba(0, 0, 0, 0.025);
-    }
-  }
-
-  .breadcrumb-container {
-    float: left;
-  }
 
   .topmenu-container {
     position: absolute;
@@ -145,9 +134,6 @@ function toggleTheme() {
   }
 
   .right-menu {
-    float: right;
-    height: 100%;
-    line-height: 50px;
     display: flex;
 
     &:focus {
@@ -155,11 +141,6 @@ function toggleTheme() {
     }
 
     .right-menu-item {
-      display: inline-block;
-      padding: 0 8px;
-      height: 100%;
-      font-size: 18px;
-      color: var(--navbar-text);
       vertical-align: text-bottom;
 
       &.hover-effect {
@@ -168,43 +149,6 @@ function toggleTheme() {
 
         &:hover {
           background: rgba(0, 0, 0, 0.025);
-        }
-      }
-
-      &.theme-switch-wrapper {
-        display: flex;
-        align-items: center;
-
-        svg {
-          transition: transform 0.3s;
-
-          &:hover {
-            transform: scale(1.15);
-          }
-        }
-      }
-    }
-
-    .avatar-container {
-      margin-right: 40px;
-
-      .avatar-wrapper {
-        margin-top: 5px;
-        position: relative;
-
-        .user-avatar {
-          cursor: pointer;
-          width: 40px;
-          height: 40px;
-          border-radius: 10px;
-        }
-
-        i {
-          cursor: pointer;
-          position: absolute;
-          right: -20px;
-          top: 25px;
-          font-size: 12px;
         }
       }
     }

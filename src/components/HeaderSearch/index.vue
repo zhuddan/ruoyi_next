@@ -134,8 +134,16 @@ watch(searchPool, (list) => {
 </script>
 
 <template>
-  <div :class="{ show }" class="header-search">
-    <svg-icon class-name="search-icon" icon-class="search" @click.stop="click" />
+  <div
+    :class="[
+      { show_select: show },
+      !show ? 'justify-center' : '',
+    ]" class="header-search h-[50px] min-w-[34px] px-2 hover:cursor-pointer inline-flex items-center"
+  >
+    <svg-icon
+      class-name="search-icon"
+      icon-class="search" @click.stop="click"
+    />
     <el-select
       ref="headerSearchSelectRef"
       v-model="search"
@@ -155,14 +163,6 @@ watch(searchPool, (list) => {
 <style lang='scss' scoped>
 .header-search {
   font-size: 0 !important;
-  display: inline-flex !important;
-  align-items: center;
-
-  .search-icon {
-    cursor: pointer;
-    font-size: 18px;
-    vertical-align: middle;
-  }
 
   .header-search-select {
     font-size: 18px;
@@ -185,7 +185,7 @@ watch(searchPool, (list) => {
     }
   }
 
-  &.show {
+  &.show_select {
     .header-search-select {
       width: 210px;
       margin-left: 10px;

@@ -7,7 +7,7 @@ function goto() {
 </script>
 
 <template>
-  <div class="!inline-flex items-center justify-center">
+  <div class="inline-flex items-center justify-center h-full min-w-[34px] hover:cursor-pointer">
     <svg-icon icon-class="question" @click="goto" />
   </div>
 </template>
