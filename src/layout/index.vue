@@ -1,6 +1,6 @@
 <script setup>
 import useAppStore from '@/store/modules/app'
-import useSettingsStoreV2 from '@/store/modules/settings-v2'
+import useSettingsStore from '@/store/modules/settings'
 import { AppMain, Navbar, Settings, TagsView } from './components'
 import Sidebar from './components/Sidebar/index.vue'
 
@@ -8,7 +8,7 @@ const {
   theme,
   tagsView,
   fixedHeader,
-} = toRefs(useSettingsStoreV2())
+} = toRefs(useSettingsStore())
 const { isCollapse, isMobile } = storeToRefs(useAppStore())
 
 const breakpoints = useAppBreakpoints()

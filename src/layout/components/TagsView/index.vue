@@ -1,7 +1,7 @@
 <script setup>
 import $tab from '@/plugins/tab'
 import usePermissionStore from '@/store/modules/permission'
-import useSettingsStoreV2 from '@/store/modules/settings-v2'
+import useSettingsStore from '@/store/modules/settings'
 import useTagsViewStore from '@/store/modules/tags-view'
 import { getNormalPath } from '@/utils/ruoyi'
 import ScrollPane from './ScrollPane.vue'
@@ -18,7 +18,7 @@ const router = useRouter()
 
 const visitedViews = computed(() => useTagsViewStore().visitedViews)
 const routes = computed(() => usePermissionStore().routes)
-const { theme } = storeToRefs(useSettingsStoreV2())
+const { theme } = storeToRefs(useSettingsStore())
 watch(route, () => {
   addTags()
   moveToCurrentTag()

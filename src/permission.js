@@ -6,7 +6,7 @@ import { isHttp, isPathMatch } from '@/utils/validate'
 import { ElMessage } from 'element-plus'
 import NProgress from 'nprogress'
 import router from './router'
-import useSettingsStoreV2 from './store/modules/settings-v2'
+import useSettingsStore from './store/modules/settings'
 import 'nprogress/nprogress.css'
 
 NProgress.configure({ showSpinner: false })
@@ -18,7 +18,7 @@ function isWhiteList(path) {
 }
 
 router.beforeEach((to, from, next) => {
-  const { setTitle } = useSettingsStoreV2()
+  const { setTitle } = useSettingsStore()
   NProgress.start()
   if (getToken()) {
     to.meta.title && setTitle(to.meta.title)

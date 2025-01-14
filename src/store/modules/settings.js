@@ -13,7 +13,7 @@ const {
 
 const LAYOUT_SETTING = 'LAYOUT_SETTING'
 
-const useSettingsStoreV2 = defineStore(
+const useSettingsStore = defineStore(
   'settings',
   () => {
     const isDark = useDark()
@@ -55,4 +55,4 @@ const useSettingsStoreV2 = defineStore(
   },
 )
 
-export default useSettingsStoreV2
+export default useSettingsStore

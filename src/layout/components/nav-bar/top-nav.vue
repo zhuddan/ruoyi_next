@@ -1,7 +1,7 @@
 <script setup>
 import { constantRoutes } from '@/router'
 import usePermissionStore from '@/store/modules/permission'
-import useSettingsStoreV2 from '@/store/modules/settings-v2'
+import useSettingsStore from '@/store/modules/settings'
 import { isHttp } from '@/utils/validate'
 
 // 顶部栏初始数
@@ -11,7 +11,7 @@ const currentIndex = ref(null)
 // 隐藏侧边栏路由
 const hideList = ['/index', '/user/profile']
 
-const { settings } = toRefs(useSettingsStoreV2())
+const { settings } = toRefs(useSettingsStore())
 const permissionStore = usePermissionStore()
 const route = useRoute()
 const router = useRouter()

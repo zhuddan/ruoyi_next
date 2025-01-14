@@ -1,6 +1,6 @@
 <script setup>
 import useAppStore from '@/store/modules/app'
-import useSettingsStoreV2 from '@/store/modules/settings-v2'
+import useSettingsStore from '@/store/modules/settings'
 import useUserStore from '@/store/modules/user'
 import { ElMessageBox } from 'element-plus'
 import AppBreadcrumb from './app-breadcrumb.vue'
@@ -19,7 +19,7 @@ const {
   settings,
   topNav,
   toggleTheme,
-} = useSettingsStoreV2()
+} = useSettingsStore()
 
 function handleCommand(command) {
   switch (command) {

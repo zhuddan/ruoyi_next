@@ -1,10 +1,10 @@
 <script setup>
-import useSettingsStoreV2 from '@/store/modules/settings-v2'
+import useSettingsStore from '@/store/modules/settings'
 import { handleThemeStyle } from '@/utils/theme'
 import { ElConfigProvider } from 'element-plus'
 import useAppStore from './store/modules/app'
 
-const { settings } = useSettingsStoreV2()
+const { settings } = useSettingsStore()
 const { size } = storeToRefs(useAppStore())
 onMounted(() => {
   nextTick(() => {

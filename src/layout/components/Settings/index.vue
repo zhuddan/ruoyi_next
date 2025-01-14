@@ -1,10 +1,10 @@
 <script setup>
 import usePermissionStore from '@/store/modules/permission'
-import useSettingsStoreV2 from '@/store/modules/settings-v2'
+import useSettingsStore from '@/store/modules/settings'
 import { handleThemeStyle } from '@/utils/theme'
 
-const { resetSetting } = useSettingsStoreV2()
-const { settings } = storeToRefs(useSettingsStoreV2())
+const { resetSetting } = useSettingsStore()
+const { settings } = storeToRefs(useSettingsStore())
 const permissionStore = usePermissionStore()
 const showSettings = ref(false)
 const predefineColors = ref(['#409EFF', '#ff4500', '#ff8c00', '#ffd700', '#90ee90', '#00ced1', '#1e90ff', '#c71585'])

@@ -2,14 +2,14 @@
 import variables from '@/assets/styles/variables.module.scss'
 import useAppStore from '@/store/modules/app'
 import usePermissionStore from '@/store/modules/permission'
-import useSettingsStoreV2 from '@/store/modules/settings-v2'
+import useSettingsStore from '@/store/modules/settings'
 import AppLogo from './app-logo.vue'
 import SidebarItem from './sidebar-item.vue'
 
 const route = useRoute()
 const {
   settings,
-} = storeToRefs(useSettingsStoreV2())
+} = storeToRefs(useSettingsStore())
 
 const permissionStore = usePermissionStore()
 
