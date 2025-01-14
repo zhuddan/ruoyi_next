@@ -53,7 +53,6 @@ function setLayout() {
 <template>
   <div class="navbar flex bg-[var(--el-bg-color) text-[var(--el-text-color-regular)]">
     <ToggleBtn />
-    topNav,
     <AppBreadcrumb v-if="!settings.topNav" id="breadcrumb-container" class="breadcrumb-container" />
 
     <TopNav v-if="settings.topNav" id="topmenu-container" class="topmenu-container" />
