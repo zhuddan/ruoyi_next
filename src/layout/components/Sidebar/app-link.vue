@@ -1,4 +1,5 @@
 <script setup>
+import { isExternal } from '@/utils/validate'
 import { computed } from 'vue'
 import { RouterLink } from 'vue-router'
 
@@ -13,7 +14,7 @@ const props = defineProps({
 })
 
 const isExternalLink = computed(() => {
-  return typeof props.to === 'string' && props.to.startsWith('http')
+  return isExternal(props.to)
 })
 </script>
 

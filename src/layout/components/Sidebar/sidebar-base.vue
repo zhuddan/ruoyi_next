@@ -3,7 +3,7 @@ import variables from '@/assets/styles/variables.module.scss'
 import useAppStoreV2 from '@/store/modules/app-v2'
 import usePermissionStore from '@/store/modules/permission'
 import useSettingsStore from '@/store/modules/settings'
-import Logo from './Logo.vue'
+import AppLogo from './app-logo.vue'
 import SidebarItem from './sidebar-item.vue'
 
 const route = useRoute()
@@ -53,7 +53,7 @@ const activeMenu = computed(() => {
     class="sidebar-container  h-[100vh] flex-shrink-0 transition-[width] sticky top-0"
     style="border-right: 1px solid var(--el-menu-border-color);"
   >
-    <Logo v-if="showLogo" :collapse="isCollapse" />
+    <AppLogo v-if="showLogo" :collapse="isCollapse" />
     <el-scrollbar
       wrap-class="scrollbar-wrapper"
       class="h-[calc(100vh_-_50px)]"
