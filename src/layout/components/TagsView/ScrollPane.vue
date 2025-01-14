@@ -27,7 +27,6 @@ function handleScroll(e) {
 function emitScroll() {
   emits('scroll')
 }
-
 const tagsViewStore = useTagsViewStore()
 const visitedViews = computed(() => tagsViewStore.visitedViews)
 
@@ -52,9 +51,12 @@ function moveToTarget(currentTag) {
     $scrollWrapper.scrollLeft = $scrollWrapper.scrollWidth - $containerWidth
   }
   else {
+    /** @type {any} */
     const tagListDom = document.getElementsByClassName('tags-view-item')
     const currentIndex = visitedViews.value.findIndex(item => item === currentTag)
+    /** @type {any} */
     let prevTag = null
+    /** @type {any} */
     let nextTag = null
     for (const k in tagListDom) {
       if (k !== 'length' && Object.hasOwnProperty.call(tagListDom, k)) {

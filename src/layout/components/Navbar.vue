@@ -1,5 +1,6 @@
 <script setup>
 import useAppStore from '@/store/modules/app'
+import useAppStoreV2 from '@/store/modules/app-v2'
 import useSettingsStore from '@/store/modules/settings'
 import useUserStore from '@/store/modules/user'
 import { ElMessageBox } from 'element-plus'
@@ -49,7 +50,12 @@ function toggleTheme() {
 
 <template>
   <div class="navbar">
-    <Hamburger id="hamburger-container" :is-active="appStore.sidebar.opened" class="hamburger-container" @toggle-click="toggleSideBar" />
+    <Hamburger
+      id="hamburger-container"
+      class="hamburger-container"
+    />
+    <!-- :is-active="appStore.sidebar.opened" -->
+    <!-- @toggle-click="toggleSideBar" -->
     <Breadcrumb v-if="!settingsStore.topNav" id="breadcrumb-container" class="breadcrumb-container" />
     <TopNav v-if="settingsStore.topNav" id="topmenu-container" class="topmenu-container" />
 

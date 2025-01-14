@@ -44,6 +44,7 @@ function goTarget(url) {
           <el-button
             type="primary"
             icon="Cloudy"
+            class="sticky z-10 top-30"
             plain
             @click="goTarget('https://gitee.com/y_project/RuoYi-Vue')"
           >

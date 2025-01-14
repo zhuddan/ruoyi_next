@@ -19,7 +19,7 @@ const props = defineProps({
   },
 })
 
-const onlyOneChild = ref({})
+const onlyOneChild = ref(/** @type {any} */({}))
 
 function hasOneShowingChild(children = [], parent) {
   if (!children) {
@@ -73,36 +73,42 @@ function hasTitle(title) {
 
 <template>
   <template v-if="!item.hidden">
-    <template v-if="hasOneShowingChild(item.children, item) && (!onlyOneChild.children || onlyOneChild.noShowingChildren) && !item.alwaysShow">
-      <AppLink v-if="onlyOneChild.meta" :to="resolvePath(onlyOneChild.path, onlyOneChild.query)">
-        <el-menu-item :index="resolvePath(onlyOneChild.path)" :class="{ 'submenu-title-noDropdown': !isNest }">
-          <el-icon class="icon-box" size="20" name="lo">
-            <Edit />
+    <template
+      v-if="hasOneShowingChild(item.children, item)
+        && (!onlyOneChild.children || onlyOneChild.noShowingChildren)
+        && !item.alwaysShow"
+    >
+      <template
+        v-if="onlyOneChild.meta"
+      >
+        <el-menu-item
+          :index="resolvePath(onlyOneChild.path)"
+        >
+          <el-icon class="icon-box" size="15">
+            <svg-icon :icon-class="onlyOneChild.meta.icon" />
           </el-icon>
           <template #title>
             <span :title="hasTitle(onlyOneChild.meta.title)">{{ onlyOneChild.meta.title }}</span>
           </template>
         </el-menu-item>
-      </AppLink>
+      </template>
     </template>
 
-    <el-sub-menu v-else ref="subMenu" :index="resolvePath(item.path)" teleported>
+    <el-sub-menu v-else :index="resolvePath(item.path)" teleported>
       <template v-if="item.meta" #title>
-        <el-icon class="icon-box" size="20" name="lo">
-          <Edit />
+        <el-icon class="icon-box" size="15">
+          <svg-icon :icon-class="item.meta.icon" />
         </el-icon>
         <span :title="hasTitle(item.meta.title)">{{ item.meta.title }}</span>
       </template>
-      <el-menu-item-group>
-        <sidebar-item
-          v-for="(child, index) in item.children"
-          :key="child.path + index"
-          :is-nest="true"
-          :item="child"
-          :base-path="resolvePath(child.path)"
-          class="nest-menu"
-        />
-      </el-menu-item-group>
+      <!-- <el-menu-item-group> -->
+      <sidebar-item
+        v-for="(child, index) in item.children"
+        :key="child.path + index"
+        :item="child"
+        :base-path="resolvePath(child.path)"
+      />
+      <!-- </el-menu-item-group> -->
     </el-sub-menu>
   </template>
 </template>

@@ -1,9 +1,24 @@
 import Cookies from 'js-cookie'
 
+/**
+ * @typedef {object} Sidebar
+ * @property {boolean} opened
+ * @property {boolean} withoutAnimation
+ * @property {boolean} hide
+ */
+
+/**
+ * @typedef {object} State
+ * @property {Sidebar} sidebar
+ * @property {string} device
+ * @property {string} size
+ * @property {boolean} isCollapse
+ * @property {boolean} drawer
+ */
 const useAppStore = defineStore(
   'app',
   {
-    state: () => ({
+    state: () => /** @type {State} */({
       sidebar: {
         opened: Cookies.get('sidebarStatus') ? !!+Cookies.get('sidebarStatus') : true,
         withoutAnimation: false,
@@ -11,6 +26,8 @@ const useAppStore = defineStore(
       },
       device: 'desktop',
       size: Cookies.get('size') || 'default',
+      isCollapse: false,
+      drawer: false,
     }),
     actions: {
       toggleSideBar(withoutAnimation) {

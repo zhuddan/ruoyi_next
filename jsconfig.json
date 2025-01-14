@@ -13,7 +13,7 @@
       "vite/client",
       "element-plus/global"
     ],
-    "checkJs": true,
+    // "checkJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true
   },

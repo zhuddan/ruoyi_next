@@ -1,20 +1,20 @@
 <script setup>
 import useAppStore from '@/store/modules/app'
+import useAppStoreV2 from '@/store/modules/app-v2'
 
-const appStore = useAppStore()
-const size = computed(() => appStore.size)
+const { size } = toRefs(useAppStoreV2())
 const sizeOptions = ref([
   { label: '较大', value: 'large' },
   { label: '默认', value: 'default' },
   { label: '稍小', value: 'small' },
 ])
 
-function handleSetSize(size) {
-  $modal.loading('正在设置布局大小，请稍候...')
-  appStore.setSize(size)
-  setTimeout(() => {
-    window.location.reload()
-  }, 1000)
+function handleSetSize(_size) {
+  // $modal.loading('正在设置布局大小，请稍候...')
+  size.value = _size
+  // setTimeout(() => {
+  //   window.location.reload()
+  // }, 1000)
 }
 </script>
 

@@ -1,6 +1,6 @@
 <script setup>
 import { constantRoutes } from '@/router'
-import useAppStore from '@/store/modules/app'
+// import useAppStore from '@/store/modules/app'
 import usePermissionStore from '@/store/modules/permission'
 import useSettingsStore from '@/store/modules/settings'
 import { isHttp } from '@/utils/validate'
@@ -12,7 +12,7 @@ const currentIndex = ref(null)
 // 隐藏侧边栏路由
 const hideList = ['/index', '/user/profile']
 
-const appStore = useAppStore()
+// const appStore = useAppStore()
 const settingsStore = useSettingsStore()
 const permissionStore = usePermissionStore()
 const route = useRoute()
@@ -70,12 +70,12 @@ const activeMenu = computed(() => {
     const tmpPath = path.substring(1, path.length)
     if (!route.meta.link) {
       activePath = `/${tmpPath.substring(0, tmpPath.indexOf('/'))}`
-      appStore.toggleSideBarHide(false)
+      // appStore.toggleSideBarHide(false)
     }
   }
   else if (!route.children) {
     activePath = path
-    appStore.toggleSideBarHide(true)
+    // appStore.toggleSideBarHide(true)
   }
   activeRoutes(activePath)
   return activePath
@@ -103,12 +103,12 @@ function handleSelect(key, keyPath) {
     else {
       router.push({ path: key })
     }
-    appStore.toggleSideBarHide(true)
+    // appStore.toggleSideBarHide(true)
   }
   else {
     // 显示左侧联动菜单
     activeRoutes(key)
-    appStore.toggleSideBarHide(false)
+    // appStore.toggleSideBarHide(false)
   }
 }
 
@@ -125,7 +125,7 @@ function activeRoutes(key) {
     permissionStore.setSidebarRouters(routes)
   }
   else {
-    appStore.toggleSideBarHide(true)
+    // appStore.toggleSideBarHide(true)
   }
   return routes
 }

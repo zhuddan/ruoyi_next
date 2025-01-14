@@ -1,4 +1,6 @@
 <script setup>
+import useAppStoreV2 from '@/store/modules/app-v2'
+
 defineProps({
   isActive: {
     type: Boolean,
@@ -6,16 +8,16 @@ defineProps({
   },
 })
 
-const emit = defineEmits(['toggleClick'])
-function toggleClick() {
-  emit('toggleClick')
-}
+const { toggle } = useAppStoreV2()
+const {
+  isOpenSideBar,
+} = storeToRefs(useAppStoreV2())
 </script>
 
 <template>
-  <div style="padding: 0 15px;" @click="toggleClick">
+  <div style="padding: 0 15px;" @click="toggle()">
     <svg
-      :class="{ 'is-active': isActive }"
+      :class="{ 'is-active': isOpenSideBar }"
       class="hamburger"
       viewBox="0 0 1024 1024"
       xmlns="http://www.w3.org/2000/svg"

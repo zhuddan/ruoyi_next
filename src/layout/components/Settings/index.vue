@@ -1,10 +1,10 @@
 <script setup>
-import useAppStore from '@/store/modules/app'
+// import useAppStore from '@/store/modules/app'
 import usePermissionStore from '@/store/modules/permission'
 import useSettingsStore from '@/store/modules/settings'
 import { handleThemeStyle } from '@/utils/theme'
 
-const appStore = useAppStore()
+// const appStore = useAppStore()
 const settingsStore = useSettingsStore()
 const permissionStore = usePermissionStore()
 const showSettings = ref(false)
@@ -16,7 +16,7 @@ const predefineColors = ref(['#409EFF', '#ff4500', '#ff8c00', '#ffd700', '#90ee9
 /** 是否需要topnav */
 function topNavChange(val) {
   if (!val) {
-    appStore.toggleSideBarHide(false)
+    // appStore.toggleSideBarHide(false)
     permissionStore.setSidebarRouters(permissionStore.defaultRoutes)
   }
 }

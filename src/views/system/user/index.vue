@@ -1,6 +1,7 @@
 <script setup>
 import { addUser, changeUserStatus, delUser, deptTreeSelect, getUser, listUser, resetUserPwd, updateUser } from '@/api/system/user'
 import useAppStore from '@/store/modules/app'
+import useAppStoreV2 from '@/store/modules/app-v2'
 import { getToken } from '@/utils/auth'
 import { download } from '@/utils/request'
 import { addDateRange } from '@/utils/ruoyi'
@@ -15,7 +16,7 @@ defineOptions({
  */
 const userRef = useTemplateRef('userRef')
 const router = useRouter()
-const appStore = useAppStore()
+const appStore = useAppStoreV2()
 const { sys_normal_disable, sys_user_sex } = useDict('sys_normal_disable', 'sys_user_sex')
 
 const userList = ref([])
@@ -344,7 +345,7 @@ getList()
 <template>
   <div class="app-container">
     <el-row :gutter="20">
-      <Splitpanes :horizontal="appStore.device === 'mobile'" class="default-theme">
+      <Splitpanes :horizontal="appStore.isMobile" class="default-theme">
         <!-- 部门数据 -->
         <Pane size="16">
           <el-col>

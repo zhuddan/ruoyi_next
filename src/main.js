@@ -18,7 +18,6 @@ import store from './store'
 import 'element-plus/dist/index.css'
 import 'element-plus/theme-chalk/dark/css-vars.css'
 import './assets/styles/index.scss' // global css
-import './style.css'
 // svg图标
 import 'virtual:svg-icons-register'
 import './permission'
@@ -37,7 +36,7 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 
 app.use(ElementPlus, {
   locale,
-  size: Cookies.get('size') || 'default',
+  // size: /** @type {"small" | "default" | "large"} */ (Cookies.get('size')) || 'default',
 })
 
 app.mount('#app')

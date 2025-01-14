@@ -13,6 +13,7 @@ export default antfu({
     'vue/eqeqeq': 'warn',
     'no-unused-vars': 'warn',
     'unused-imports/no-unused-vars': 'warn',
+    'vue/no-undef-properties': 'error',
     'prefer-spread': 'warn',
     'no-console': 'warn',
   },
