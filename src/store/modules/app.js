@@ -2,7 +2,7 @@ import { useLocalStorage } from '@vueuse/core'
 
 const ELEMENT_PLUS_SIZE = 'ELEMENT_PLUS_SIZE'
 const useAppStore = defineStore(
-  'appV2',
+  'app',
   () => {
     const isCollapse = ref(false)
     const drawer = ref(false)
