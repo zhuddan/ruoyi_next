@@ -9,7 +9,6 @@ defineProps({
 })
 
 const title = import.meta.env.VITE_APP_TITLE
-
 const { menuBg, menuText } = useMenuStyle()
 </script>
 
