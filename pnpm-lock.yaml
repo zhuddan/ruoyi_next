@@ -18,8 +18,8 @@ importers:
         specifier: 10.11.0
         version: 10.11.0(vue@3.5.13(typescript@5.7.3))
       axios:
-        specifier: 0.28.1
-        version: 0.28.1
+        specifier: ^1.7.9
+        version: 1.7.9
       clipboard:
         specifier: 2.0.11
         version: 2.0.11
@@ -39,17 +39,17 @@ importers:
         specifier: 1.14.11
         version: 1.14.11
       js-cookie:
-        specifier: 3.0.5
+        specifier: ^3.0.5
         version: 3.0.5
       jsencrypt:
-        specifier: 3.3.2
+        specifier: ^3.3.2
         version: 3.3.2
       nprogress:
-        specifier: 0.2.0
+        specifier: ^0.2.0
         version: 0.2.0
       pinia:
-        specifier: 2.1.7
-        version: 2.1.7(typescript@5.7.3)(vue@3.5.13(typescript@5.7.3))
+        specifier: ^2.3.0
+        version: 2.3.0(typescript@5.7.3)(vue@3.5.13(typescript@5.7.3))
       splitpanes:
         specifier: 3.1.5
         version: 3.1.5
@@ -60,15 +60,18 @@ importers:
         specifier: 1.1.1
         version: 1.1.1
       vue-router:
-        specifier: 4.4.0
-        version: 4.4.0(vue@3.5.13(typescript@5.7.3))
+        specifier: ^4.5.0
+        version: 4.5.0(vue@3.5.13(typescript@5.7.3))
       vuedraggable:
-        specifier: 4.1.0
-        version: 4.1.0(vue@3.5.13(typescript@5.7.3))
+        specifier: ^2.24.3
+        version: 2.24.3
     devDependencies:
       '@antfu/eslint-config':
         specifier: ^3.14.0
         version: 3.14.0(@typescript-eslint/utils@8.19.1(eslint@9.18.0(jiti@1.21.7))(typescript@5.7.3))(@vue/compiler-sfc@3.5.13)(eslint-plugin-format@1.0.1(eslint@9.18.0(jiti@1.21.7)))(eslint@9.18.0(jiti@1.21.7))(typescript@5.7.3)
+      '@types/js-cookie':
+        specifier: ^3.0.6
+        version: 3.0.6
       '@vitejs/plugin-vue':
         specifier: 5.0.5
         version: 5.0.5(vite@5.3.2(@types/node@22.10.5)(sass@1.77.5))(vue@3.5.13(typescript@5.7.3))
@@ -611,6 +614,9 @@ packages:
   '@types/estree@1.0.6':
     resolution: {integrity: sha512-AYnb1nQyY49te+VRAVgmzfcgjYS91mY5P0TKUDCLEM+gNnA+3T6rWITXRLYCpahpqSQbN5cE+gHpnPyXjHWxcw==}
 
+  '@types/js-cookie@3.0.6':
+    resolution: {integrity: sha512-wkw9yd1kEXOPnvEeEV1Go1MmxtBJL0RR79aOTAApecWFVu7w0NNXNqhcWgvw2YgZDYadliXkl14pa3WXw5jlCQ==}
+
   '@types/json-schema@7.0.15':
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
 
@@ -874,8 +880,8 @@ packages:
     resolution: {integrity: sha512-wvUjBtSGN7+7SjNpq/9M2Tg350UZD3q62IFZLbRAR1bSMlCo1ZaeW+BJ+D090e4hIIZLBcTDWe4Mh4jvUDajzQ==}
     engines: {node: '>= 0.4'}
 
-  axios@0.28.1:
-    resolution: {integrity: sha512-iUcGA5a7p0mVb4Gm/sy+FSECNkPFT4y7wt6OM/CDpO/OnNCvSs3PoMG8ibrC9jRoGYU0gUK5pXVC4NPXq6lHRQ==}
+  axios@1.7.9:
+    resolution: {integrity: sha512-LhLcE7Hbiryz8oMDdDptSrWowmB4Bl6RCt6sIJKpRB4XtVf0iEgewX3au/pJqm+Py1kCASkb/FFKjxQaLtxJvw==}
 
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
@@ -2491,15 +2497,12 @@ packages:
     resolution: {integrity: sha512-udgsAY+fTnvv7kI7aaxbqwWNb0AHiB0qBO89PZKPkoTmGOgdbrHDKD+0B2X4uTfJ/FT1R09r9gTsjUjNJotuog==}
     engines: {node: '>=0.10.0'}
 
-  pinia@2.1.7:
-    resolution: {integrity: sha512-+C2AHFtcFqjPih0zpYuvof37SFxMQ7OEG2zV9jRI12i9BOy3YQVAHwdKtyyc8pDcDyIc33WCIsZaCFWU7WWxGQ==}
+  pinia@2.3.0:
+    resolution: {integrity: sha512-ohZj3jla0LL0OH5PlLTDMzqKiVw2XARmC1XYLdLWIPBMdhDW/123ZWr4zVAhtJm+aoSkFa13pYXskAvAscIkhQ==}
     peerDependencies:
-      '@vue/composition-api': ^1.4.0
       typescript: '>=4.4.4'
-      vue: ^2.6.14 || ^3.3.0
+      vue: ^2.7.0 || ^3.5.11
     peerDependenciesMeta:
-      '@vue/composition-api':
-        optional: true
       typescript:
         optional: true
 
@@ -2824,8 +2827,8 @@ packages:
     resolution: {integrity: sha512-FtyOnWN/wCHTVXOMwvSv26d+ko5vWlIDD6zoUJ7LW8vh+ZBC8QdljveRP+crNrtBwioEUWy/4dMtbBjA4ioNlg==}
     engines: {node: '>=0.10.0'}
 
-  sortablejs@1.14.0:
-    resolution: {integrity: sha512-pBXvQCs5/33fdN1/39pPL0NZF20LeRbLQ5jtnheIPN9JQAaufGjKdWduZn4U7wCtVuzKhmRkI0DFYHYRbB2H1w==}
+  sortablejs@1.10.2:
+    resolution: {integrity: sha512-YkPGufevysvfwn5rfdlGyrGjt7/CRHwvRPogD/lC+TnvcN29jDpCifKP+rBqf+LRldfXSTh+0CGLcSg0VIxq3A==}
 
   source-map-js@1.2.1:
     resolution: {integrity: sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==}
@@ -3224,8 +3227,8 @@ packages:
     peerDependencies:
       eslint: '>=6.0.0'
 
-  vue-router@4.4.0:
-    resolution: {integrity: sha512-HB+t2p611aIZraV2aPSRNXf0Z/oLZFrlygJm+sZbdJaW6lcFqEDQwnzUBXn+DApw+/QzDU/I9TeWx9izEjTmsA==}
+  vue-router@4.5.0:
+    resolution: {integrity: sha512-HDuk+PuH5monfNuY+ct49mNmkCRK4xJAV9Ts4z9UFc4rzdDnxQLyCMGGc8pKhZhHTVzfanpNwB/lwqevcBwI4w==}
     peerDependencies:
       vue: ^3.2.0
 
@@ -3237,10 +3240,8 @@ packages:
       typescript:
         optional: true
 
-  vuedraggable@4.1.0:
-    resolution: {integrity: sha512-FU5HCWBmsf20GpP3eudURW3WdWTKIbEIQxh9/8GE806hydR9qZqRRxRE3RjqX7PkuLuMQG/A7n3cfj9rCEchww==}
-    peerDependencies:
-      vue: ^3.0.1
+  vuedraggable@2.24.3:
+    resolution: {integrity: sha512-6/HDXi92GzB+Hcs9fC6PAAozK1RLt1ewPTLjK0anTYguXLAeySDmcnqE8IC0xa7shvSzRjQXq3/+dsZ7ETGF3g==}
 
   webpack-virtual-modules@0.6.2:
     resolution: {integrity: sha512-66/V2i5hQanC51vBQKPH4aI8NMAcBW59FVBs+rC7eGHupMyfn34q7rZIE+ETlJ+XTevqfUhVVBgSUNSW2flEUQ==}
@@ -3722,6 +3723,8 @@ snapshots:
 
   '@types/estree@1.0.6': {}
 
+  '@types/js-cookie@3.0.6': {}
+
   '@types/json-schema@7.0.15': {}
 
   '@types/lodash-es@4.17.12':
@@ -4028,7 +4031,7 @@ snapshots:
     dependencies:
       possible-typed-array-names: 1.0.0
 
-  axios@0.28.1:
+  axios@1.7.9:
     dependencies:
       follow-redirects: 1.15.9
       form-data: 4.0.1
@@ -6028,13 +6031,15 @@ snapshots:
 
   pify@2.3.0: {}
 
-  pinia@2.1.7(typescript@5.7.3)(vue@3.5.13(typescript@5.7.3)):
+  pinia@2.3.0(typescript@5.7.3)(vue@3.5.13(typescript@5.7.3)):
     dependencies:
       '@vue/devtools-api': 6.6.4
       vue: 3.5.13(typescript@5.7.3)
       vue-demi: 0.14.10(vue@3.5.13(typescript@5.7.3))
     optionalDependencies:
       typescript: 5.7.3
+    transitivePeerDependencies:
+      - '@vue/composition-api'
 
   pirates@4.0.6: {}
 
@@ -6418,7 +6423,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  sortablejs@1.14.0: {}
+  sortablejs@1.10.2: {}
 
   source-map-js@1.2.1: {}
 
@@ -6911,7 +6916,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  vue-router@4.4.0(vue@3.5.13(typescript@5.7.3)):
+  vue-router@4.5.0(vue@3.5.13(typescript@5.7.3)):
     dependencies:
       '@vue/devtools-api': 6.6.4
       vue: 3.5.13(typescript@5.7.3)
@@ -6926,10 +6931,9 @@ snapshots:
     optionalDependencies:
       typescript: 5.7.3
 
-  vuedraggable@4.1.0(vue@3.5.13(typescript@5.7.3)):
+  vuedraggable@2.24.3:
     dependencies:
-      sortablejs: 1.14.0
-      vue: 3.5.13(typescript@5.7.3)
+      sortablejs: 1.10.2
 
   webpack-virtual-modules@0.6.2: {}
 

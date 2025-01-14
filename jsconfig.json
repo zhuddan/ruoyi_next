@@ -1,14 +1,27 @@
 {
   "compilerOptions": {
     "baseUrl": "./",
-    "module": "commonjs",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "strict": true,
     "paths": {
       "@/*": ["src/*"]
     },
     "target": "ES6",
     "allowSyntheticDefaultImports": true,
-    "types": ["element-plus/global"]
+    "types": [
+      "vite/client",
+      "element-plus/global"
+    ],
+    "checkJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true
   },
-  "include": ["src/**/*"],
+  "include": [
+    "src/**/*.js",
+    "src/**/*.d.ts",
+    "src/**/*.jsx",
+    "src/**/*.vue"
+  ],
   "exclude": ["node_modules", "dist"]
 }
