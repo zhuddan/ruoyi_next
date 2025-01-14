@@ -21,7 +21,7 @@ const useSettingsStore = defineStore(
 
     const initial_settings = {
       title: '',
-      theme: '#409EFF',
+      theme: '#00ced1',
       sideTheme,
       showSettings,
       topNav,
@@ -49,10 +49,7 @@ const useSettingsStore = defineStore(
     return {
       setTitle,
       settings,
-      toggleTheme() {
-        toggleTheme()
-        console.log('x')
-      },
+      toggleTheme,
       resetSetting,
     }
   },

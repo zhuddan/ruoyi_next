@@ -67,7 +67,10 @@ defineExpose({
     <div class="drawer-item">
       <span>主题颜色</span>
       <span class="comp-style">
-        <el-color-picker v-model="settings.theme" :predefine="predefineColors" @change="themeChange" />
+        <el-color-picker
+          v-model="settings.theme"
+          :predefine="predefineColors" @change="themeChange"
+        />
       </span>
     </div>
     <el-divider />
