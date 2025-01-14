@@ -226,7 +226,7 @@ function handleScroll() {
 <template>
   <div
     id="tags-view-container" ref="tagRef"
-    class="tags-view-container bg-[var(--el-bg-color) text-[var(--el-text-color-regular)]"
+    class="tags-view-container bg-[var(--el-bg-color)] text-[var(--el-text-color-regular)]"
   >
     <ScrollPane ref="scrollPaneRef" class="tags-view-wrapper" @scroll="handleScroll">
       <router-link

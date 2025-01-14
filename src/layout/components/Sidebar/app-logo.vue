@@ -13,7 +13,7 @@ const title = import.meta.env.VITE_APP_TITLE
 
 <template>
   <div
-    class="sidebar-logo-container bg-[var(--el-bg-color) text-[var(--el-text-color-regular)]"
+    class="sidebar-logo-container bg-[var(--el-bg-color)] text-[var(--el-text-color-regular)"
     :class="{
       'sidebar-logo-container_collapse': collapse,
     }"

@@ -49,7 +49,10 @@ const useSettingsStore = defineStore(
     return {
       setTitle,
       settings,
-      toggleTheme,
+      toggleTheme() {
+        toggleTheme()
+        console.log('x')
+      },
       resetSetting,
     }
   },

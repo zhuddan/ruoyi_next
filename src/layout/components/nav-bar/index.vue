@@ -17,8 +17,10 @@ const userStore = useUserStore()
 const { isMobile } = storeToRefs(useAppStore())
 const {
   settings,
-  toggleTheme,
 } = storeToRefs(useSettingsStore())
+const {
+  toggleTheme,
+} = useSettingsStore()
 
 function handleCommand(command) {
   switch (command) {
@@ -51,7 +53,7 @@ function setLayout() {
 </script>
 
 <template>
-  <div class="navbar flex bg-[var(--el-bg-color) text-[var(--el-text-color-regular)]">
+  <div class="navbar flex bg-[var(--el-bg-color)] text-[var(--el-text-color-regular)">
     <ToggleBtn />
     <AppBreadcrumb v-if="!settings.topNav" id="breadcrumb-container" class="breadcrumb-container" />
 
@@ -74,7 +76,7 @@ function setLayout() {
         <ScreenfullBtn />
 
         <el-tooltip content="主题模式" effect="dark" placement="bottom">
-          <div class="inline-flex items-center justify-center h-full min-w-[34px] hover:cursor-pointer" @click="toggleTheme">
+          <div class="inline-flex items-center justify-center h-full min-w-[34px] hover:cursor-pointer" @click.stop="toggleTheme">
             <svg-icon v-if="settings.isDark" icon-class="sunny" />
             <svg-icon v-if="!settings.isDark" icon-class="moon" />
           </div>
