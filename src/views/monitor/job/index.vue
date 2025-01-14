@@ -352,7 +352,7 @@ getList()
           />
         </template>
       </el-table-column>
-      <el-table-column label="操作" align="center" width="200" class-name="small-padding fixed-width">
+      <el-table-column label="操作" align="center" width="200" fixed="right">
         <template #default="scope">
           <el-tooltip content="修改" placement="top">
             <el-button v-hasPermi="['monitor:job:edit']" link type="primary" icon="Edit" @click="handleUpdate(scope.row)" />
