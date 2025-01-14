@@ -17,7 +17,10 @@ const useSettingsStore = defineStore(
   'settings',
   () => {
     const isDark = useDark()
-    const toggleTheme = useToggle(isDark)
+    const __toggleTheme = useToggle(isDark)
+    function toggleTheme() {
+      __toggleTheme()
+    }
 
     const initial_settings = {
       title: '',
