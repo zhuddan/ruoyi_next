@@ -6,7 +6,7 @@ const useAppStoreV2 = defineStore(
   () => {
     const isCollapse = ref(false)
     const drawer = ref(false)
-    const breakpoints = useBreakpoints(breakpointsTailwind)
+    const breakpoints = useAppBreakpoints()
     const isMobile = breakpoints.smaller('md')
     /** @type {import('@vueuse/core').RemovableRef<ComponentSize>} */
     const size = useLocalStorage(

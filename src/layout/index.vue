@@ -1,18 +1,19 @@
 <script setup>
 import useAppStore from '@/store/modules/app'
+import useAppStoreV2 from '@/store/modules/app-v2'
 import useSettingsStore from '@/store/modules/settings'
-import { useWindowSize } from '@vueuse/core'
 
+import { useWindowSize } from '@vueuse/core'
 import { AppMain, Navbar, Settings, TagsView } from './components'
 import Sidebar from './components/Sidebar/index.vue'
 
 const settingsStore = useSettingsStore()
 const theme = computed(() => settingsStore.theme)
-// const sideTheme = computed(() => settingsStore.sideTheme)
 const sidebar = computed(() => useAppStore().sidebar)
 const device = computed(() => useAppStore().device)
 const needTagsView = computed(() => settingsStore.tagsView)
 const fixedHeader = computed(() => settingsStore.fixedHeader)
+const { isCollapse, isMobile } = storeToRefs(useAppStoreV2())
 
 const classObj = computed(() => ({
   hideSidebar: !sidebar.value.opened,
@@ -22,27 +23,23 @@ const classObj = computed(() => ({
 }))
 
 const { width, height } = useWindowSize()
-const WIDTH = 992 // refer to Bootstrap's responsive design
 
-// watch(() => device.value, () => {
-//   if (device.value === 'mobile' && sidebar.value.opened) {
-//     useAppStore().closeSideBar({ withoutAnimation: false })
-//   }
-// })
+const breakpoints = useAppBreakpoints()
 
-// watchEffect(() => {
-//   if (width.value - 1 < WIDTH) {
-//     useAppStore().toggleDevice('mobile')
-//     useAppStore().closeSideBar({ withoutAnimation: true })
-//   }
-//   else {
-//     useAppStore().toggleDevice('desktop')
-//   }
-// })
+const smaller_lg = breakpoints.smaller('lg')
+const greater_lg = breakpoints.greater('lg')
 
-// function handleClickOutside() {
-//   useAppStore().closeSideBar({ withoutAnimation: false })
-// }
+watchEffect(() => {
+  if (smaller_lg.value && !isMobile.value && !isCollapse.value) {
+    isCollapse.value = true
+  }
+})
+
+watchEffect(() => {
+  if (greater_lg.value && !isMobile.value && isCollapse.value) {
+    isCollapse.value = false
+  }
+})
 
 const settingRef = ref(null)
 function setLayout() {
@@ -61,7 +58,7 @@ function setLayout() {
     <Sidebar v-if="!sidebar.hide" />
 
     <div
-      :class="{ hasTagsView: needTagsView, sidebarHide: sidebar.hide }" class="main-container flex-1 "
+      :class="{ hasTagsView: needTagsView, sidebarHide: sidebar.hide }" class="main-container flex-1"
     >
       <div :class="{ 'fixed-header': fixedHeader }">
         <Navbar @set-layout="setLayout" />
