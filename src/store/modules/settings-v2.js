@@ -1,5 +1,4 @@
 import defaultSettings from '@/settings'
-import { useDynamicTitle } from '@/utils/dynamicTitle'
 import { useDark, useLocalStorage, useToggle } from '@vueuse/core'
 
 const {
