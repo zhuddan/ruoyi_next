@@ -1,7 +1,7 @@
 <script setup>
 import { getNormalPath } from '@/utils/ruoyi'
 import { isExternal } from '@/utils/validate'
-import AppLink from './Link.vue'
+import LinkItem from './menu-link-item.vue'
 
 const props = defineProps({
   // route object
@@ -81,8 +81,9 @@ function hasTitle(title) {
       <template
         v-if="onlyOneChild.meta"
       >
-        <el-menu-item
+        <LinkItem
           :index="resolvePath(onlyOneChild.path)"
+          :to="resolvePath(onlyOneChild.path)"
         >
           <el-icon class="icon-box" size="15">
             <svg-icon :icon-class="onlyOneChild.meta.icon" />
@@ -90,7 +91,7 @@ function hasTitle(title) {
           <template #title>
             <span :title="hasTitle(onlyOneChild.meta.title)">{{ onlyOneChild.meta.title }}</span>
           </template>
-        </el-menu-item>
+        </LinkItem>
       </template>
     </template>
 

@@ -4,7 +4,7 @@ import useAppStoreV2 from '@/store/modules/app-v2'
 import usePermissionStore from '@/store/modules/permission'
 import useSettingsStore from '@/store/modules/settings'
 import Logo from './Logo.vue'
-import SidebarItem from './SidebarItem.vue'
+import SidebarItem from './sidebar-item.vue'
 
 const route = useRoute()
 const settingsStore = useSettingsStore()
