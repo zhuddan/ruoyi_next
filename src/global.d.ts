@@ -1,10 +1,5 @@
 /* eslint-disable */
 // @ts-nocheck
-declare module 'vue' {
-  interface ComponentCustomProperties {
-    parseTime: typeof import('@/utils/ruoyi')['parseTime']
-  }
-}
 declare global {
   // @ts-ignore
   export type { ShallowRef } from 'vue'
