@@ -1,6 +1,5 @@
 <script setup>
 import variables from '@/assets/styles/variables.module.scss'
-import useAppStore from '@/store/modules/app'
 import useAppStoreV2 from '@/store/modules/app-v2'
 import usePermissionStore from '@/store/modules/permission'
 import useSettingsStore from '@/store/modules/settings'
@@ -55,7 +54,10 @@ const activeMenu = computed(() => {
     style="border-right: 1px solid var(--el-menu-border-color);"
   >
     <Logo v-if="showLogo" :collapse="isCollapse" />
-    <el-scrollbar wrap-class="scrollbar-wrapper">
+    <el-scrollbar
+      wrap-class="scrollbar-wrapper"
+      class="h-[calc(100vh_-_50px)]"
+    >
       <el-menu
         class="!border-r-0"
         :default-active="activeMenu"
