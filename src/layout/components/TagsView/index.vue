@@ -18,7 +18,7 @@ const router = useRouter()
 
 const visitedViews = computed(() => useTagsViewStore().visitedViews)
 const routes = computed(() => usePermissionStore().routes)
-const { theme } = storeToRefs(useSettingsStore())
+const { settings } = storeToRefs(useSettingsStore())
 watch(route, () => {
   addTags()
   moveToCurrentTag()
@@ -46,8 +46,8 @@ function activeStyle(tag) {
   if (!isActive(tag))
     return {}
   return {
-    'background-color': theme.value,
-    'border-color': theme.value,
+    'background-color': settings.value.theme,
+    'border-color': settings.value.theme,
   }
 }
 

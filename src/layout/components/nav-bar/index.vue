@@ -17,9 +17,8 @@ const userStore = useUserStore()
 const { isMobile } = storeToRefs(useAppStore())
 const {
   settings,
-  topNav,
   toggleTheme,
-} = useSettingsStore()
+} = storeToRefs(useSettingsStore())
 
 function handleCommand(command) {
   switch (command) {
@@ -54,9 +53,10 @@ function setLayout() {
 <template>
   <div class="navbar flex bg-[var(--el-bg-color) text-[var(--el-text-color-regular)]">
     <ToggleBtn />
-    <AppBreadcrumb v-if="!topNav" id="breadcrumb-container" class="breadcrumb-container" />
+    topNav,
+    <AppBreadcrumb v-if="!settings.topNav" id="breadcrumb-container" class="breadcrumb-container" />
 
-    <TopNav v-if="topNav" id="topmenu-container" class="topmenu-container" />
+    <TopNav v-if="settings.topNav" id="topmenu-container" class="topmenu-container" />
     <div class="flex-1" />
     <div
       class=" flex items-center"
