@@ -9,13 +9,19 @@ defineProps({
 })
 
 const title = import.meta.env.VITE_APP_TITLE
+
+const { menuBg, menuText } = useMenuStyle()
 </script>
 
 <template>
   <div
-    class="sidebar-logo-container bg-[var(--el-bg-color)] text-[var(--el-text-color-regular)"
+    class="sidebar-logo-container "
     :class="{
       'sidebar-logo-container_collapse': collapse,
+    }"
+    :style="{
+      backgroundColor: menuBg,
+      color: menuText,
     }"
   >
     <router-link

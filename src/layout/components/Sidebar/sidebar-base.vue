@@ -1,5 +1,4 @@
 <script setup>
-import variables from '@/assets/styles/variables.module.scss'
 import useAppStore from '@/store/modules/app'
 import usePermissionStore from '@/store/modules/permission'
 import useSettingsStore from '@/store/modules/settings'
@@ -10,27 +9,11 @@ const route = useRoute()
 const {
   settings,
 } = storeToRefs(useSettingsStore())
-
+const { menuBg, menuText } = useMenuStyle()
 const permissionStore = usePermissionStore()
-
 const sidebarRouters = computed(() => permissionStore.sidebarRouters)
 const { isCollapse } = storeToRefs(useAppStore())
 
-// 获取菜单背景色
-const getMenuBackground = computed(() => {
-  if (settings.value.isDark) {
-    return 'var(--sidebar-bg)'
-  }
-  return settings.value.sideTheme === 'theme-dark' ? variables.menuBg : variables.menuLightBg
-})
-
-// 获取菜单文字颜色
-const getMenuTextColor = computed(() => {
-  if (settings.value.isDark) {
-    return 'var(--sidebar-text)'
-  }
-  return settings.value.sideTheme === 'theme-dark' ? variables.menuText : variables.menuLightText
-})
 const activeMenu = computed(() => {
   const { meta, path } = route
   if (meta.activeMenu) {
@@ -62,8 +45,8 @@ const activeMenu = computed(() => {
         class="!border-r-0"
         :default-active="activeMenu"
         :collapse="isCollapse"
-        :background-color="getMenuBackground"
-        :text-color="getMenuTextColor"
+        :background-color="menuBg"
+        :text-color="menuText"
         :unique-opened="true"
         :active-text-color="settings.theme"
         :collapse-transition="false"
@@ -83,9 +66,9 @@ const activeMenu = computed(() => {
 
 <style lang="scss" scoped>
 .sidebar-container {
-  background-color: v-bind(getMenuBackground);
+  background-color: v-bind(menuBg);
   .scrollbar-wrapper {
-    background-color: v-bind(getMenuBackground);
+    background-color: v-bind(menuBg);
   }
 }
 </style>
