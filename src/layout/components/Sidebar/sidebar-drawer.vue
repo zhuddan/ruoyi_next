@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import useAppStoreV2 from '@/store/modules/app-v2'
+import useAppStore from '@/store/modules/app'
 
-const appStore = useAppStoreV2()
+const appStore = useAppStore()
 const { drawer } = storeToRefs(appStore)
 </script>
 

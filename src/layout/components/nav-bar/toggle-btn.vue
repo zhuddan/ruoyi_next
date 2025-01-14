@@ -1,5 +1,5 @@
 <script setup>
-import useAppStoreV2 from '@/store/modules/app-v2'
+import useAppStore from '@/store/modules/app'
 
 defineProps({
   isActive: {
@@ -8,10 +8,10 @@ defineProps({
   },
 })
 
-const { toggle } = useAppStoreV2()
+const { toggle } = useAppStore()
 const {
   isOpenSideBar,
-} = storeToRefs(useAppStoreV2())
+} = storeToRefs(useAppStore())
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script setup>
-import useAppStoreV2 from '@/store/modules/app-v2'
+import useAppStore from '@/store/modules/app'
 import useSettingsStore from '@/store/modules/settings'
 import useUserStore from '@/store/modules/user'
 import { ElMessageBox } from 'element-plus'
@@ -14,7 +14,7 @@ import TopNav from './top-nav.vue'
 
 const emits = defineEmits(['setLayout'])
 const userStore = useUserStore()
-const { isMobile } = storeToRefs(useAppStoreV2())
+const { isMobile } = storeToRefs(useAppStore())
 const settingsStore = useSettingsStore()
 
 function handleCommand(command) {

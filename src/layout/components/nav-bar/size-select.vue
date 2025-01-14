@@ -1,7 +1,7 @@
 <script setup>
-import useAppStoreV2 from '@/store/modules/app-v2'
+import useAppStore from '@/store/modules/app'
 
-const { size } = toRefs(useAppStoreV2())
+const { size } = toRefs(useAppStore())
 const sizeOptions = ref([
   { label: '较大', value: 'large' },
   { label: '默认', value: 'default' },

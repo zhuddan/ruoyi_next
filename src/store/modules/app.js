@@ -1,7 +1,7 @@
-import { breakpointsTailwind, useBreakpoints, useLocalStorage } from '@vueuse/core'
+import { useLocalStorage } from '@vueuse/core'
 
 const ELEMENT_PLUS_SIZE = 'ELEMENT_PLUS_SIZE'
-const useAppStoreV2 = defineStore(
+const useAppStore = defineStore(
   'appV2',
   () => {
     const isCollapse = ref(false)
@@ -48,4 +48,4 @@ const useAppStoreV2 = defineStore(
   },
 )
 
-export default useAppStoreV2
+export default useAppStore

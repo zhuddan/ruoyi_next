@@ -1,6 +1,6 @@
 <script setup>
 import variables from '@/assets/styles/variables.module.scss'
-import useAppStoreV2 from '@/store/modules/app-v2'
+import useAppStore from '@/store/modules/app'
 import usePermissionStore from '@/store/modules/permission'
 import useSettingsStore from '@/store/modules/settings'
 import AppLogo from './app-logo.vue'
@@ -14,7 +14,7 @@ const sidebarRouters = computed(() => permissionStore.sidebarRouters)
 const showLogo = computed(() => settingsStore.sidebarLogo)
 const sideTheme = computed(() => settingsStore.sideTheme)
 const theme = computed(() => settingsStore.theme)
-const { isCollapse } = storeToRefs(useAppStoreV2())
+const { isCollapse } = storeToRefs(useAppStore())
 
 // 获取菜单背景色
 const getMenuBackground = computed(() => {

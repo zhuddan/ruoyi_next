@@ -1,6 +1,6 @@
 <script setup>
 import { addUser, changeUserStatus, delUser, deptTreeSelect, getUser, listUser, resetUserPwd, updateUser } from '@/api/system/user'
-import useAppStoreV2 from '@/store/modules/app-v2'
+import useAppStore from '@/store/modules/app'
 import { getToken } from '@/utils/auth'
 import { download } from '@/utils/request'
 import { addDateRange } from '@/utils/ruoyi'
@@ -15,7 +15,7 @@ defineOptions({
  */
 const userRef = useTemplateRef('userRef')
 const router = useRouter()
-const appStore = useAppStoreV2()
+const appStore = useAppStore()
 const { sys_normal_disable, sys_user_sex } = useDict('sys_normal_disable', 'sys_user_sex')
 
 const userList = ref([])

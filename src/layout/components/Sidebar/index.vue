@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import useAppStoreV2 from '@/store/modules/app-v2'
+import useAppStore from '@/store/modules/app'
 import SidebarBase from './sidebar-base.vue'
 import SidebarDrawer from './sidebar-drawer.vue'
 
-const { isMobile } = storeToRefs(useAppStoreV2())
+const { isMobile } = storeToRefs(useAppStore())
 </script>
 
 <template>

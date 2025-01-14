@@ -1,5 +1,5 @@
 <script setup>
-import useAppStoreV2 from '@/store/modules/app-v2'
+import useAppStore from '@/store/modules/app'
 import { getNormalPath } from '@/utils/ruoyi'
 import { isExternal } from '@/utils/validate'
 
@@ -71,7 +71,7 @@ function hasTitle(title) {
     return ''
   }
 }
-const { isMobile, drawer } = storeToRefs(useAppStoreV2())
+const { isMobile, drawer } = storeToRefs(useAppStore())
 function handleClick() {
   // 展开 drawer 的情况下点击菜单需要关闭
   if (isMobile.value && drawer.value) {
