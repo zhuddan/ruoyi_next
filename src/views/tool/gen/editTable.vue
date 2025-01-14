@@ -1,7 +1,7 @@
 <script setup>
 import { optionselect as getDictOptionselect } from '@/api/system/dict/type'
 import { getGenTable, updateGenTable } from '@/api/tool/gen'
-import $tab from '@/plugins/tab'
+import $tab from '@/tools/tab'
 import basicInfoForm from './basicInfoForm.vue'
 import genInfoForm from './genInfoForm.vue'
 

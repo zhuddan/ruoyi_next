@@ -1,7 +1,7 @@
 <script setup>
 import { addData, delData, getData, listData, updateData } from '@/api/system/dict/data'
 import { optionselect as getDictOptionselect, getType } from '@/api/system/dict/type'
-import $tab from '@/plugins/tab'
+import $tab from '@/tools/tab'
 import useDictStore from '@/store/modules/dict'
 import { download } from '@/utils/request'
 

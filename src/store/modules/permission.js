@@ -2,7 +2,6 @@ import { getRouters } from '@/api/menu'
 import ParentView from '@/components/ParentView/index.vue'
 import InnerLink from '@/layout/components/InnerLink/index.vue'
 import Layout from '@/layout/index.vue'
-import auth from '@/plugins/auth'
 import router, { constantRoutes, dynamicRoutes } from '@/router'
 
 // 匹配views里面所有的.vue文件

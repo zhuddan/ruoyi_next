@@ -1,7 +1,7 @@
 <script setup>
 import { getJob } from '@/api/monitor/job'
 import { cleanJobLog, delJobLog, listJobLog } from '@/api/monitor/jobLog'
-import $tab from '@/plugins/tab'
+import $tab from '@/tools/tab'
 import { download } from '@/utils/request'
 import { addDateRange } from '@/utils/ruoyi'
 

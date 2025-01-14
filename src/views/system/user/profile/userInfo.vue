@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/no-mutating-props -->
 <script setup>
 import { updateUserProfile } from '@/api/system/user'
-import $tab from '@/plugins/tab'
+import $tab from '@/tools/tab'
 
 const props = defineProps({
   user: {

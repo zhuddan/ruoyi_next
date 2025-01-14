@@ -1,6 +1,6 @@
 <script setup>
 import logo from '@/assets/logo/logo.png'
-import Download from '@/plugins/download'
+import Download from '@/tools/download'
 import { formConf as formConfData, inputComponents, layoutComponents, selectComponents } from '@/utils/generator/config'
 import { makeUpCss } from '@/utils/generator/css'
 import drawingDefalut from '@/utils/generator/drawingDefalut'

@@ -73,6 +73,7 @@ export default {
   "useDict": true,
   "useId": true,
   "useLink": true,
+  "useMenuStyle": true,
   "useModel": true,
   "useRoute": true,
   "useRouter": true,

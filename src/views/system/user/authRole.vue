@@ -1,6 +1,6 @@
 <script setup>
 import { getAuthRole, updateAuthRole } from '@/api/system/user'
-import $tab from '@/plugins/tab'
+import $tab from '@/tools/tab'
 
 defineOptions({
   name: 'AuthRole',

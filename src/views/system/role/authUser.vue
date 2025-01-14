@@ -1,6 +1,6 @@
 <script setup>
 import { allocatedUserList, authUserCancel, authUserCancelAll } from '@/api/system/role'
-import $tab from '@/plugins/tab'
+import $tab from '@/tools/tab'
 import selectUser from './selectUser'
 
 defineOptions({

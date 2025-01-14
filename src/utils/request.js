@@ -1,4 +1,3 @@
-import cache from '@/plugins/cache'
 import useUserStore from '@/store/modules/user'
 import { getToken } from '@/utils/auth'
 import errorCode from '@/utils/errorCode'
