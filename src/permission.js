@@ -19,6 +19,7 @@ function isWhiteList(path) {
 
 router.beforeEach((to, from, next) => {
   const { setTitle } = useSettingsStore()
+  const userStore = useUserStore()
   NProgress.start()
   if (getToken()) {
     to.meta.title && setTitle(to.meta.title)
@@ -31,10 +32,10 @@ router.beforeEach((to, from, next) => {
       next()
     }
     else {
-      if (useUserStore().roles.length === 0) {
+      if (userStore.roles.length === 0) {
         isReLogin.show = true
         // 判断当前用户是否已拉取完user_info信息
-        useUserStore().getInfo().then(() => {
+        userStore.getInfo().then(() => {
           isReLogin.show = false
           usePermissionStore().generateRoutes().then((accessRoutes) => {
             // 根据roles权限生成可访问的路由表
@@ -45,11 +46,9 @@ router.beforeEach((to, from, next) => {
             })
             next({ ...to, replace: true }) // hack方法 确保addRoutes已完成
           })
-        }).catch((err) => {
-          useUserStore().logOut().then(() => {
-            ElMessage.error(err)
-            next({ path: '/' })
-          })
+        }).catch(async () => {
+          await userStore.logOut()
+          next({ path: '/' })
         })
       }
       else {

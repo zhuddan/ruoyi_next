@@ -3,7 +3,7 @@ import { getToken } from '@/utils/auth'
 import errorCode from '@/utils/errorCode'
 import { blobValidate, tansParams } from '@/utils/ruoyi'
 import axios from 'axios'
-import { ElLoading, ElMessage, ElMessageBox, ElNotification } from 'element-plus'
+import { ElLoading, ElMessageBox, ElNotification } from 'element-plus'
 import { saveAs } from 'file-saver'
 
 let downloadLoadingInstance
@@ -99,11 +99,11 @@ service.interceptors.response.use((res) => {
     )
   }
   else if (code === 500) {
-    ElMessage({ message: msg, type: 'error' })
+    $modal.msgError(msg)
     return Promise.reject(new Error(msg))
   }
   else if (code === 601) {
-    ElMessage({ message: msg, type: 'warning' })
+    $modal.msgWarning(msg)
     return Promise.reject(new Error(msg))
   }
   else if (code !== 200) {
@@ -128,7 +128,7 @@ service.interceptors.response.use((res) => {
   else if (message.includes('Request failed with status code')) {
     message = `系统接口${message.substr(message.length - 3)}异常`
   }
-  ElMessage({ message, type: 'error', duration: 5 * 1000 })
+  $modal.errMsg(message)
   return Promise.reject(error)
 })
 
@@ -150,12 +150,12 @@ export function download(url, params, filename, config) {
       const resText = await data.text()
       const rspObj = JSON.parse(resText)
       const errMsg = errorCode[rspObj.code] || rspObj.msg || errorCode.default
-      ElMessage.error(errMsg)
+      $modal.errMsg(errMsg)
     }
     downloadLoadingInstance.close()
   }).catch((r) => {
     console.error(r)
-    ElMessage.error('下载文件出现错误，请联系管理员！')
+    $modal.errMsg('下载文件出现错误，请联系管理员！')
     downloadLoadingInstance.close()
   })
 }
