@@ -29,9 +29,9 @@ const activeMenu = computed(() => {
       isCollapse
         ? 'w-[var(--sidevar-collapse-width)]'
         : 'w-[var(--sidebar-default-width)]',
-
+      settings.showAppBar ? 'top-[60px]' : 'top-0',
     ]"
-    class="sidebar-container flex-shrink-0 transition-[width] sticky top-0"
+    class="sidebar-container flex-shrink-0 transition-[width] sticky "
     style="border-right: 1px solid var(--el-menu-border-color);"
     :style="{
       height: `calc(100vh${settings.showAppBar ? ' - 60px' : ''})`,

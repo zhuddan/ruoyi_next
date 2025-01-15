@@ -52,8 +52,11 @@ function setLayout() {
       }"
     >
       <div
-        :class="settings.fixedHeader ? 'sticky' : 'relative'"
-        class="top-0 z-10 backdrop-blur-md"
+        :class="[
+          settings.fixedHeader ? 'sticky' : 'relative',
+          settings.showAppBar ? 'top-[60px]' : 'top-0',
+        ]"
+        class="z-10 backdrop-blur-md"
       >
         <Navbar @set-layout="setLayout" />
         <TagsView v-if="settings.tagsView" />

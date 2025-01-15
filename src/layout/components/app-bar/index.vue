@@ -10,7 +10,7 @@ const title = import.meta.env.VITE_APP_TITLE
       backgroundColor: variables.menuBg,
       color: variables.menuText,
     }"
-    class="sticky top-0 z-1000"
+    class="sticky top-0 z-50"
   >
     <router-link
       key="collapse"
