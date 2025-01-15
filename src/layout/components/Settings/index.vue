@@ -34,7 +34,14 @@ defineExpose({
 </script>
 
 <template>
-  <el-drawer v-model="showSettings" :with-header="false" direction="rtl" size="300px">
+  <el-drawer
+    v-model="showSettings"
+    :with-header="false"
+    direction="rtl"
+    size="300px"
+    lock-scroll
+    append-to-body
+  >
     <div class="setting-drawer-title">
       <h3 class="drawer-title">
         主题风格设置

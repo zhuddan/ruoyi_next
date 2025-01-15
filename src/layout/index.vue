@@ -53,7 +53,7 @@ function setLayout() {
     >
       <div
         :class="[
-          settings.fixedHeader ? 'sticky' : 'relative',
+          settings.fixedHeader ? 'sticky' : '',
           settings.showAppBar ? 'top-[60px]' : 'top-0',
         ]"
         class="z-10 backdrop-blur-md"
