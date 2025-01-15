@@ -1,152 +1,99 @@
 <script setup>
 import { addPost, delPost, getPost, listPost, updatePost } from '@/api/system/post'
-import { download } from '@/utils/request'
 
 defineOptions({
   name: 'Post',
 })
-/**
- * @type {TemplateRef<import("element-plus").FormInstance>}
- */
-const postRef = useTemplateRef('postRef')
+const TITLE = '岗位'
 
 const { sys_normal_disable } = useDict('sys_normal_disable')
 
-const postList = ref([])
-const open = ref(false)
-const loading = ref(true)
-const showSearch = ref(true)
-const ids = ref([])
-const single = ref(true)
-const multiple = ref(true)
-const total = ref(0)
-const title = ref('')
-
-const data = reactive({
-  form: {},
-  queryParams: {
-    pageNum: 1,
-    pageSize: 10,
-    postCode: undefined,
-    postName: undefined,
-    status: undefined,
+const {
+  data: postList,
+  loading,
+  queryRef,
+  queryParams,
+  showSearch,
+  total,
+  handleQuery,
+  resetQuery,
+  getList,
+  onExport,
+} = usePageFormQuery(
+  'queryRef',
+  listPost,
+  {
+    initial: {
+      postCode: undefined,
+      postName: undefined,
+      status: undefined,
+    },
+    downloadUrl: '/system/post/export',
   },
-  rules: {
-    postName: [{ required: true, message: '岗位名称不能为空', trigger: 'blur' }],
-    postCode: [{ required: true, message: '岗位编码不能为空', trigger: 'blur' }],
-    postSort: [{ required: true, message: '岗位顺序不能为空', trigger: 'blur' }],
-  },
-})
-
-const { queryParams, form, rules } = toRefs(data)
-
-/** 查询岗位列表 */
-function getList() {
-  loading.value = true
-  listPost(queryParams.value).then((response) => {
-    postList.value = response.rows
-    total.value = response.total
-    loading.value = false
-  })
-}
-
-/** 取消按钮 */
-function cancel() {
-  open.value = false
-  reset()
-}
-
-/** 表单重置 */
-function reset() {
-  form.value = {
-    postId: undefined,
-    postCode: undefined,
-    postName: undefined,
-    postSort: 0,
-    status: '0',
-    remark: undefined,
-  }
-  postRef.value?.resetFields()
-}
-
-/** 搜索按钮操作 */
-function handleQuery() {
-  queryParams.value.pageNum = 1
-  getList()
-}
-
-/** 重置按钮操作 */
-function resetQuery() {
-  queryRef.value?.resetFields()
-  handleQuery()
-}
-
-/** 多选框选中数据 */
-function handleSelectionChange(selection) {
-  ids.value = selection.map(item => item.postId)
-  single.value = selection.length != 1
-  multiple.value = !selection.length
-}
-
-/** 新增按钮操作 */
-function handleAdd() {
-  reset()
-  open.value = true
-  title.value = '添加岗位'
-}
-
-/** 修改按钮操作 */
-function handleUpdate(row) {
-  reset()
-  const postId = row.postId || ids.value
-  getPost(postId).then((response) => {
-    form.value = response.data
-    open.value = true
-    title.value = '修改岗位'
-  })
-}
-
-/** 提交按钮 */
-function submitForm() {
-  postRef.value.validate((valid) => {
-    if (valid) {
-      if (form.value.postId != undefined) {
-        updatePost(form.value).then((response) => {
-          $modal.msgSuccess('修改成功')
-          open.value = false
-          getList()
-        })
-      }
-      else {
-        addPost(form.value).then((response) => {
-          $modal.msgSuccess('新增成功')
-          open.value = false
-          getList()
-        })
-      }
-    }
-  })
-}
-
-/** 删除按钮操作 */
-function handleDelete(row) {
+)
+const {
+  onSelectionChange,
+  onDelete,
+  ids,
+  single,
+  multiple,
+} = useTableSelection(TITLE, (row) => {
   const postIds = row.postId || ids.value
-  $modal.confirm(`是否确认删除岗位编号为"${postIds}"的数据项？`).then(() => {
-    return delPost(postIds)
-  }).then(() => {
-    getList()
-    $modal.msgSuccess('删除成功')
-  }).catch(() => {})
+  return delPost(postIds)
+}, getList)
+
+const rules = {
+  postName: [{ required: true, message: '岗位名称不能为空', trigger: 'blur' }],
+  postCode: [{ required: true, message: '岗位编码不能为空', trigger: 'blur' }],
+  postSort: [{ required: true, message: '岗位顺序不能为空', trigger: 'blur' }],
 }
 
-/** 导出按钮操作 */
-function handleExport() {
-  download('system/post/export', {
-    ...queryParams.value,
-  }, `post_${new Date().getTime()}.xlsx`)
-}
-
-getList()
+const {
+  formRef,
+  formData,
+  submit,
+  cancel,
+  onAdd,
+  onUpdate,
+  title,
+  open,
+} = useModalForm(
+  'formRef',
+  async () => {
+    formRef.value.validate((valid) => {
+      if (valid) {
+        if (formData.value.postId !== undefined) {
+          updatePost(formData.value).then(() => {
+            $modal.msgSuccess('修改成功')
+            getList()
+          })
+        }
+        else {
+          addPost(formData.value).then(() => {
+            $modal.msgSuccess('新增成功')
+            getList()
+          })
+        }
+      }
+    })
+  },
+  {
+    title: TITLE,
+    initial: {
+      postId: undefined,
+      postCode: undefined,
+      postName: undefined,
+      postSort: 0,
+      status: '0',
+      remark: undefined,
+    },
+    async beforeUpdate(row) {
+      const postId = row.postId || ids.value
+      const response = await getPost(postId)
+      formData.value = response.data
+    },
+  },
+)
 </script>
 
 <template>
@@ -181,10 +128,15 @@ getList()
         </el-select>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" icon="Search" @click="handleQuery">
+        <el-button
+          type="primary"
+          icon="Search"
+          :loading="loading"
+          @click="handleQuery"
+        >
           搜索
         </el-button>
-        <el-button icon="Refresh" @click="resetQuery">
+        <el-button icon="Refresh" :loading="loading" @click="resetQuery">
           重置
         </el-button>
       </el-form-item>
@@ -197,7 +149,7 @@ getList()
           type="primary"
           plain
           icon="Plus"
-          @click="handleAdd"
+          @click="onAdd"
         >
           新增
         </el-button>
@@ -209,7 +161,7 @@ getList()
           plain
           icon="Edit"
           :disabled="single"
-          @click="handleUpdate"
+          @click="onUpdate"
         >
           修改
         </el-button>
@@ -221,7 +173,7 @@ getList()
           plain
           icon="Delete"
           :disabled="multiple"
-          @click="handleDelete"
+          @click="onDelete"
         >
           删除
         </el-button>
@@ -232,7 +184,7 @@ getList()
           type="warning"
           plain
           icon="Download"
-          @click="handleExport"
+          @click="onExport"
         >
           导出
         </el-button>
@@ -240,7 +192,7 @@ getList()
       <right-toolbar v-model:show-search="showSearch" @query-table="getList" />
     </el-row>
 
-    <el-table v-loading="loading" :data="postList" @selection-change="handleSelectionChange">
+    <el-table v-loading="loading" :data="postList" @selection-change="onSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="岗位编号" align="center" prop="postId" />
       <el-table-column label="岗位编码" align="center" prop="postCode" />
@@ -258,10 +210,10 @@ getList()
       </el-table-column>
       <el-table-column label="操作" width="180" align="center" fixed="right">
         <template #default="scope">
-          <el-button v-hasPermi="['system:post:edit']" link type="primary" icon="Edit" @click="handleUpdate(scope.row)">
+          <el-button v-hasPermi="['system:post:edit']" link type="primary" icon="Edit" @click="onUpdate(scope.row)">
             修改
           </el-button>
-          <el-button v-hasPermi="['system:post:remove']" link type="primary" icon="Delete" @click="handleDelete(scope.row)">
+          <el-button v-hasPermi="['system:post:remove']" link type="primary" icon="Delete" @click="onDelete(scope.row)">
             删除
           </el-button>
         </template>
@@ -278,18 +230,18 @@ getList()
 
     <!-- 添加或修改岗位对话框 -->
     <el-dialog v-model="open" :title="title" width="500px" append-to-body>
-      <el-form ref="postRef" :model="form" :rules="rules" label-width="80px">
+      <el-form ref="formRef" :model="formData" :rules="rules" label-width="80px">
         <el-form-item label="岗位名称" prop="postName">
-          <el-input v-model="form.postName" placeholder="请输入岗位名称" />
+          <el-input v-model="formData.postName" placeholder="请输入岗位名称" />
         </el-form-item>
         <el-form-item label="岗位编码" prop="postCode">
-          <el-input v-model="form.postCode" placeholder="请输入编码名称" />
+          <el-input v-model="formData.postCode" placeholder="请输入编码名称" />
         </el-form-item>
         <el-form-item label="岗位顺序" prop="postSort">
-          <el-input-number v-model="form.postSort" controls-position="right" :min="0" />
+          <el-input-number v-model="formData.postSort" controls-position="right" :min="0" />
         </el-form-item>
         <el-form-item label="岗位状态" prop="status">
-          <el-radio-group v-model="form.status">
+          <el-radio-group v-model="formData.status">
             <el-radio
               v-for="dict in sys_normal_disable"
               :key="dict.value"
@@ -300,12 +252,12 @@ getList()
           </el-radio-group>
         </el-form-item>
         <el-form-item label="备注" prop="remark">
-          <el-input v-model="form.remark" type="textarea" placeholder="请输入内容" />
+          <el-input v-model="formData.remark" type="textarea" placeholder="请输入内容" />
         </el-form-item>
       </el-form>
       <template #footer>
         <div class="dialog-footer">
-          <el-button type="primary" @click="submitForm">
+          <el-button type="primary" @click="submit">
             确 定
           </el-button>
           <el-button @click="cancel">
