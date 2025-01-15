@@ -4,6 +4,7 @@ import useSettingsStore from '@/store/modules/settings'
 import useTagsViewStore from '@/store/modules/tags-view'
 import $tab from '@/tools/tab'
 import { getNormalPath } from '@/utils/ruoyi'
+import { Close } from '@element-plus/icons-vue'
 import ScrollPane from './ScrollPane.vue'
 
 const visible = ref(false)
@@ -52,7 +53,8 @@ function activeStyle(tag) {
 }
 
 function isAffix(tag) {
-  return tag.meta && tag.meta.affix
+  const result = tag.meta && !!tag.meta.affix
+  return result
 }
 
 function isFirstView() {
@@ -242,7 +244,7 @@ function handleScroll() {
       >
         {{ tag.title }}
         <span v-if="!isAffix(tag)" @click.prevent.stop="closeSelectedTag(tag)">
-          <close class="el-icon-close" style="width: 1em; height: 1em;vertical-align: middle;" />
+          <Close class="el-icon-close" style="width: 1em; height: 1em;vertical-align: middle;" />
         </span>
       </router-link>
     </ScrollPane>
@@ -251,7 +253,7 @@ function handleScroll() {
         <refresh-right style="width: 1em; height: 1em;" /> 刷新页面
       </li>
       <li v-if="!isAffix(selectedTag)" @click="closeSelectedTag(selectedTag)">
-        <close style="width: 1em; height: 1em;" /> 关闭当前
+        <Close style="width: 1em; height: 1em;" /> 关闭当前
       </li>
       <li @click="closeOthersTags">
         <circle-close style="width: 1em; height: 1em;" /> 关闭其他
@@ -281,8 +283,10 @@ function handleScroll() {
 
   .tags-view-wrapper {
     .tags-view-item {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
       position: relative;
+      z-index: 999;
       cursor: pointer;
       height: 26px;
       line-height: 26px;
@@ -338,7 +342,9 @@ function handleScroll() {
     li {
       margin: 0;
       padding: 7px 16px;
+      display: flex;
       cursor: pointer;
+      align-items: center;
 
       &:hover {
         background: var(--tags-item-hover, #eee);

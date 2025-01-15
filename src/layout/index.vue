@@ -54,7 +54,7 @@ function setLayout() {
       }"
     >
       <div
-        :class="{ sticky: settings.fixedHeader }"
+        :class="settings.fixedHeader ? 'sticky' : 'relative'"
         class="top-0 z-10 backdrop-blur-md"
       >
         <Navbar @set-layout="setLayout" />
