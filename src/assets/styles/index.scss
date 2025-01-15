@@ -36,9 +36,3 @@ html {
 .splitpanes.default-theme .splitpanes__pane {
   background-color: transparent !important;
 }
-
-// fix element
-
-.el-row {
-  z-index: -1;
-}
