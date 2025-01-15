@@ -29,9 +29,13 @@ const activeMenu = computed(() => {
       isCollapse
         ? 'w-[var(--sidevar-collapse-width)]'
         : 'w-[var(--sidebar-default-width)]',
+
     ]"
-    class="sidebar-container  h-[100vh] flex-shrink-0 transition-[width] sticky top-0"
+    class="sidebar-container flex-shrink-0 transition-[width] sticky top-0"
     style="border-right: 1px solid var(--el-menu-border-color);"
+    :style="{
+      height: `calc(100vh${settings.showAppBar ? ' - 60px' : ''})`,
+    }"
   >
     <AppLogo
       v-if="settings.sidebarLogo"
@@ -39,9 +43,9 @@ const activeMenu = computed(() => {
     />
     <el-scrollbar
       wrap-class="scrollbar-wrapper"
-      :class="
-        settings.sidebarLogo ? 'h-[calc(100vh_-_50px)]' : 'h-[calc(100vh)]'
-      "
+      :style="{
+        height: `calc(100vh${settings.showAppBar ? ' - 60px' : ''}${settings.sidebarLogo ? ' - 50px ' : ''})`,
+      }"
     >
       <el-menu
         class="!border-r-0"

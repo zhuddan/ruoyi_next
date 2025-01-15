@@ -99,6 +99,13 @@ defineExpose({
     </div>
 
     <div class="drawer-item">
+      <span>显示顶部横幅</span>
+      <span class="comp-style">
+        <el-switch v-model="settings.showAppBar" class="drawer-switch" />
+      </span>
+    </div>
+
+    <div class="drawer-item">
       <span>显示 Logo</span>
       <span class="comp-style">
         <el-switch v-model="settings.sidebarLogo" class="drawer-switch" />

@@ -2,6 +2,7 @@
 import useAppStore from '@/store/modules/app'
 import { useCssVar } from '@vueuse/core'
 import { AppMain, Navbar, Settings, TagsView } from './components'
+import AppBar from './components/app-bar/index.vue'
 import Sidebar from './components/Sidebar/index.vue'
 
 const { settings } = useSettings()
@@ -38,12 +39,12 @@ function setLayout() {
 </script>
 
 <template>
+  <AppBar v-if="settings.showAppBar" />
   <div
     class="app-wrapper flex"
     :style="{ '--current-color': settings.theme }"
   >
     <Sidebar />
-
     <div
       class="main-container flex-1 max-w-full"
       :style="{

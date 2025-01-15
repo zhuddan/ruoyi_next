@@ -7,6 +7,7 @@ const {
   topNav,
   tagsView,
   fixedHeader,
+  showAppBar,
   sidebarLogo,
   dynamicTitle,
 } = defaultSettings
@@ -33,6 +34,7 @@ const useSettingsStore = defineStore(
       sidebarLogo,
       dynamicTitle,
       isDark: isDark.value,
+      showAppBar,
     }
     const settings = useLocalStorage(LAYOUT_SETTING, initial_settings)
 

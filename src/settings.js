@@ -23,6 +23,11 @@ export default {
   tagsView: true,
 
   /**
+   * 显示 app-bar
+   */
+  showAppBar: false,
+
+  /**
    * 是否固定头部
    */
   fixedHeader: false,
