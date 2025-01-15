@@ -3,10 +3,8 @@ import useUserStore from '@/store/modules/user'
 import { getToken } from '@/utils/auth'
 import { isReLogin } from '@/utils/request'
 import { isHttp, isPathMatch } from '@/utils/validate'
-import { ElMessage } from 'element-plus'
 import NProgress from 'nprogress'
 import router from './router'
-import useSettingsStore from './store/modules/settings'
 import 'nprogress/nprogress.css'
 
 NProgress.configure({ showSpinner: false })
@@ -18,7 +16,7 @@ function isWhiteList(path) {
 }
 
 router.beforeEach((to, from, next) => {
-  const { setTitle } = useSettingsStore()
+  const { setTitle } = useSettings()
   const userStore = useUserStore()
   NProgress.start()
   if (getToken()) {

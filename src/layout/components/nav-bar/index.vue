@@ -1,6 +1,5 @@
 <script setup>
 import useAppStore from '@/store/modules/app'
-import useSettingsStore from '@/store/modules/settings'
 import useUserStore from '@/store/modules/user'
 import { ElMessageBox } from 'element-plus'
 import AppBreadcrumb from './app-breadcrumb.vue'
@@ -16,12 +15,9 @@ const emits = defineEmits(['setLayout'])
 const userStore = useUserStore()
 const { isMobile } = storeToRefs(useAppStore())
 const {
-  settings,
-} = storeToRefs(useSettingsStore())
-const {
   toggleTheme,
-} = useSettingsStore()
-
+  settings,
+} = useSettings()
 function handleCommand(command) {
   switch (command) {
     case 'setLayout':

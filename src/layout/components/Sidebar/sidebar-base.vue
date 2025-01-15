@@ -1,14 +1,11 @@
 <script setup>
 import useAppStore from '@/store/modules/app'
 import usePermissionStore from '@/store/modules/permission'
-import useSettingsStore from '@/store/modules/settings'
 import AppLogo from './app-logo.vue'
 import SidebarItem from './sidebar-item.vue'
 
 const route = useRoute()
-const {
-  settings,
-} = storeToRefs(useSettingsStore())
+const { settings } = useSettings()
 const { menuBg, menuText } = useMenuStyle()
 const permissionStore = usePermissionStore()
 const sidebarRouters = computed(() => permissionStore.sidebarRouters)

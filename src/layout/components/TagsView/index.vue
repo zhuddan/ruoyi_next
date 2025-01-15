@@ -1,6 +1,5 @@
 <script setup>
 import usePermissionStore from '@/store/modules/permission'
-import useSettingsStore from '@/store/modules/settings'
 import useTagsViewStore from '@/store/modules/tags-view'
 import $tab from '@/tools/tab'
 import { getNormalPath } from '@/utils/ruoyi'
@@ -19,7 +18,7 @@ const router = useRouter()
 
 const visitedViews = computed(() => useTagsViewStore().visitedViews)
 const routes = computed(() => usePermissionStore().routes)
-const { settings } = storeToRefs(useSettingsStore())
+const { settings } = useSettings()
 watch(route, () => {
   addTags()
   moveToCurrentTag()

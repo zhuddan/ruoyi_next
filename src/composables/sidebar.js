@@ -1,5 +1,3 @@
-import useSettingsStore from '@/store/modules/settings'
-
 export const variables = {
   // 默认主题变量
   menuText: '#bfcbd9',
@@ -14,9 +12,7 @@ export const variables = {
 }
 
 export function useMenuStyle() {
-  const {
-    settings,
-  } = storeToRefs(useSettingsStore())
+  const { settings } = useSettings()
   const menuBg = computed(() => {
     if (settings.value.isDark) {
       return variables.menuBg

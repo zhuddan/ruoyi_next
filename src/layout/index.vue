@@ -1,13 +1,10 @@
 <script setup>
 import useAppStore from '@/store/modules/app'
-import useSettingsStore from '@/store/modules/settings'
 import { useCssVar } from '@vueuse/core'
 import { AppMain, Navbar, Settings, TagsView } from './components'
 import Sidebar from './components/Sidebar/index.vue'
 
-const {
-  settings,
-} = toRefs(useSettingsStore())
+const { settings } = useSettings()
 const { isCollapse, isMobile } = storeToRefs(useAppStore())
 const breakpoints = useAppBreakpoints()
 const sidevarDefaultWidth = useCssVar('--sidebar-default-width')
