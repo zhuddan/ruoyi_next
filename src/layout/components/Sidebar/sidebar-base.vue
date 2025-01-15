@@ -33,10 +33,15 @@ const activeMenu = computed(() => {
     class="sidebar-container  h-[100vh] flex-shrink-0 transition-[width] sticky top-0"
     style="border-right: 1px solid var(--el-menu-border-color);"
   >
-    <AppLogo v-if="settings. sidebarLogo" :collapse="isCollapse" />
+    <AppLogo
+      v-if="settings.sidebarLogo"
+      :collapse="isCollapse"
+    />
     <el-scrollbar
       wrap-class="scrollbar-wrapper"
-      class="h-[calc(100vh_-_50px)]"
+      :class="
+        settings.sidebarLogo ? 'h-[calc(100vh_-_50px)]' : 'h-[calc(100vh)]'
+      "
     >
       <el-menu
         class="!border-r-0"
