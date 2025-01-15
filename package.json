@@ -14,7 +14,8 @@
     "build:prod": "vite build",
     "build:stage": "vite build --mode staging",
     "preview": "vite preview",
-    "lint": "eslint . --fix --quiet"
+    "lint": "eslint . --fix --quiet",
+    "tag": "bumpp"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.1",
@@ -42,6 +43,7 @@
     "@types/js-cookie": "^3.0.6",
     "@vitejs/plugin-vue": "5.0.5",
     "autoprefixer": "^10.4.20",
+    "bumpp": "^9.10.0",
     "eslint": "^9.18.0",
     "eslint-plugin-format": "^1.0.1",
     "postcss": "^8.4.49",
